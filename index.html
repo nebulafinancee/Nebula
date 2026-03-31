@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Nebula — Built on Discipline</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@300;400;500;700;800;900&family=Instrument+Sans:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --p1: #7B2FF7;
+    --p2: #9D4EDD;
+    --p3: #b87fff;
+    --bg: #05030f;
+    --text: #f0eeff;
+    --muted: #7a6fa0;
+    --dim: #3a3358;
+    --glass: rgba(255,255,255,0.032);
+    --border: rgba(255,255,255,0.055);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Instrument Sans', sans-serif;
+    overflow-x: hidden;
+  }
+
+  /* Grain */
+  body::after {
+    content: '';
+    position: fixed; inset: 0;
+    pointer-events: none; z-index: 9999;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23g)' opacity='1'/%3E%3C/svg%3E");
+    opacity: 0.025;
+  }
+
+  /* ── NAVBAR ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0;
+    z-index: 500;
+    height: 64px;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 40px;
+    background: rgba(5,3,15,0.8);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-logo {
+    font-family: 'Epilogue', sans-serif;
+    font-size: 18px; font-weight: 900; letter-spacing: -0.5px;
+    background: linear-gradient(135deg, #fff 30%, var(--p3));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    text-decoration: none;
+  }
+
+  .nav-links { display: flex; gap: 4px; list-style: none; }
+  .nav-links a {
+    text-decoration: none;
+    font-family: 'Epilogue', sans-serif;
+    font-size: 13px; font-weight: 600; letter-spacing: 0.02em;
+    color: var(--muted);
+    padding: 8px 16px; border-radius: 8px;
+    transition: color 0.2s, background 0.2s;
+  }
+  .nav-links a:hover { color: var(--text); background: rgba(255,255,255,0.05); }
+  .nav-links a.active { color: var(--p3); }
+
+  /* ── FIXED BG ── */
+  .bg-orb {
+    position: fixed; width: 860px; height: 860px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(123,47,247,0.22) 0%, rgba(100,30,200,0.08) 40%, transparent 70%);
+    top: 45%; left: 50%; transform: translate(-50%,-50%);
+    filter: blur(70px); pointer-events: none; z-index: 0;
+    animation: breathe 9s ease-in-out infinite alternate;
+  }
+  .bg-orb-2 {
+    position: fixed; width: 420px; height: 180px;
+    background: radial-gradient(ellipse, rgba(168,85,247,0.07) 0%, transparent 70%);
+    top: 68%; left: 50%; transform: translate(-50%,-50%);
+    filter: blur(50px); pointer-events: none; z-index: 0;
+    animation: breathe 13s ease-in-out infinite alternate-reverse;
+  }
+  .ring {
+    position: fixed; border-radius: 50%;
+    border: 1px solid rgba(123,47,247,0.07);
+    top: 45%; left: 50%; transform: translate(-50%,-50%) rotateX(70deg);
+    pointer-events: none; z-index: 0;
+    animation: slow-spin 55s linear infinite;
+  }
+  .ring-1 { width: 620px; height: 620px; }
+  .ring-2 { width: 880px; height: 880px; border-color: rgba(123,47,247,0.04); animation-direction: reverse; animation-duration: 85s; }
+
+  @keyframes breathe {
+    from { opacity:.7; transform:translate(-50%,-50%) scale(.95); }
+    to   { opacity:1;  transform:translate(-50%,-50%) scale(1.07); }
+  }
+  @keyframes slow-spin {
+    from { transform:translate(-50%,-50%) rotateX(70deg) rotate(0deg); }
+    to   { transform:translate(-50%,-50%) rotateX(70deg) rotate(360deg); }
+  }
+
+  /* ── SECTIONS ── */
+  section {
+    position: relative; z-index: 1;
+    display: flex; flex-direction: column; align-items: center;
+    text-align: center; padding: 0 24px;
+  }
+
+  #home {
+    min-height: 100vh;
+    justify-content: center;
+    padding-top: 64px;
+  }
+
+  #strategy {
+    padding-top: 80px; padding-bottom: 100px;
+    border-top: 1px solid var(--border);
+  }
+
+  .inner { max-width: 860px; width: 100%; }
+
+  /* ── LOGO MARK ── */
+  .logo-mark { margin-bottom: 44px; animation: rise .7s cubic-bezier(.22,1,.36,1) both; }
+  .logo-mark-text {
+    font-family: 'Epilogue', sans-serif;
+    font-size: 13px; font-weight: 800; letter-spacing: .28em; text-transform: uppercase;
+    background: linear-gradient(135deg, rgba(255,255,255,.45), rgba(184,127,255,.65));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  }
+  .logo-mark-line { width: 28px; height: 1px; background: linear-gradient(to right, transparent, var(--p3), transparent); margin: 9px auto 0; opacity: .45; }
+
+  /* ── H1 ── */
+  h1 {
+    font-family: 'Epilogue', sans-serif;
+    font-size: clamp(36px, 6vw, 70px); font-weight: 900; line-height: 1.05; letter-spacing: -2.5px;
+    margin-bottom: 20px; animation: rise .7s .08s cubic-bezier(.22,1,.36,1) both;
+  }
+  h1 em {
+    font-style: normal;
+    background: linear-gradient(135deg, var(--p1) 10%, var(--p3) 55%, #ddbfff);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  }
+
+  .hero-sub {
+    font-size: clamp(14px,1.8vw,17px); font-weight: 400; font-style: italic;
+    color: var(--muted); line-height: 1.7; max-width: 460px; margin: 0 auto 56px;
+    animation: rise .7s .14s cubic-bezier(.22,1,.36,1) both;
+  }
+
+  /* ── TRUST BOXES ── */
+  .boxes {
+    display: grid; grid-template-columns: repeat(4,1fr); gap: 13px;
+    width: 100%; animation: rise .7s .22s cubic-bezier(.22,1,.36,1) both;
+  }
+  .box {
+    background: var(--glass); border: 1px solid var(--border); border-radius: 18px;
+    padding: 30px 16px;
+    display: flex; flex-direction: column; align-items: center; gap: 13px;
+    cursor: default; position: relative; overflow: hidden; backdrop-filter: blur(12px);
+    transition: border-color .3s, transform .3s, box-shadow .3s, background .3s;
+  }
+  .box::before {
+    content:''; position:absolute; top:0; left:18%; right:18%; height:1px;
+    background:linear-gradient(to right,transparent,rgba(184,127,255,.55),transparent);
+    opacity:0; transition:opacity .3s;
+  }
+  .box::after {
+    content:''; position:absolute; inset:0;
+    background:radial-gradient(circle at 50% 0%,rgba(123,47,247,.09),transparent 68%);
+    opacity:0; transition:opacity .3s; pointer-events:none;
+  }
+  .box:hover { border-color:rgba(123,47,247,.48); transform:translateY(-5px); box-shadow:0 10px 40px rgba(123,47,247,.16); background:rgba(123,47,247,.05); }
+  .box:hover::before,.box:hover::after { opacity:1; }
+  .box-icon {
+    width:42px;height:42px;border-radius:11px;
+    background:rgba(123,47,247,.12);border:1px solid rgba(123,47,247,.22);
+    display:flex;align-items:center;justify-content:center;font-size:19px;
+    transition:background .3s,box-shadow .3s;
+  }
+  .box:hover .box-icon { background:rgba(123,47,247,.22);box-shadow:0 0 14px rgba(123,47,247,.25); }
+  .box-title { font-family:'Epilogue',sans-serif;font-size:13px;font-weight:700;color:var(--text); }
+
+  /* ── DIVIDER ── */
+  .divider {
+    position: relative; z-index: 1;
+    display:flex;align-items:center;gap:18px;
+    width:100%;max-width:860px;margin:0 auto;padding:0 24px;
+  }
+  .divider-line { flex:1;height:1px;background:linear-gradient(to right,transparent,var(--border),transparent); }
+  .divider-dot { width:5px;height:5px;border-radius:50%;background:var(--p3);opacity:.35;box-shadow:0 0 6px var(--p3); }
+
+  /* ── STRATEGY HEADING ── */
+  .eq-label { font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--p3);opacity:.7;margin-bottom:12px; }
+  h2.eq-title {
+    font-family:'Epilogue',sans-serif;
+    font-size:clamp(22px,3.5vw,38px);font-weight:900;letter-spacing:-1.2px;line-height:1.08;margin-bottom:16px;
+  }
+  h2.eq-title em {
+    font-style:normal;
+    background:linear-gradient(135deg,var(--p1) 10%,var(--p3) 55%,#ddbfff);
+    -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  }
+  .eq-desc { font-size:15px;font-style:italic;color:var(--muted);line-height:1.7;max-width:540px;margin:0 auto 44px; }
+
+  /* ── ALLOCATION CARDS ── */
+  .alloc-grid { display:grid;grid-template-columns:repeat(4,1fr);gap:13px;width:100%;margin-bottom:52px; }
+  .alloc-card {
+    background:var(--glass);border:1px solid var(--border);border-radius:20px;
+    padding:26px 16px 22px;
+    display:flex;flex-direction:column;align-items:center;gap:11px;
+    position:relative;overflow:hidden;cursor:default;backdrop-filter:blur(14px);
+    transition:transform .3s cubic-bezier(.22,1,.36,1),border-color .3s,box-shadow .3s,background .3s;
+  }
+  .alloc-card::before {
+    content:'';position:absolute;top:0;left:14%;right:14%;height:1px;
+    background:linear-gradient(to right,transparent,var(--card-accent,rgba(184,127,255,.5)),transparent);
+    opacity:0;transition:opacity .3s;
+  }
+  .alloc-card::after {
+    content:'';position:absolute;inset:0;
+    background:radial-gradient(circle at 50% 0%,var(--card-glow,rgba(123,47,247,.1)),transparent 65%);
+    opacity:0;transition:opacity .3s;pointer-events:none;
+  }
+  .alloc-card:hover { transform:translateY(-7px);border-color:var(--card-border,rgba(123,47,247,.45));box-shadow:0 14px 48px var(--card-shadow,rgba(123,47,247,.2));background:rgba(123,47,247,.04); }
+  .alloc-card:hover::before,.alloc-card:hover::after { opacity:1; }
+
+  .alloc-card.mf{--card-accent:rgba(192,132,252,.7);--card-border:rgba(192,132,252,.5);--card-glow:rgba(192,132,252,.1);--card-shadow:rgba(192,132,252,.2);--icon-bg:rgba(192,132,252,.13);--icon-border:rgba(192,132,252,.25);--pct-color:#c084fc;}
+  .alloc-card.ds{--card-accent:rgba(147,197,253,.6);--card-border:rgba(147,197,253,.4);--card-glow:rgba(147,197,253,.07);--card-shadow:rgba(147,197,253,.14);--icon-bg:rgba(147,197,253,.1);--icon-border:rgba(147,197,253,.22);--pct-color:#93c5fd;}
+  .alloc-card.th{--card-accent:rgba(253,186,116,.55);--card-border:rgba(253,186,116,.38);--card-glow:rgba(253,186,116,.07);--card-shadow:rgba(253,186,116,.14);--icon-bg:rgba(253,186,116,.1);--icon-border:rgba(253,186,116,.22);--pct-color:#fdba74;}
+  .alloc-card.gd{--card-accent:rgba(253,230,138,.6);--card-border:rgba(253,230,138,.38);--card-glow:rgba(253,230,138,.07);--card-shadow:rgba(253,230,138,.15);--icon-bg:rgba(253,230,138,.1);--icon-border:rgba(253,230,138,.22);--pct-color:#fde68a;}
+
+  .alloc-icon { width:44px;height:44px;border-radius:12px;background:var(--icon-bg);border:1px solid var(--icon-border);display:flex;align-items:center;justify-content:center;font-size:20px;transition:box-shadow .3s,transform .3s; }
+  .alloc-card:hover .alloc-icon { box-shadow:0 0 18px var(--card-shadow);transform:scale(1.07); }
+  .alloc-pct { font-family:'Epilogue',sans-serif;font-size:32px;font-weight:900;letter-spacing:-1.5px;color:var(--pct-color);line-height:1; }
+  .alloc-title { font-family:'Epilogue',sans-serif;font-size:12px;font-weight:700;letter-spacing:.02em;color:var(--text);opacity:.8; }
+  .alloc-bar-track { width:100%;height:2px;background:rgba(255,255,255,.05);border-radius:99px;overflow:hidden; }
+  .alloc-bar-fill { height:100%;border-radius:99px;background:var(--pct-color);opacity:.5;width:0%;transition:width 1.1s .5s cubic-bezier(.22,1,.36,1); }
+
+  /* ── PIE CHART ── */
+  .pie-section {
+    display: flex; align-items: center; justify-content: center;
+    gap: 52px; flex-wrap: wrap;
+    margin-bottom: 44px;
+    background: var(--glass);
+    border: 1px solid var(--border);
+    border-radius: 24px;
+    padding: 40px 48px;
+    backdrop-filter: blur(16px);
+    position: relative; overflow: hidden;
+    width: 100%;
+  }
+  .pie-section::before {
+    content:''; position:absolute; top:0; left:20%; right:20%; height:1px;
+    background:linear-gradient(to right,transparent,rgba(184,127,255,.35),transparent);
+  }
+
+  .pie-svg-wrap {
+    position: relative; width: 240px; height: 240px; flex-shrink: 0;
+  }
+  .pie-svg {
+    width: 240px; height: 240px;
+    transform: rotate(-90deg);
+    filter: drop-shadow(0 0 28px rgba(168,85,247,.22));
+    overflow: visible;
+  }
+  .pie-seg {
+    fill: none; stroke-width: 48;
+    stroke-dasharray: 0 503;
+    transition: opacity .22s;
+    cursor: pointer;
+  }
+  .pie-seg:hover { opacity: .82; }
+
+  .pie-center {
+    position: absolute; top:50%; left:50%;
+    transform: translate(-50%,-50%);
+    text-align: center; pointer-events: none;
+    transition: all .2s ease;
+  }
+  .pie-center-pct {
+    font-family:'Epilogue',sans-serif;
+    font-size:28px;font-weight:900;line-height:1;
+    transition: color .2s;
+  }
+  .pie-center-label {
+    font-size:11px;font-weight:600;color:var(--muted);
+    letter-spacing:.04em;margin-top:5px;
+    max-width:80px;line-height:1.3;
+  }
+
+  /* Legend */
+  .pie-legend { display:flex;flex-direction:column;gap:16px;text-align:left; }
+  .legend-item {
+    display:flex;align-items:center;gap:14px;cursor:pointer;
+    padding: 10px 14px; border-radius: 10px;
+    border: 1px solid transparent;
+    transition: background .2s, border-color .2s, opacity .2s;
+  }
+  .legend-item:hover { background: rgba(255,255,255,.04); border-color: var(--border); }
+  .legend-swatch {
+    width:14px;height:14px;border-radius:4px;flex-shrink:0;
+    transition:transform .2s,box-shadow .2s;
+  }
+  .legend-item:hover .legend-swatch { transform:scale(1.2); }
+  .legend-name { font-family:'Epilogue',sans-serif;font-size:14px;font-weight:700;color:var(--text);min-width:130px; }
+  .legend-pct  { font-family:'Epilogue',sans-serif;font-size:15px;font-weight:900;opacity:.75; }
+
+  /* ── DISCLAIMER ── */
+  .eq-disclaimer {
+    font-size:11px;color:var(--dim);letter-spacing:.04em;line-height:1.6;
+    padding:11px 20px;border:1px solid rgba(255,255,255,.04);
+    border-radius:10px;background:rgba(255,255,255,.012);
+    max-width:460px;margin:0 auto;
+  }
+  .eq-disclaimer .warn { color:rgba(251,191,36,.45);margin-right:5px; }
+
+  /* ── CTA ── */
+  .cta-block {
+    display:flex;flex-direction:column;align-items:center;gap:14px;margin-top:52px;
+  }
+  .cta-btn {
+    display:inline-flex;align-items:center;gap:12px;
+    padding:15px 36px;border-radius:999px;text-decoration:none;
+    font-family:'Epilogue',sans-serif;font-size:15px;font-weight:800;letter-spacing:.02em;color:#fff;
+    background:linear-gradient(135deg,var(--p1),var(--p2) 60%,#b060ff);
+    box-shadow:0 0 0 1px rgba(184,127,255,.18),0 4px 24px rgba(123,47,247,.38),0 1px 0 rgba(255,255,255,.1) inset;
+    position:relative;overflow:hidden;
+    transition:transform .25s cubic-bezier(.22,1,.36,1),box-shadow .25s;
+  }
+  .cta-btn::before {
+    content:'';position:absolute;top:0;left:-75%;width:50%;height:100%;
+    background:linear-gradient(to right,transparent,rgba(255,255,255,.15),transparent);
+    transform:skewX(-20deg);transition:left .5s ease;
+  }
+  .cta-btn:hover::before { left:130%; }
+  .cta-btn:hover { transform:translateY(-3px) scale(1.02);box-shadow:0 0 0 1px rgba(184,127,255,.3),0 8px 38px rgba(123,47,247,.55),0 1px 0 rgba(255,255,255,.1) inset; }
+  .cta-btn:active { transform:translateY(0) scale(.99); }
+  .cta-icon {
+    width:22px;height:22px;border-radius:6px;
+    background:linear-gradient(135deg,#f09433,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888);
+    display:flex;align-items:center;justify-content:center;font-size:12px;
+  }
+  .cta-note { font-size:11px;color:var(--dim);letter-spacing:.04em; }
+
+  @keyframes rise {
+    from { opacity:0;transform:translateY(20px); }
+    to   { opacity:1;transform:translateY(0); }
+  }
+
+  /* ── RESPONSIVE ── */
+  @media(max-width:700px){
+    .boxes,.alloc-grid{grid-template-columns:repeat(2,1fr);}
+    h1{letter-spacing:-1.5px;}
+    nav{padding:0 20px;}
+    .nav-links a{padding:7px 10px;font-size:12px;}
+    .pie-section{padding:28px 20px;gap:28px;}
+    .pie-svg-wrap,.pie-svg{width:200px;height:200px;}
+    .pie-seg{stroke-width:44;}
+  }
+  @media(max-width:420px){
+    .boxes,.alloc-grid{grid-template-columns:1fr 1fr;gap:10px;}
+    .box,.alloc-card{padding:18px 10px;}
+    .pie-legend{gap:8px;}
+  }
+</style>
+</head>
+<body>
+
+<!-- Fixed background -->
+<div class="bg-orb"></div>
+<div class="bg-orb-2"></div>
+<div class="ring ring-1"></div>
+<div class="ring ring-2"></div>
+
+<!-- ── NAVBAR ── -->
+<nav>
+  <a class="nav-logo" href="#home">Nebula.</a>
+  <ul class="nav-links">
+    <li><a href="#home" class="active" id="nav-home">Home</a></li>
+    <li><a href="#strategy" id="nav-strategy">Nebula Funds</a></li>
+  </ul>
+</nav>
+
+<!-- ── HOME ── -->
+<section id="home">
+  <div class="inner">
+    <div class="logo-mark">
+      <div class="logo-mark-text">Nebula</div>
+      <div class="logo-mark-line"></div>
+    </div>
+    <h1>Built on <em>Discipline.</em><br>Driven by Learning.</h1>
+    <p class="hero-sub">Simplifying investing through clarity, consistency, and long-term thinking.</p>
+    <div class="boxes">
+      <div class="box"><div class="box-icon">🎓</div><div class="box-title">Beginner Friendly</div></div>
+      <div class="box"><div class="box-icon">🔬</div><div class="box-title">Research Focused</div></div>
+      <div class="box"><div class="box-icon">⏳</div><div class="box-title">Long-Term Thinking</div></div>
+      <div class="box"><div class="box-icon">🔁</div><div class="box-title">Consistency First</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── DIVIDER ── -->
+<div class="divider">
+  <div class="divider-line"></div>
+  <div class="divider-dot"></div>
+  <div class="divider-line"></div>
+</div>
+
+<!-- ── STRATEGY ── -->
+<section id="strategy">
+  <div class="inner">
+    <div class="eq-label">Model Portfolio</div>
+    <h2 class="eq-title">Nebula <em>Equilibrium</em> Strategy</h2>
+    <p class="eq-desc">A diversified strategy combining stability through mutual funds, alpha generation via direct equities, tactical thematic exposure, and gold as a hedge against uncertainty.</p>
+
+    <!-- Allocation cards -->
+    <div class="alloc-grid">
+      <div class="alloc-card mf">
+        <div class="alloc-icon">📊</div>
+        <div class="alloc-pct">55%</div>
+        <div class="alloc-title">Mutual Funds</div>
+        <div class="alloc-bar-track"><div class="alloc-bar-fill" data-width="55"></div></div>
+      </div>
+      <div class="alloc-card ds">
+        <div class="alloc-icon">📈</div>
+        <div class="alloc-pct">20%</div>
+        <div class="alloc-title">Direct Stocks</div>
+        <div class="alloc-bar-track"><div class="alloc-bar-fill" data-width="20"></div></div>
+      </div>
+      <div class="alloc-card th">
+        <div class="alloc-icon">🎯</div>
+        <div class="alloc-pct">10%</div>
+        <div class="alloc-title">Thematic Bets</div>
+        <div class="alloc-bar-track"><div class="alloc-bar-fill" data-width="10"></div></div>
+      </div>
+      <div class="alloc-card gd">
+        <div class="alloc-icon">🪙</div>
+        <div class="alloc-pct">15%</div>
+        <div class="alloc-title">Gold</div>
+        <div class="alloc-bar-track"><div class="alloc-bar-fill" data-width="15"></div></div>
+      </div>
+    </div>
+
+    <!-- PIE CHART -->
+    <div class="pie-section">
+      <!-- SVG Donut -->
+      <div class="pie-svg-wrap">
+        <svg class="pie-svg" viewBox="0 0 240 240" xmlns="http://www.w3.org/2000/svg">
+          <!-- Segments painted by JS -->
+          <circle class="pie-seg" id="seg-mf" cx="120" cy="120" r="72"
+            stroke="#c084fc" data-pct="55" data-label="Mutual Funds" data-color="#c084fc"/>
+          <circle class="pie-seg" id="seg-ds" cx="120" cy="120" r="72"
+            stroke="#93c5fd" data-pct="20" data-label="Direct Stocks" data-color="#93c5fd"/>
+          <circle class="pie-seg" id="seg-th" cx="120" cy="120" r="72"
+            stroke="#fdba74" data-pct="10" data-label="Thematic Bets" data-color="#fdba74"/>
+          <circle class="pie-seg" id="seg-gd" cx="120" cy="120" r="72"
+            stroke="#fde68a" data-pct="15" data-label="Gold" data-color="#fde68a"/>
+          <!-- Donut hole -->
+          <circle cx="120" cy="120" r="46" fill="#05030f"/>
+          <circle cx="120" cy="120" r="46" fill="none" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+        </svg>
+        <!-- Center text -->
+        <div class="pie-center" id="pie-center">
+          <div class="pie-center-pct" id="pie-pct" style="color:#c084fc">55%</div>
+          <div class="pie-center-label" id="pie-label">Mutual Funds</div>
+        </div>
+      </div>
+
+      <!-- Legend -->
+      <div class="pie-legend">
+        <div class="legend-item" data-seg="seg-mf">
+          <div class="legend-swatch" style="background:#c084fc;box-shadow:0 0 8px rgba(192,132,252,.45)"></div>
+          <span class="legend-name">Mutual Funds</span>
+          <span class="legend-pct" style="color:#c084fc">55%</span>
+        </div>
+        <div class="legend-item" data-seg="seg-ds">
+          <div class="legend-swatch" style="background:#93c5fd;box-shadow:0 0 8px rgba(147,197,253,.45)"></div>
+          <span class="legend-name">Direct Stocks</span>
+          <span class="legend-pct" style="color:#93c5fd">20%</span>
+        </div>
+        <div class="legend-item" data-seg="seg-th">
+          <div class="legend-swatch" style="background:#fdba74;box-shadow:0 0 8px rgba(253,186,116,.45)"></div>
+          <span class="legend-name">Thematic Bets</span>
+          <span class="legend-pct" style="color:#fdba74">10%</span>
+        </div>
+        <div class="legend-item" data-seg="seg-gd">
+          <div class="legend-swatch" style="background:#fde68a;box-shadow:0 0 8px rgba(253,230,138,.45)"></div>
+          <span class="legend-name">Gold</span>
+          <span class="legend-pct" style="color:#fde68a">15%</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="eq-disclaimer">
+      <span class="warn">⚠</span>This is a model portfolio for educational purposes only. Not investment advice.
+    </div>
+
+    <!-- CTA -->
+    <div class="cta-block">
+      <a class="cta-btn" href="https://instagram.com/nebulafinance" target="_blank" rel="noopener noreferrer">
+        <span class="cta-icon">📷</span>
+        Follow Weekly Reports
+      </a>
+      <span class="cta-note">@nebulafinance · Weekly insights, every Monday</span>
+    </div>
+
+  </div>
+</section>
+
+<script>
+// ── Build pie segments ──────────────────────────────────
+const R = 72;
+const C = 2 * Math.PI * R;   // ~452.4
+const GAP = 3;
+const segs = Array.from(document.querySelectorAll('.pie-seg'));
+const pcts = segs.map(s => +s.dataset.pct);
+
+let offset = 0;
+segs.forEach((s, i) => {
+  const arc = (pcts[i] / 100) * C;
+  s.style.strokeDasharray = `${Math.max(0, arc - GAP)} ${C}`;
+  s.style.strokeDashoffset = -offset;
+  s.style.strokeWidth = '48';
+  offset += arc;
+});
+
+// ── Pie interaction ────────────────────────────────────
+const piePct   = document.getElementById('pie-pct');
+const pieLabel = document.getElementById('pie-label');
+
+const defaults = { pct: '55%', label: 'Mutual Funds', color: '#c084fc' };
+
+function highlight(seg) {
+  segs.forEach(s => {
+    s.style.opacity = s === seg ? '1' : '0.22';
+    s.style.filter  = s === seg ? 'drop-shadow(0 0 10px ' + seg.stroke + ')' : 'none';
+  });
+  piePct.textContent = seg.dataset.pct + '%';
+  piePct.style.color = seg.dataset.color;
+  pieLabel.textContent = seg.dataset.label;
+}
+function reset() {
+  segs.forEach(s => { s.style.opacity = '1'; s.style.filter = 'none'; });
+  piePct.textContent = defaults.pct;
+  piePct.style.color = defaults.color;
+  pieLabel.textContent = defaults.label;
+}
+
+segs.forEach(seg => {
+  seg.addEventListener('mouseenter', () => highlight(seg));
+  seg.addEventListener('mouseleave', reset);
+});
+
+document.querySelectorAll('.legend-item').forEach(item => {
+  item.addEventListener('mouseenter', () => {
+    const seg = document.getElementById(item.dataset.seg);
+    if (seg) highlight(seg);
+  });
+  item.addEventListener('mouseleave', reset);
+});
+
+// ── Progress bars on scroll ────────────────────────────
+const fills = document.querySelectorAll('.alloc-bar-fill');
+const barObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.style.width = e.target.dataset.width + '%';
+      barObs.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.3 });
+fills.forEach(f => barObs.observe(f));
+
+// ── Navbar active state ────────────────────────────────
+const navHome     = document.getElementById('nav-home');
+const navStrategy = document.getElementById('nav-strategy');
+const secHome     = document.getElementById('home');
+const secStrategy = document.getElementById('strategy');
+
+const navObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      if (e.target.id === 'home') {
+        navHome.classList.add('active'); navStrategy.classList.remove('active');
+      } else {
+        navStrategy.classList.add('active'); navHome.classList.remove('active');
+      }
+    }
+  });
+}, { threshold: 0.4 });
+[secHome, secStrategy].forEach(s => navObs.observe(s));
+</script>
+</body>
+</html>

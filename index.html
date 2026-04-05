@@ -144,6 +144,7 @@ nav {
    PAGE LAYOUT
 ───────────────────────────────────────── */
 main { padding-top: 60px; }
+@media (max-width: 480px) { main { padding-top: 56px; } }
 
 /* ─────────────────────────────────────────
    HERO
@@ -590,7 +591,58 @@ main { padding-top: 60px; }
   font-size: 9px; color: var(--gold); font-weight: 700;
 }
 
-/* ── Donut (used inside fund accordion) ── */
+/* ── Mobile hamburger ── */
+.nav-hamburger {
+  display: none;
+  flex-direction: column; justify-content: center; align-items: center;
+  gap: 5px;
+  width: 36px; height: 36px; border-radius: 9px;
+  background: var(--surface); border: 1px solid var(--border);
+  cursor: pointer; padding: 0; flex-shrink: 0;
+  transition: background .18s, border-color .18s;
+}
+.nav-hamburger:hover { background: var(--accent-lt); border-color: var(--accent-mid); }
+.nav-hamburger span {
+  display: block; width: 16px; height: 1.5px;
+  background: var(--ink-2); border-radius: 99px;
+  transition: transform .28s cubic-bezier(.22,1,.36,1), opacity .2s;
+}
+.nav-hamburger.is-open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+.nav-hamburger.is-open span:nth-child(2) { opacity: 0; }
+.nav-hamburger.is-open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+/* Mobile nav drawer */
+.mobile-nav {
+  position: fixed; top: 56px; left: 0; right: 0; z-index: 800;
+  background: rgba(250,249,252,.97);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+  max-height: 0; overflow: hidden;
+  transition: max-height .38s cubic-bezier(.22,1,.36,1);
+}
+.mobile-nav.is-open { max-height: 300px; }
+.mobile-nav-inner {
+  padding: 12px 16px 20px;
+  display: flex; flex-direction: column; gap: 4px;
+}
+.mobile-nav-inner a {
+  display: block; text-decoration: none;
+  font-size: 15px; font-weight: 600; color: var(--ink-2);
+  padding: 12px 14px; border-radius: 11px;
+  transition: background .18s, color .18s;
+}
+.mobile-nav-inner a:hover { background: var(--surface); color: var(--ink); }
+.mobile-nav-inner a.ig-link {
+  margin-top: 6px;
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  color: white; text-align: center;
+}
+.mobile-nav-inner a.ig-link:hover { opacity: .9; background: linear-gradient(135deg, var(--accent), var(--accent-2)); }
+
+@media (max-width: 768px) {
+  .nav-hamburger { display: flex; }
+  .nav-cta { display: none; }
+}
 .donut-wrap {
   display: flex; flex-direction: column; align-items: center; gap: 20px; width: 100%;
 }
@@ -644,7 +696,7 @@ main { padding-top: 60px; }
    EMAIL CAPTURE
 ───────────────────────────────────────── */
 .orbit {
-  padding: clamp(48px,6vw,80px) var(--pad) clamp(72px,8vw,112px);
+  padding: clamp(40px,6vw,80px) var(--pad) clamp(60px,8vw,112px);
   max-width: var(--max); margin: 0 auto;
 }
 
@@ -781,16 +833,132 @@ footer {
   .hero-right { display: none; }
   .orbit-card { grid-template-columns: 1fr; }
   .trust-strip { grid-template-columns: 1fr 1fr; }
+  .footer-inner { grid-template-columns: 1fr; gap: 24px; }
+  .footer-inner > *:last-child { align-self: flex-start; }
 }
+
 @media (min-width: 861px) and (max-width: 1020px) {
   .planet-scene { width: 280px; height: 260px; }
   .planet-scene .planet-svg-wrap svg { width: 190px; height: 175px; }
 }
-@media (max-width: 520px) {
-  .trust-strip { grid-template-columns: 1fr 1fr; gap: 10px; }
+
+/* ── Tablet ── */
+@media (max-width: 768px) {
+  /* Nav: hide links, keep logo + CTA */
   .nav-links { display: none; }
-  .hero-card { padding: 36px 24px; }
-  .hero-h1 { font-size: 32px; }
+  .nav-cta { font-size: 12px; padding: 7px 14px; }
+
+  /* Hero */
+  .hero { padding: clamp(24px,4vw,48px) 20px 0; }
+  .hero-card {
+    grid-template-columns: 1fr;
+    padding: 36px 24px;
+  }
+  .hero-h1 { font-size: clamp(30px, 7vw, 48px); letter-spacing: -1px; }
+  .hero-sub { font-size: 15px; margin-bottom: 28px; }
+  .hero-cta { font-size: 14px; padding: 12px 22px; }
+
+  /* Trust */
+  .trust-strip {
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    padding: 32px 20px;
+  }
+  .trust-pill { padding: 16px 14px; gap: 10px; }
+  .trust-pill-icon { width: 34px; height: 34px; font-size: 16px; }
+  .trust-pill-text { font-size: 12px; }
+
+  /* Strategies */
+  .strategies-section { padding: 60px 20px; }
+  .strategies-header { flex-direction: column; align-items: flex-start; gap: 10px; }
+  .fund-trigger { padding: 18px 16px; gap: 12px; }
+  .fund-trigger-icon { width: 38px; height: 38px; font-size: 18px; border-radius: 10px; }
+  .fund-trigger-name { font-size: 16px; }
+  .fund-trigger-sub { font-size: 11px; }
+  .fund-body-inner { padding: 0 16px 24px; }
+  .fund-content { grid-template-columns: 1fr; gap: 28px; }
+  .fund-alloc-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+  .fund-desc-title { font-size: 22px; }
+
+  /* Orbit/Email */
+  .orbit { padding: 40px 20px 60px; }
+  .orbit-card {
+    grid-template-columns: 1fr;
+    padding: 32px 24px;
+    gap: 28px;
+  }
+  .orbit-h2 { font-size: clamp(24px, 5vw, 36px); }
+
+  /* Footer */
+  footer { padding: 32px 20px; }
+  .footer-inner {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  .footer-disc { max-width: 100%; }
+}
+
+/* ── Mobile ── */
+@media (max-width: 480px) {
+  :root { --pad: 16px; }
+
+  /* Nav */
+  nav { height: 56px; }
+  .nav-inner { padding: 0 16px; }
+  .nav-logo { font-size: 17px; }
+  .nav-logo-img { width: 26px; height: 26px; }
+  .nav-cta { font-size: 11px; padding: 6px 12px; border-radius: 8px; }
+
+  /* Hero */
+  .hero { padding: 16px 16px 0; }
+  .hero-card { padding: 28px 18px; border-radius: 20px; }
+  .hero-h1 { font-size: clamp(26px, 8vw, 36px); letter-spacing: -.5px; }
+  .hero-sub { font-size: 14px; }
+  .hero-cta { font-size: 13px; padding: 11px 20px; border-radius: 11px; width: 100%; justify-content: center; }
+  .tag { font-size: 10px; padding: 4px 10px; }
+
+  /* Trust */
+  .trust-strip { grid-template-columns: 1fr 1fr; gap: 8px; padding: 24px 16px; }
+  .trust-pill { padding: 14px 10px; gap: 8px; border-radius: 14px; }
+  .trust-pill-icon { width: 30px; height: 30px; font-size: 14px; border-radius: 9px; }
+  .trust-pill-text { font-size: 11px; }
+
+  /* Strategies */
+  .strategies-section { padding: 48px 16px; }
+  .fund-trigger { padding: 16px 14px; gap: 10px; }
+  .fund-trigger-icon { width: 34px; height: 34px; font-size: 16px; }
+  .fund-trigger-name { font-size: 15px; }
+  .fund-trigger-sub { font-size: 10px; display: none; }
+  .fund-arrow { width: 26px; height: 26px; }
+  .fund-body-inner { padding: 0 14px 20px; }
+  .fund-alloc-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
+  .fund-alloc-card { padding: 14px 10px; border-radius: 14px; }
+  .fund-alloc-pct { font-size: 22px; }
+  .fund-alloc-label { font-size: 9px; }
+  .fund-desc-title { font-size: 20px; }
+  .fund-desc-text { font-size: 13px; }
+  .fund-bullets li { font-size: 12px; }
+  .donut-svg { width: 170px; height: 170px; }
+  .strategies-count { font-size: 11px; }
+  .fund-soon-badge { font-size: 9px; padding: 3px 8px; }
+
+  /* Orbit */
+  .orbit { padding: 32px 16px 48px; }
+  .orbit-card { padding: 24px 18px; border-radius: 22px; }
+  .orbit-h2 { font-size: clamp(22px, 7vw, 32px); }
+  .orbit-input { padding: 12px 14px; font-size: 14px; }
+  .orbit-btn { padding: 13px 20px; font-size: 14px; }
+
+  /* Footer */
+  footer { padding: 28px 16px; }
+  .footer-inner { gap: 18px; }
+  .footer-logo { font-size: 16px; }
+  .footer-disc { font-size: 11px; }
+  .footer-ig { font-size: 12px; padding: 7px 14px; }
+
+  /* Section headings */
+  .alloc-h2 { font-size: clamp(22px, 6vw, 32px); letter-spacing: -.5px; }
+  .section-label { font-size: 10px; }
 }
 </style>
 </head>
@@ -806,8 +974,21 @@ footer {
       <li><a href="#orbit" id="nl-orbit">Stay in Orbit</a></li>
     </ul>
     <a class="nav-cta" href="https://instagram.com/nebulafinance" target="_blank">Follow Weekly Reports</a>
+    <button class="nav-hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
   </div>
 </nav>
+
+<!-- Mobile drawer -->
+<div class="mobile-nav" id="mobile-nav">
+  <div class="mobile-nav-inner">
+    <a href="#home"     onclick="closeMobileNav()">Home</a>
+    <a href="#strategy" onclick="closeMobileNav()">Nebula Funds</a>
+    <a href="#orbit"    onclick="closeMobileNav()">Stay in Orbit</a>
+    <a href="https://instagram.com/nebulafinance" target="_blank" class="ig-link" onclick="closeMobileNav()">Follow Weekly Reports →</a>
+  </div>
+</div>
 
 <main>
 
@@ -1201,7 +1382,27 @@ footer {
 </footer>
 
 <script>
-// ── Accordion ──────────────────────────────────
+// ── Hamburger menu ─────────────────────────────
+const hamburger = document.getElementById('hamburger');
+const mobileNav = document.getElementById('mobile-nav');
+
+hamburger.addEventListener('click', () => {
+  const open = mobileNav.classList.toggle('is-open');
+  hamburger.classList.toggle('is-open', open);
+  hamburger.setAttribute('aria-expanded', open);
+});
+
+function closeMobileNav() {
+  mobileNav.classList.remove('is-open');
+  hamburger.classList.remove('is-open');
+}
+
+// Close on outside click
+document.addEventListener('click', e => {
+  if (!hamburger.contains(e.target) && !mobileNav.contains(e.target)) {
+    closeMobileNav();
+  }
+});
 document.querySelectorAll('.fund-trigger:not([disabled])').forEach(btn => {
   btn.addEventListener('click', () => {
     const fundId = btn.dataset.fund;

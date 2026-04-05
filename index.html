@@ -102,8 +102,21 @@ nav {
   font-family: var(--serif);
   font-size: 20px; color: var(--ink); text-decoration: none;
   letter-spacing: -.3px;
+  display: flex; align-items: center; gap: 9px;
 }
 .nav-logo span { color: var(--accent); }
+.nav-logo-img {
+  height: 32px; width: 32px;
+  display: block; flex-shrink: 0;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center;
+  filter: drop-shadow(0 0 5px rgba(108,63,212,.5));
+  transition: filter .22s;
+}
+.nav-logo:hover .nav-logo-img {
+  filter: drop-shadow(0 0 10px rgba(108,63,212,.75));
+}
 .nav-links {
   display: flex; gap: 4px; list-style: none;
 }
@@ -153,7 +166,7 @@ main { padding-top: 60px; }
   grid-template-columns: 1fr 1fr;
   gap: 48px;
   align-items: center;
-  overflow: hidden;
+  overflow: visible;
   position: relative;
 }
 
@@ -241,8 +254,9 @@ main { padding-top: 60px; }
 
 .planet-scene {
   position: relative;
-  width: 340px; height: 340px;
+  width: 360px; height: 340px;
   display: flex; align-items: center; justify-content: center;
+  overflow: visible;
 }
 
 /* Ambient nebula glow behind */
@@ -356,49 +370,233 @@ main { padding-top: 60px; }
 }
 
 /* ─────────────────────────────────────────
-   EQUILIBRIUM SECTION
+   OUR STRATEGIES ACCORDION
 ───────────────────────────────────────── */
-.equilibrium {
-  background: var(--white);
-  border-top: 1px solid var(--border);
-  border-bottom: 1px solid var(--border);
-  padding: clamp(72px,8vw,112px) var(--pad);
-}
-.equilibrium-inner {
+.strategies-section {
+  padding: clamp(80px,8vw,120px) var(--pad);
   max-width: var(--max); margin: 0 auto;
-  display: grid; grid-template-columns: 1fr 1fr; gap: clamp(40px,6vw,100px);
-  align-items: center;
 }
-.eq-left {}
-.eq-h2 {
+
+.strategies-header {
+  display: flex; align-items: flex-end; justify-content: space-between;
+  flex-wrap: wrap; gap: 16px;
+  margin-bottom: 52px;
+}
+.strategies-header-left {}
+.strategies-count {
+  font-size: 12px; font-weight: 600; color: var(--ink-4);
+  letter-spacing: .06em;
+  padding: 6px 14px; border-radius: 99px;
+  background: var(--surface); border: 1px solid var(--border);
+}
+
+/* Fund list */
+.fund-list {
+  display: flex; flex-direction: column; gap: 12px;
+}
+
+/* Each fund item */
+.fund-item {
+  background: var(--white);
+  border: 1.5px solid var(--border);
+  border-radius: 20px;
+  overflow: hidden;
+  transition: border-color .25s, box-shadow .25s;
+}
+.fund-item.is-open {
+  border-color: var(--accent-mid);
+  box-shadow: 0 4px 24px rgba(108,63,212,.08), 0 1px 4px rgba(108,63,212,.04);
+}
+.fund-item.is-soon {
+  opacity: .65;
+}
+
+/* Trigger row */
+.fund-trigger {
+  width: 100%; background: none; border: none; cursor: pointer;
+  display: flex; align-items: center;
+  padding: 22px 28px;
+  gap: 16px;
+  text-align: left;
+  transition: background .18s;
+}
+.fund-item.is-soon .fund-trigger { cursor: default; }
+.fund-trigger:hover:not(:disabled) { background: var(--surface); }
+.fund-item.is-open .fund-trigger { background: var(--accent-lt); }
+
+.fund-trigger-icon {
+  width: 44px; height: 44px; border-radius: 13px; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 20px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  transition: background .2s, border-color .2s;
+}
+.fund-item.is-open .fund-trigger-icon {
+  background: rgba(108,63,212,.1);
+  border-color: var(--accent-mid);
+}
+
+.fund-trigger-meta { flex: 1; min-width: 0; }
+.fund-trigger-name {
   font-family: var(--serif);
-  font-size: clamp(30px,4vw,50px); line-height: 1.1; letter-spacing: -.4px;
-  color: var(--ink); margin-bottom: 20px;
+  font-size: 19px; color: var(--ink); line-height: 1.2;
+  letter-spacing: -.2px;
+  transition: color .2s;
 }
-.eq-h2 em { font-style: italic; color: var(--accent); }
-.eq-intro {
-  font-size: 16px; font-weight: 300; color: var(--ink-3); line-height: 1.8;
-  margin-bottom: 24px;
+.fund-item.is-open .fund-trigger-name { color: var(--accent); }
+.fund-trigger-sub {
+  font-size: 12px; font-weight: 500; color: var(--ink-4);
+  margin-top: 3px; letter-spacing: .01em;
 }
-.eq-bullets { display: flex; flex-direction: column; gap: 10px; list-style: none; }
-.eq-bullets li {
-  display: flex; align-items: flex-start; gap: 10px;
-  font-size: 14px; color: var(--ink-2); line-height: 1.6;
+
+.fund-soon-badge {
+  font-size: 10px; font-weight: 700; letter-spacing: .1em;
+  text-transform: uppercase; color: var(--ink-4);
+  background: var(--surface); border: 1px solid var(--border);
+  padding: 4px 10px; border-radius: 99px;
+  flex-shrink: 0;
 }
-.eq-bullet-dot {
+
+.fund-arrow {
+  width: 32px; height: 32px; border-radius: 50%; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--surface); border: 1px solid var(--border);
+  transition: transform .35s cubic-bezier(.22,1,.36,1), background .2s, border-color .2s;
+}
+.fund-item.is-open .fund-arrow {
+  transform: rotate(180deg);
+  background: var(--accent); border-color: var(--accent);
+}
+.fund-arrow svg {
+  width: 14px; height: 14px;
+  stroke: var(--ink-3);
+  transition: stroke .2s;
+}
+.fund-item.is-open .fund-arrow svg { stroke: #fff; }
+
+/* Collapsible body */
+.fund-body {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height .55s cubic-bezier(.22,1,.36,1);
+}
+.fund-item.is-open .fund-body {
+  max-height: 1200px; /* generous enough for all content */
+}
+
+.fund-body-inner {
+  padding: 0 28px 32px;
+  border-top: 1px solid var(--border);
+}
+.fund-item.is-open .fund-body-inner {
+  border-color: var(--accent-mid);
+}
+
+/* Inner layout: description left, donut right */
+.fund-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(28px,4vw,64px);
+  align-items: start;
+  padding-top: 28px;
+}
+
+/* Left: description + bullets */
+.fund-desc-block {}
+.fund-desc-label {
+  font-size: 10px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase;
+  color: var(--accent); margin-bottom: 10px; display: block;
+}
+.fund-desc-title {
+  font-family: var(--serif);
+  font-size: clamp(20px,2.5vw,30px); line-height: 1.15; letter-spacing: -.3px;
+  color: var(--ink); margin-bottom: 14px;
+}
+.fund-desc-title em { font-style: italic; color: var(--accent); }
+.fund-desc-text {
+  font-size: 14px; font-weight: 300; color: var(--ink-3); line-height: 1.8;
+  margin-bottom: 20px;
+}
+.fund-bullets { list-style: none; display: flex; flex-direction: column; gap: 9px; }
+.fund-bullets li {
+  display: flex; align-items: flex-start; gap: 9px;
+  font-size: 13px; color: var(--ink-2); line-height: 1.6;
+}
+.fund-bullet-dot {
   width: 6px; height: 6px; border-radius: 50%;
-  background: var(--accent); opacity: .7; flex-shrink: 0; margin-top: 8px;
+  background: var(--accent); opacity: .65; flex-shrink: 0; margin-top: 7px;
 }
 
-.eq-right {}
+/* Right: donut + legend */
+.fund-visual-block {
+  display: flex; flex-direction: column; align-items: center; gap: 20px;
+}
 
-/* Big donut chart (pure CSS) */
+/* Allocation cards inside fund */
+.fund-alloc-grid {
+  display: grid; grid-template-columns: repeat(4,1fr); gap: 10px;
+  width: 100%; margin-top: 28px;
+}
+.fund-alloc-card {
+  border-radius: 16px; padding: 18px 14px;
+  border: 1px solid var(--border);
+  display: flex; flex-direction: column; align-items: center; gap: 6px;
+  transition: transform .22s cubic-bezier(.22,1,.36,1), box-shadow .22s;
+}
+.fund-alloc-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-sm); }
+.fund-alloc-card.mf { background: linear-gradient(140deg,#f6f2fe,#faf8ff); }
+.fund-alloc-card.ds { background: linear-gradient(140deg,#eef4fd,#f5f9ff); }
+.fund-alloc-card.th { background: linear-gradient(140deg,#fef4ed,#fff8f4); }
+.fund-alloc-card.gd { background: linear-gradient(140deg,#fdf8ee,#fffdf5); }
+.fund-alloc-icon { font-size: 18px; }
+.fund-alloc-pct {
+  font-family: var(--serif);
+  font-size: 26px; line-height: 1; letter-spacing: -1px;
+}
+.fund-alloc-card.mf .fund-alloc-pct { color: var(--accent); }
+.fund-alloc-card.ds .fund-alloc-pct { color: var(--blue); }
+.fund-alloc-card.th .fund-alloc-pct { color: var(--orange); }
+.fund-alloc-card.gd .fund-alloc-pct { color: var(--gold); }
+.fund-alloc-label {
+  font-size: 10px; font-weight: 600; color: var(--ink-3);
+  text-align: center; line-height: 1.3;
+}
+.fund-alloc-bar-track {
+  width: 100%; height: 2px; background: rgba(0,0,0,.06);
+  border-radius: 99px; overflow: hidden; margin-top: 2px;
+}
+.fund-alloc-bar-fill {
+  height: 100%; border-radius: 99px; width: 0%;
+  transition: width 1s .2s cubic-bezier(.22,1,.36,1);
+}
+.fund-alloc-card.mf .fund-alloc-bar-fill { background: var(--accent); }
+.fund-alloc-card.ds .fund-alloc-bar-fill { background: var(--blue); }
+.fund-alloc-card.th .fund-alloc-bar-fill { background: var(--orange); }
+.fund-alloc-card.gd .fund-alloc-bar-fill { background: var(--gold); }
+
+/* Disclaimer inside fund */
+.fund-disclaimer {
+  margin-top: 20px;
+  font-size: 11px; color: var(--ink-4);
+  display: flex; align-items: center; gap: 7px;
+  padding: 10px 16px; border-radius: 10px;
+  background: var(--surface); border: 1px solid var(--border);
+}
+.fund-disclaimer-i {
+  width: 16px; height: 16px; border-radius: 50%; flex-shrink: 0;
+  background: var(--gold-lt); border: 1px solid rgba(185,155,90,.3);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 9px; color: var(--gold); font-weight: 700;
+}
+
+/* ── Donut (used inside fund accordion) ── */
 .donut-wrap {
-  display: flex; flex-direction: column; align-items: center; gap: 28px;
+  display: flex; flex-direction: column; align-items: center; gap: 20px; width: 100%;
 }
 .donut-svg {
-  width: 240px; height: 240px;
-  filter: drop-shadow(0 8px 24px rgba(108,63,212,.12));
+  width: 200px; height: 200px;
+  filter: drop-shadow(0 6px 18px rgba(108,63,212,.10));
 }
 .donut-seg {
   fill: none; stroke-width: 44;
@@ -407,116 +605,39 @@ main { padding-top: 60px; }
   cursor: pointer;
 }
 .donut-seg:hover { opacity: .75; }
-
 .donut-center-group { pointer-events: none; }
 .donut-center-pct {
   font-family: 'DM Serif Display', serif;
   font-size: 26px; fill: #1a1624; text-anchor: middle; dominant-baseline: middle;
-  transition: all .2s;
+  transition: fill .2s;
 }
 .donut-center-label {
   font-size: 10px; fill: #9d98ae; text-anchor: middle;
-  font-family: 'DM Sans', sans-serif; font-weight: 600; letter-spacing: .06em; text-transform: uppercase;
+  font-family: 'DM Sans', sans-serif; font-weight: 600;
+  letter-spacing: .06em; text-transform: uppercase;
 }
-
-.donut-legend { display: flex; flex-direction: column; gap: 10px; width: 100%; }
+.donut-legend { display: flex; flex-direction: column; gap: 8px; width: 100%; }
 .legend-row {
-  display: flex; align-items: center; gap: 12px;
-  cursor: pointer;
-  padding: 8px 12px; border-radius: 10px;
+  display: flex; align-items: center; gap: 10px;
+  cursor: pointer; padding: 7px 10px; border-radius: 10px;
   border: 1px solid transparent;
   transition: background .18s, border-color .18s;
 }
 .legend-row:hover { background: var(--surface); border-color: var(--border); }
-.legend-swatch { width: 12px; height: 12px; border-radius: 3px; flex-shrink: 0; }
-.legend-row-name { font-size: 13px; font-weight: 600; color: var(--ink-2); flex: 1; }
-.legend-row-pct  { font-family: var(--serif); font-size: 16px; color: var(--ink); }
+.legend-swatch { width: 11px; height: 11px; border-radius: 3px; flex-shrink: 0; }
+.legend-row-name { font-size: 12px; font-weight: 600; color: var(--ink-2); flex: 1; }
+.legend-row-pct  { font-family: var(--serif); font-size: 15px; color: var(--ink); }
 
-/* ─────────────────────────────────────────
-   ALLOCATION CARDS
-───────────────────────────────────────── */
-.alloc-section {
-  padding: clamp(72px,8vw,112px) var(--pad);
-  max-width: var(--max); margin: 0 auto;
+@media (max-width: 720px) {
+  .fund-content { grid-template-columns: 1fr; }
+  .fund-alloc-grid { grid-template-columns: 1fr 1fr; }
+  .fund-trigger { padding: 18px 20px; }
+  .fund-body-inner { padding: 0 20px 24px; }
+  .fund-trigger-name { font-size: 17px; }
 }
-.alloc-header { margin-bottom: 48px; }
-.alloc-h2 {
-  font-family: var(--serif);
-  font-size: clamp(28px,3.5vw,44px); line-height: 1.12; letter-spacing: -.3px;
-  color: var(--ink); margin-top: 12px;
-}
-
-.alloc-grid {
-  display: grid; grid-template-columns: repeat(4,1fr); gap: 18px;
-}
-
-.alloc-card {
-  border-radius: 22px; padding: 30px 24px;
-  border: 1px solid var(--border);
-  box-shadow: var(--shadow-sm);
-  position: relative; overflow: hidden;
-  transition: transform .28s cubic-bezier(.22,1,.36,1), box-shadow .28s;
-  cursor: default;
-}
-.alloc-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-md); }
-
-.alloc-card.mf { background: linear-gradient(140deg, #f6f2fe 0%, #faf8ff 100%); }
-.alloc-card.ds { background: linear-gradient(140deg, #eef4fd 0%, #f5f9ff 100%); }
-.alloc-card.th { background: linear-gradient(140deg, #fef4ed 0%, #fff8f4 100%); }
-.alloc-card.gd { background: linear-gradient(140deg, #fdf8ee 0%, #fffdf5 100%); }
-
-.alloc-card-icon {
-  width: 44px; height: 44px; border-radius: 13px;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 20px; margin-bottom: 20px;
-}
-.alloc-card.mf .alloc-card-icon { background: rgba(108,63,212,.1); }
-.alloc-card.ds .alloc-card-icon { background: rgba(74,127,193,.1); }
-.alloc-card.th .alloc-card-icon { background: rgba(196,112,58,.1); }
-.alloc-card.gd .alloc-card-icon { background: rgba(185,155,90,.1); }
-
-.alloc-card-pct {
-  font-family: var(--serif);
-  font-size: 44px; line-height: 1; letter-spacing: -1.5px;
-  margin-bottom: 8px;
-}
-.alloc-card.mf .alloc-card-pct { color: var(--accent); }
-.alloc-card.ds .alloc-card-pct { color: var(--blue); }
-.alloc-card.th .alloc-card-pct { color: var(--orange); }
-.alloc-card.gd .alloc-card-pct { color: var(--gold); }
-
-.alloc-card-title {
-  font-size: 14px; font-weight: 700; color: var(--ink-2); margin-bottom: 8px;
-}
-.alloc-card-desc {
-  font-size: 13px; font-weight: 300; color: var(--ink-3); line-height: 1.65;
-}
-
-/* Progress bar */
-.alloc-bar-wrap { margin-top: 20px; }
-.alloc-bar-track {
-  height: 3px; border-radius: 99px;
-  background: rgba(0,0,0,.06); overflow: hidden;
-}
-.alloc-bar-fill {
-  height: 100%; border-radius: 99px; width: 0%;
-  transition: width 1.2s .3s cubic-bezier(.22,1,.36,1);
-}
-.alloc-card.mf .alloc-bar-fill { background: var(--accent); }
-.alloc-card.ds .alloc-bar-fill { background: var(--blue); }
-.alloc-card.th .alloc-bar-fill { background: var(--orange); }
-.alloc-card.gd .alloc-bar-fill { background: var(--gold); }
-
-/* Disclaimer */
-.alloc-disclaimer {
-  margin-top: 24px;
-  font-size: 12px; color: var(--ink-4); display: flex; align-items: center; gap: 7px;
-}
-.alloc-disclaimer-dot {
-  width: 14px; height: 14px; border-radius: 50%; background: var(--gold-lt);
-  border: 1px solid rgba(185,155,90,.3);
-  display: flex; align-items: center; justify-content: center;
-  font-size: 8px; color: var(--gold); flex-shrink: 0;
+@media (max-width: 480px) {
+  .fund-alloc-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
+  .strategies-header { flex-direction: column; align-items: flex-start; }
 }
 
 /* ─────────────────────────────────────────
@@ -658,17 +779,14 @@ footer {
 @media (max-width: 860px) {
   .hero-card { grid-template-columns: 1fr; }
   .hero-right { display: none; }
-  .equilibrium-inner { grid-template-columns: 1fr; }
-  .alloc-grid { grid-template-columns: 1fr 1fr; }
   .orbit-card { grid-template-columns: 1fr; }
   .trust-strip { grid-template-columns: 1fr 1fr; }
 }
 @media (min-width: 861px) and (max-width: 1020px) {
-  .planet-scene { width: 260px; height: 260px; }
-  .planet-scene .planet-svg-wrap svg { width: 160px; height: 160px; }
+  .planet-scene { width: 280px; height: 260px; }
+  .planet-scene .planet-svg-wrap svg { width: 190px; height: 175px; }
 }
 @media (max-width: 520px) {
-  .alloc-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
   .trust-strip { grid-template-columns: 1fr 1fr; gap: 10px; }
   .nav-links { display: none; }
   .hero-card { padding: 36px 24px; }
@@ -681,7 +799,7 @@ footer {
 <!-- ── NAV ── -->
 <nav>
   <div class="nav-inner">
-    <a class="nav-logo" href="#home">Nebula<span>.</span></a>
+    <a class="nav-logo" href="#home"><img class="nav-logo-img" src="data:image/png;base64,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" alt="Nebula planet logo">Nebula<span>.</span></a>
     <ul class="nav-links">
       <li><a href="#home" class="active" id="nl-home">Home</a></li>
       <li><a href="#strategy" id="nl-strategy">Nebula Funds</a></li>
@@ -723,9 +841,9 @@ footer {
 
           <!-- Planet SVG -->
           <div class="planet-svg-wrap">
-            <svg width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <svg width="240" height="220" viewBox="-30 -10 260 240" fill="none" xmlns="http://www.w3.org/2000/svg">
               <defs>
-                <!-- Planet body gradient: warm purple-violet with atmospheric haze -->
+                <!-- Planet body gradient -->
                 <radialGradient id="planetBody" cx="38%" cy="32%" r="65%" gradientUnits="objectBoundingBox">
                   <stop offset="0%"   stop-color="#e8e0ff"/>
                   <stop offset="22%"  stop-color="#c4b0f0"/>
@@ -746,7 +864,7 @@ footer {
                   <stop offset="100%" stop-color="rgba(185,155,90,0)"/>
                 </linearGradient>
                 <!-- Atmospheric rim -->
-                <radialGradient id="rimLight" cx="50%" cy="50%" r="50%" gradientUnits="objectBoundingBox">
+                <radialGradient id="rimLight" cx="50%" cy="50%" r="50%">
                   <stop offset="72%"  stop-color="rgba(144,112,232,0)"/>
                   <stop offset="88%"  stop-color="rgba(144,112,232,0.18)"/>
                   <stop offset="100%" stop-color="rgba(108,63,212,0.35)"/>
@@ -763,15 +881,15 @@ footer {
                   <stop offset="60%"  stop-color="rgba(255,255,255,0.08)"/>
                   <stop offset="100%" stop-color="rgba(255,255,255,0)"/>
                 </radialGradient>
-                <!-- Ring gradient -->
+                <!-- Ring gradient — full width -->
                 <linearGradient id="ringGrad" x1="0%" y1="50%" x2="100%" y2="50%">
                   <stop offset="0%"   stop-color="rgba(185,155,90,0)"/>
-                  <stop offset="12%"  stop-color="rgba(185,155,90,0.55)"/>
-                  <stop offset="30%"  stop-color="rgba(224,196,120,0.75)"/>
-                  <stop offset="42%"  stop-color="rgba(108,63,212,0.6)"/>
-                  <stop offset="58%"  stop-color="rgba(108,63,212,0.6)"/>
-                  <stop offset="70%"  stop-color="rgba(224,196,120,0.75)"/>
-                  <stop offset="88%"  stop-color="rgba(185,155,90,0.55)"/>
+                  <stop offset="8%"   stop-color="rgba(185,155,90,0.5)"/>
+                  <stop offset="25%"  stop-color="rgba(224,196,120,0.8)"/>
+                  <stop offset="40%"  stop-color="rgba(108,63,212,0.65)"/>
+                  <stop offset="60%"  stop-color="rgba(108,63,212,0.65)"/>
+                  <stop offset="75%"  stop-color="rgba(224,196,120,0.8)"/>
+                  <stop offset="92%"  stop-color="rgba(185,155,90,0.5)"/>
                   <stop offset="100%" stop-color="rgba(185,155,90,0)"/>
                 </linearGradient>
                 <!-- Ring shadow on planet -->
@@ -782,19 +900,28 @@ footer {
                   <stop offset="80%"  stop-color="rgba(30,10,60,0.2)"/>
                   <stop offset="100%" stop-color="rgba(30,10,60,0)"/>
                 </linearGradient>
+
+                <!-- Clip planet circle -->
                 <clipPath id="planetClip">
                   <circle cx="100" cy="100" r="72"/>
                 </clipPath>
+                <!-- Clip: only the BOTTOM half (for ring-back: the part behind planet) -->
+                <clipPath id="ringBackClip">
+                  <rect x="-30" y="105" width="260" height="120"/>
+                </clipPath>
+                <!-- Clip: only the TOP half (for ring-front: the part in front of planet) -->
+                <clipPath id="ringFrontClip">
+                  <rect x="-30" y="-10" width="260" height="115"/>
+                </clipPath>
               </defs>
 
-              <!-- ── Ring back half (behind planet) ── -->
-              <ellipse cx="100" cy="105" rx="112" ry="22"
-                fill="none" stroke="url(#ringGrad)" stroke-width="12" opacity="0.7"
-                clip-path="inset(50% 0 0 0 round 50%)"/>
-              <!-- Second ring band back -->
-              <ellipse cx="100" cy="105" rx="96" ry="18"
-                fill="none" stroke="rgba(144,112,232,0.4)" stroke-width="5" opacity="0.6"
-                clip-path="inset(50% 0 0 0 round 50%)"/>
+              <!-- ── Ring BACK half (below planet equator → sits behind) ── -->
+              <ellipse cx="100" cy="108" rx="118" ry="24"
+                fill="none" stroke="url(#ringGrad)" stroke-width="13" opacity="0.65"
+                clip-path="url(#ringBackClip)"/>
+              <ellipse cx="100" cy="108" rx="100" ry="19"
+                fill="none" stroke="rgba(144,112,232,0.38)" stroke-width="6" opacity="0.55"
+                clip-path="url(#ringBackClip)"/>
 
               <!-- ── Planet body ── -->
               <circle cx="100" cy="100" r="72" fill="url(#planetBody)"/>
@@ -805,36 +932,33 @@ footer {
               <ellipse cx="100" cy="72"  rx="72" ry="6"  fill="url(#band1)" clip-path="url(#planetClip)" opacity=".6"/>
               <ellipse cx="100" cy="128" rx="72" ry="7"  fill="url(#band2)" clip-path="url(#planetClip)" opacity=".5"/>
 
-              <!-- Subtle surface texture dots (craters/wisps) -->
+              <!-- Surface texture -->
               <circle cx="70"  cy="82"  r="5"  fill="rgba(255,255,255,0.06)" clip-path="url(#planetClip)"/>
               <circle cx="128" cy="95"  r="7"  fill="rgba(255,255,255,0.05)" clip-path="url(#planetClip)"/>
               <circle cx="84"  cy="118" r="4"  fill="rgba(255,255,255,0.06)" clip-path="url(#planetClip)"/>
               <circle cx="115" cy="118" r="9"  fill="rgba(0,0,0,0.07)"       clip-path="url(#planetClip)"/>
               <circle cx="60"  cy="110" r="6"  fill="rgba(0,0,0,0.06)"       clip-path="url(#planetClip)"/>
 
-              <!-- Terminator (night-side shadow) -->
+              <!-- Terminator, rim, specular -->
               <circle cx="100" cy="100" r="72" fill="url(#terminator)"/>
-              <!-- Atmospheric rim glow -->
               <circle cx="100" cy="100" r="72" fill="url(#rimLight)"/>
-              <!-- Specular highlight -->
               <circle cx="100" cy="100" r="72" fill="url(#specular)"/>
 
-              <!-- ── Ring shadow cast on planet ── -->
-              <ellipse cx="100" cy="103" rx="72" ry="10" fill="url(#ringShadow)"
-                clip-path="url(#planetClip)" opacity=".5"/>
+              <!-- Ring shadow on planet surface -->
+              <ellipse cx="100" cy="104" rx="72" ry="10" fill="url(#ringShadow)"
+                clip-path="url(#planetClip)" opacity=".45"/>
 
-              <!-- ── Ring front half (in front of planet) ── -->
-              <ellipse cx="100" cy="105" rx="112" ry="22"
-                fill="none" stroke="url(#ringGrad)" stroke-width="12" opacity="0.85"
-                clip-path="inset(0 0 50% 0 round 50%)"/>
-              <ellipse cx="100" cy="105" rx="96" ry="18"
-                fill="none" stroke="rgba(144,112,232,0.45)" stroke-width="5" opacity="0.7"
-                clip-path="inset(0 0 50% 0 round 50%)"/>
+              <!-- ── Ring FRONT half (above planet equator → sits in front) ── -->
+              <ellipse cx="100" cy="108" rx="118" ry="24"
+                fill="none" stroke="url(#ringGrad)" stroke-width="13" opacity="0.9"
+                clip-path="url(#ringFrontClip)"/>
+              <ellipse cx="100" cy="108" rx="100" ry="19"
+                fill="none" stroke="rgba(144,112,232,0.48)" stroke-width="6" opacity="0.72"
+                clip-path="url(#ringFrontClip)"/>
 
-              <!-- ── Small distant orb (far moon) ── -->
-              <circle cx="168" cy="48" r="7" fill="radial-gradient(circle at 35% 30%, #ede8fb, #9070e8)"/>
-              <circle cx="168" cy="48" r="7" fill="rgba(108,63,212,0.7)"/>
-              <circle cx="166" cy="46" r="2.5" fill="rgba(255,255,255,0.5)"/>
+              <!-- Small distant moon -->
+              <circle cx="166" cy="46" r="7" fill="rgba(108,63,212,0.65)"/>
+              <circle cx="164" cy="44" r="2.5" fill="rgba(255,255,255,0.5)"/>
             </svg>
           </div>
 
@@ -879,110 +1003,160 @@ footer {
   </div>
 </section>
 
-<!-- ── EQUILIBRIUM ── -->
-<section class="equilibrium" id="strategy">
-  <div class="equilibrium-inner">
-    <div class="eq-left reveal">
-      <span class="section-label">Model Portfolio</span>
-      <h2 class="eq-h2">What is Nebula<br><em>Equilibrium?</em></h2>
-      <p class="eq-intro">A thoughtfully constructed portfolio designed for investors who value steadiness over speculation. It balances core market exposure with selective opportunities — built to compound quietly over time.</p>
-      <ul class="eq-bullets">
-        <li><span class="eq-bullet-dot"></span>Anchored by diversified mutual funds for reliable compounding</li>
-        <li><span class="eq-bullet-dot"></span>Direct equities for targeted alpha without overconcentration</li>
-        <li><span class="eq-bullet-dot"></span>Thematic bets on sectors with structural tailwinds</li>
-        <li><span class="eq-bullet-dot"></span>Gold as a timeless hedge against macro uncertainty</li>
-      </ul>
+<!-- ── OUR STRATEGIES ── -->
+<section id="strategy">
+<div class="strategies-section reveal">
+
+  <div class="strategies-header">
+    <div class="strategies-header-left">
+      <span class="section-label">Investment Strategies</span>
+      <h2 class="alloc-h2" style="margin-top:10px;">Our <em style="font-style:italic;color:var(--accent);">Strategies</em></h2>
     </div>
+    <span class="strategies-count">3 Funds · 1 Active</span>
+  </div>
 
-    <div class="eq-right reveal" style="transition-delay:.12s">
-      <div class="donut-wrap">
-        <svg class="donut-svg" viewBox="0 0 240 240" xmlns="http://www.w3.org/2000/svg">
-          <circle class="donut-seg" id="dseg-mf" cx="120" cy="120" r="72"
-            stroke="#7c5cbf" data-pct="55" data-label="Mutual Funds" data-color="#6c3fd4"/>
-          <circle class="donut-seg" id="dseg-ds" cx="120" cy="120" r="72"
-            stroke="#4a7fc1" data-pct="20" data-label="Direct Stocks" data-color="#4a7fc1"/>
-          <circle class="donut-seg" id="dseg-th" cx="120" cy="120" r="72"
-            stroke="#c4703a" data-pct="10" data-label="Thematic Bets" data-color="#c4703a"/>
-          <circle class="donut-seg" id="dseg-gd" cx="120" cy="120" r="72"
-            stroke="#b99b5a" data-pct="15" data-label="Gold" data-color="#b99b5a"/>
-          <!-- Donut hole -->
-          <circle cx="120" cy="120" r="46" fill="white"/>
-          <circle cx="120" cy="120" r="46" fill="none" stroke="#e8e4f0" stroke-width="1"/>
-          <!-- Center text -->
-          <g class="donut-center-group">
-            <text class="donut-center-pct" id="dpct" x="120" y="117">55%</text>
-            <text class="donut-center-label" id="dlabel" x="120" y="134">Mutual Funds</text>
-          </g>
-        </svg>
+  <div class="fund-list">
 
-        <div class="donut-legend">
-          <div class="legend-row" data-seg="dseg-mf">
-            <div class="legend-swatch" style="background:#6c3fd4"></div>
-            <span class="legend-row-name">Mutual Funds</span>
-            <span class="legend-row-pct" style="color:#6c3fd4">55%</span>
+    <!-- ── FUND 1: Nebula Equilibrium (open by default) ── -->
+    <div class="fund-item is-open" id="fund-equilibrium">
+      <button class="fund-trigger" data-fund="fund-equilibrium" aria-expanded="true">
+        <div class="fund-trigger-icon">⚖️</div>
+        <div class="fund-trigger-meta">
+          <div class="fund-trigger-name">Nebula Equilibrium</div>
+          <div class="fund-trigger-sub">Balanced · Long-term · Moderate risk</div>
+        </div>
+        <div class="fund-arrow">
+          <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M4 6l4 4 4-4" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+      </button>
+
+      <div class="fund-body">
+        <div class="fund-body-inner">
+          <div class="fund-content">
+
+            <!-- Left: description -->
+            <div class="fund-desc-block">
+              <span class="fund-desc-label">Strategy Overview</span>
+              <h3 class="fund-desc-title">What is Nebula<br><em>Equilibrium?</em></h3>
+              <p class="fund-desc-text">A thoughtfully constructed portfolio designed for investors who value steadiness over speculation. It balances core market exposure with selective opportunities — built to compound quietly over time.</p>
+              <ul class="fund-bullets">
+                <li><span class="fund-bullet-dot"></span>Anchored by diversified mutual funds for reliable compounding</li>
+                <li><span class="fund-bullet-dot"></span>Direct equities for targeted alpha without overconcentration</li>
+                <li><span class="fund-bullet-dot"></span>Thematic bets on sectors with structural tailwinds</li>
+                <li><span class="fund-bullet-dot"></span>Gold as a timeless hedge against macro uncertainty</li>
+              </ul>
+            </div>
+
+            <!-- Right: donut chart -->
+            <div class="fund-visual-block">
+              <div class="donut-wrap">
+                <svg class="donut-svg" viewBox="0 0 240 240" xmlns="http://www.w3.org/2000/svg">
+                  <circle class="donut-seg" id="dseg-mf" cx="120" cy="120" r="72"
+                    stroke="#7c5cbf" data-pct="55" data-label="Mutual Funds" data-color="#6c3fd4"/>
+                  <circle class="donut-seg" id="dseg-ds" cx="120" cy="120" r="72"
+                    stroke="#4a7fc1" data-pct="20" data-label="Direct Stocks" data-color="#4a7fc1"/>
+                  <circle class="donut-seg" id="dseg-th" cx="120" cy="120" r="72"
+                    stroke="#c4703a" data-pct="10" data-label="Thematic Bets" data-color="#c4703a"/>
+                  <circle class="donut-seg" id="dseg-gd" cx="120" cy="120" r="72"
+                    stroke="#b99b5a" data-pct="15" data-label="Gold" data-color="#b99b5a"/>
+                  <circle cx="120" cy="120" r="46" fill="white"/>
+                  <circle cx="120" cy="120" r="46" fill="none" stroke="#e8e4f0" stroke-width="1"/>
+                  <g class="donut-center-group">
+                    <text class="donut-center-pct" id="dpct" x="120" y="117">55%</text>
+                    <text class="donut-center-label" id="dlabel" x="120" y="134">Mutual Funds</text>
+                  </g>
+                </svg>
+                <div class="donut-legend">
+                  <div class="legend-row" data-seg="dseg-mf">
+                    <div class="legend-swatch" style="background:#6c3fd4"></div>
+                    <span class="legend-row-name">Mutual Funds</span>
+                    <span class="legend-row-pct" style="color:#6c3fd4">55%</span>
+                  </div>
+                  <div class="legend-row" data-seg="dseg-ds">
+                    <div class="legend-swatch" style="background:#4a7fc1"></div>
+                    <span class="legend-row-name">Direct Stocks</span>
+                    <span class="legend-row-pct" style="color:#4a7fc1">20%</span>
+                  </div>
+                  <div class="legend-row" data-seg="dseg-th">
+                    <div class="legend-swatch" style="background:#c4703a"></div>
+                    <span class="legend-row-name">Thematic Bets</span>
+                    <span class="legend-row-pct" style="color:#c4703a">10%</span>
+                  </div>
+                  <div class="legend-row" data-seg="dseg-gd">
+                    <div class="legend-swatch" style="background:#b99b5a"></div>
+                    <span class="legend-row-name">Gold</span>
+                    <span class="legend-row-pct" style="color:#b99b5a">15%</span>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
-          <div class="legend-row" data-seg="dseg-ds">
-            <div class="legend-swatch" style="background:#4a7fc1"></div>
-            <span class="legend-row-name">Direct Stocks</span>
-            <span class="legend-row-pct" style="color:#4a7fc1">20%</span>
+
+          <!-- Allocation cards -->
+          <div class="fund-alloc-grid">
+            <div class="fund-alloc-card mf">
+              <div class="fund-alloc-icon">📊</div>
+              <div class="fund-alloc-pct">55%</div>
+              <div class="fund-alloc-label">Mutual Funds</div>
+              <div class="fund-alloc-bar-track"><div class="fund-alloc-bar-fill" data-width="55"></div></div>
+            </div>
+            <div class="fund-alloc-card ds">
+              <div class="fund-alloc-icon">📈</div>
+              <div class="fund-alloc-pct">20%</div>
+              <div class="fund-alloc-label">Direct Stocks</div>
+              <div class="fund-alloc-bar-track"><div class="fund-alloc-bar-fill" data-width="20"></div></div>
+            </div>
+            <div class="fund-alloc-card th">
+              <div class="fund-alloc-icon">🎯</div>
+              <div class="fund-alloc-pct">10%</div>
+              <div class="fund-alloc-label">Thematic Bets</div>
+              <div class="fund-alloc-bar-track"><div class="fund-alloc-bar-fill" data-width="10"></div></div>
+            </div>
+            <div class="fund-alloc-card gd">
+              <div class="fund-alloc-icon">🪙</div>
+              <div class="fund-alloc-pct">15%</div>
+              <div class="fund-alloc-label">Gold</div>
+              <div class="fund-alloc-bar-track"><div class="fund-alloc-bar-fill" data-width="15"></div></div>
+            </div>
           </div>
-          <div class="legend-row" data-seg="dseg-th">
-            <div class="legend-swatch" style="background:#c4703a"></div>
-            <span class="legend-row-name">Thematic Bets</span>
-            <span class="legend-row-pct" style="color:#c4703a">10%</span>
-          </div>
-          <div class="legend-row" data-seg="dseg-gd">
-            <div class="legend-swatch" style="background:#b99b5a"></div>
-            <span class="legend-row-name">Gold</span>
-            <span class="legend-row-pct" style="color:#b99b5a">15%</span>
+
+          <div class="fund-disclaimer">
+            <div class="fund-disclaimer-i">i</div>
+            Model portfolio for educational purposes only. Not investment advice. Consult a certified financial advisor before investing.
           </div>
         </div>
       </div>
-    </div>
-  </div>
-</section>
+    </div><!-- /fund-equilibrium -->
 
-<!-- ── ALLOCATION CARDS ── -->
-<div class="alloc-section">
-  <div class="alloc-header reveal">
-    <span class="section-label">Asset Allocation</span>
-    <h2 class="alloc-h2">Proportioned for<br>calm compounding</h2>
-  </div>
-  <div class="alloc-grid">
-    <div class="alloc-card mf reveal">
-      <div class="alloc-card-icon">📊</div>
-      <div class="alloc-card-pct">55%</div>
-      <div class="alloc-card-title">Mutual Funds</div>
-      <div class="alloc-card-desc">The backbone of stability — diversified exposure across equity and debt funds for reliable long-term compounding.</div>
-      <div class="alloc-bar-wrap"><div class="alloc-bar-track"><div class="alloc-bar-fill" data-width="55"></div></div></div>
+    <!-- ── FUND 2: Nebula Growth (coming soon) ── -->
+    <div class="fund-item is-soon" id="fund-growth">
+      <button class="fund-trigger" data-fund="fund-growth" disabled aria-expanded="false">
+        <div class="fund-trigger-icon">🚀</div>
+        <div class="fund-trigger-meta">
+          <div class="fund-trigger-name">Nebula Growth</div>
+          <div class="fund-trigger-sub">Aggressive · High-return · Higher risk</div>
+        </div>
+        <span class="fund-soon-badge">Coming Soon</span>
+      </button>
     </div>
-    <div class="alloc-card ds reveal" style="transition-delay:.08s">
-      <div class="alloc-card-icon">📈</div>
-      <div class="alloc-card-pct">20%</div>
-      <div class="alloc-card-title">Direct Stocks</div>
-      <div class="alloc-card-desc">Selective direct equity positions in high-conviction businesses with durable competitive advantages.</div>
-      <div class="alloc-bar-wrap"><div class="alloc-bar-track"><div class="alloc-bar-fill" data-width="20"></div></div></div>
+
+    <!-- ── FUND 3: Nebula Defensive (coming soon) ── -->
+    <div class="fund-item is-soon" id="fund-defensive">
+      <button class="fund-trigger" data-fund="fund-defensive" disabled aria-expanded="false">
+        <div class="fund-trigger-icon">🛡️</div>
+        <div class="fund-trigger-meta">
+          <div class="fund-trigger-name">Nebula Defensive</div>
+          <div class="fund-trigger-sub">Conservative · Capital preservation · Low risk</div>
+        </div>
+        <span class="fund-soon-badge">Coming Soon</span>
+      </button>
     </div>
-    <div class="alloc-card th reveal" style="transition-delay:.16s">
-      <div class="alloc-card-icon">🎯</div>
-      <div class="alloc-card-pct">10%</div>
-      <div class="alloc-card-title">Thematic Bets</div>
-      <div class="alloc-card-desc">Tactical exposure to emerging trends — EV, AI infrastructure, green energy — with clear structural tailwinds.</div>
-      <div class="alloc-bar-wrap"><div class="alloc-bar-track"><div class="alloc-bar-fill" data-width="10"></div></div></div>
-    </div>
-    <div class="alloc-card gd reveal" style="transition-delay:.24s">
-      <div class="alloc-card-icon">🪙</div>
-      <div class="alloc-card-pct">15%</div>
-      <div class="alloc-card-title">Gold</div>
-      <div class="alloc-card-desc">A timeless store of value and portfolio hedge — providing ballast during equity volatility and macro stress.</div>
-      <div class="alloc-bar-wrap"><div class="alloc-bar-track"><div class="alloc-bar-fill" data-width="15"></div></div></div>
-    </div>
-  </div>
-  <div class="alloc-disclaimer reveal" style="transition-delay:.1s">
-    <div class="alloc-disclaimer-dot">i</div>
-    This is a model portfolio for educational purposes only. Not investment advice. Please consult a certified financial advisor before investing.
-  </div>
+
+  </div><!-- /fund-list -->
 </div>
+</section>
 
 <!-- ── EMAIL CAPTURE ── -->
 <section id="orbit">
@@ -1027,18 +1201,44 @@ footer {
 </footer>
 
 <script>
+// ── Accordion ──────────────────────────────────
+document.querySelectorAll('.fund-trigger:not([disabled])').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const fundId = btn.dataset.fund;
+    const clickedItem = document.getElementById(fundId);
+    const isAlreadyOpen = clickedItem.classList.contains('is-open');
+
+    // Close all open items
+    document.querySelectorAll('.fund-item.is-open').forEach(item => {
+      item.classList.remove('is-open');
+      const trigger = item.querySelector('.fund-trigger');
+      if (trigger) trigger.setAttribute('aria-expanded', 'false');
+    });
+
+    // Open clicked (if it wasn't already open)
+    if (!isAlreadyOpen) {
+      clickedItem.classList.add('is-open');
+      btn.setAttribute('aria-expanded', 'true');
+
+      // Animate donut + bars when newly opened
+      setTimeout(() => {
+        animateDonut();
+        animateBarsInItem(clickedItem);
+      }, 80);
+    }
+  });
+});
+
 // ── Donut chart ──────────────────────────────
-const R = 72, C = 2 * Math.PI * R; // ~452.4
+const R = 72, C = 2 * Math.PI * R;
 const GAP = 3;
 const segs = Array.from(document.querySelectorAll('.donut-seg'));
 const pcts = segs.map(s => +s.dataset.pct);
 
-// Draw segments (hidden first, animate in on observe)
 let offset = 0;
 segs.forEach((s, i) => {
   const arc = (pcts[i] / 100) * C;
   s._arc = arc;
-  s._offset = offset;
   s.style.transform = 'rotate(-90deg)';
   s.style.transformOrigin = '120px 120px';
   s.setAttribute('stroke-dasharray', `0 ${C}`);
@@ -1049,21 +1249,20 @@ segs.forEach((s, i) => {
 
 function animateDonut() {
   segs.forEach((s, i) => {
-    const arc = s._arc;
     setTimeout(() => {
       s.style.transition = `stroke-dasharray 1s cubic-bezier(.22,1,.36,1)`;
-      s.setAttribute('stroke-dasharray', `${Math.max(0, arc - GAP)} ${C}`);
-    }, 100 + i * 80);
+      s.setAttribute('stroke-dasharray', `${Math.max(0, s._arc - GAP)} ${C}`);
+    }, 80 + i * 80);
   });
 }
 
-// Donut interaction
+// Donut hover interaction
 const dpct   = document.getElementById('dpct');
 const dlabel = document.getElementById('dlabel');
 const DEF_PCT = '55%', DEF_LABEL = 'Mutual Funds', DEF_COLOR = '#6c3fd4';
 
 function highlightSeg(seg) {
-  segs.forEach(s => s.style.opacity = s === seg ? '1' : '0.2');
+  segs.forEach(s => s.style.opacity = s === seg ? '1' : '0.18');
   dpct.textContent = seg.dataset.pct + '%';
   dpct.style.fill = seg.dataset.color;
   dlabel.textContent = seg.dataset.label;
@@ -1073,7 +1272,6 @@ function resetSeg() {
   dpct.textContent = DEF_PCT; dpct.style.fill = DEF_COLOR;
   dlabel.textContent = DEF_LABEL;
 }
-
 segs.forEach(seg => {
   seg.addEventListener('mouseenter', () => highlightSeg(seg));
   seg.addEventListener('mouseleave', resetSeg);
@@ -1086,6 +1284,24 @@ document.querySelectorAll('.legend-row').forEach(row => {
   row.addEventListener('mouseleave', resetSeg);
 });
 
+// ── Animate allocation bars ────────────────────
+function animateBarsInItem(item) {
+  item.querySelectorAll('.fund-alloc-bar-fill').forEach(fill => {
+    fill.style.width = fill.dataset.width + '%';
+  });
+}
+
+// ── On page load: animate default open fund ────
+window.addEventListener('DOMContentLoaded', () => {
+  const defaultOpen = document.querySelector('.fund-item.is-open');
+  if (defaultOpen) {
+    setTimeout(() => {
+      animateDonut();
+      animateBarsInItem(defaultOpen);
+    }, 400);
+  }
+});
+
 // ── Scroll reveal ──────────────────────────────
 const revealEls = document.querySelectorAll('.reveal');
 const revObs = new IntersectionObserver(entries => {
@@ -1095,33 +1311,8 @@ const revObs = new IntersectionObserver(entries => {
       revObs.unobserve(e.target);
     }
   });
-}, { threshold: 0.12 });
+}, { threshold: 0.08 });
 revealEls.forEach(el => revObs.observe(el));
-
-// ── Progress bars ──────────────────────────────
-const fills = document.querySelectorAll('.alloc-bar-fill');
-const barObs = new IntersectionObserver(entries => {
-  entries.forEach(e => {
-    if (e.isIntersecting) {
-      e.target.style.width = e.target.dataset.width + '%';
-      barObs.unobserve(e.target);
-    }
-  });
-}, { threshold: 0.3 });
-fills.forEach(f => barObs.observe(f));
-
-// ── Animate donut on scroll into view ─────────
-let donutAnimated = false;
-const donutObs = new IntersectionObserver(entries => {
-  entries.forEach(e => {
-    if (e.isIntersecting && !donutAnimated) {
-      donutAnimated = true;
-      animateDonut();
-    }
-  });
-}, { threshold: 0.3 });
-const donutEl = document.querySelector('.donut-svg');
-if (donutEl) donutObs.observe(donutEl);
 
 // ── Navbar active state ────────────────────────
 const navSections = [
@@ -1137,7 +1328,7 @@ const secObs = new IntersectionObserver(entries => {
       });
     }
   });
-}, { threshold: 0.4 });
+}, { threshold: 0.35 });
 navSections.forEach(ns => {
   const el = document.getElementById(ns.id);
   if (el) secObs.observe(el);

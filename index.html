@@ -230,54 +230,55 @@ main { padding-top: 60px; }
   animation: rise .8s .12s cubic-bezier(.22,1,.36,1) both;
   position: relative;
 }
-
-/* Planet float animation */
 @keyframes planet-float {
-  0%,100% { transform: translateY(0px) rotate(0deg); }
-  50%      { transform: translateY(-14px) rotate(1.5deg); }
-}
-@keyframes ring-drift {
-  0%,100% { transform: rotateX(72deg) rotate(0deg) scaleX(1); }
-  50%      { transform: rotateX(72deg) rotate(3deg) scaleX(1.02); }
+  0%,100% { transform: translateY(0px); }
+  50%      { transform: translateY(-12px); }
 }
 @keyframes moon-orbit {
-  from { transform: rotate(0deg) translateX(115px) rotate(0deg); }
-  to   { transform: rotate(360deg) translateX(115px) rotate(-360deg); }
+  from { transform: rotate(0deg) translateX(90px) rotate(0deg); }
+  to   { transform: rotate(360deg) translateX(90px) rotate(-360deg); }
 }
 @keyframes star-twinkle {
   0%,100% { opacity:.7; transform:scale(1); }
-  50%      { opacity:.2; transform:scale(.5); }
+  50%      { opacity:.15; transform:scale(.4); }
 }
 @keyframes nebula-drift {
-  0%,100% { opacity:.55; transform:scale(1) translate(0,0); }
-  50%      { opacity:.8;  transform:scale(1.08) translate(4px,-6px); }
+  0%,100% { opacity:.5; transform:translate(-50%,-50%) scale(1); }
+  50%      { opacity:.75; transform:translate(-50%,-50%) scale(1.06); }
 }
 
 .planet-scene {
   position: relative;
-  width: 360px; height: 340px;
+  width: 300px; height: 300px;
   display: flex; align-items: center; justify-content: center;
   overflow: visible;
+  /* Force GPU layer on mobile */
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
 }
 
 /* Ambient nebula glow behind */
 .planet-scene::before {
   content: '';
-  position: absolute; width: 280px; height: 280px; border-radius: 50%;
+  position: absolute; width: 260px; height: 260px; border-radius: 50%;
   background: radial-gradient(circle,
-    rgba(108,63,212,.18) 0%,
-    rgba(144,112,232,.10) 40%,
-    rgba(185,155,90,.04) 70%,
-    transparent 100%);
-  top: 50%; left: 50%; transform: translate(-50%,-50%);
+    rgba(108,63,212,.22) 0%,
+    rgba(144,112,232,.12) 40%,
+    transparent 70%);
+  top: 50%; left: 50%;
+  transform: translate(-50%,-50%);
   animation: nebula-drift 8s ease-in-out infinite;
-  filter: blur(18px);
+  filter: blur(24px);
+  pointer-events: none;
 }
 
 .planet-svg-wrap {
-  animation: planet-float 7s ease-in-out infinite;
+  animation: planet-float 6s ease-in-out infinite;
   position: relative; z-index: 2;
-  filter: drop-shadow(0 24px 48px rgba(108,63,212,.22)) drop-shadow(0 8px 16px rgba(108,63,212,.12));
+  /* Use will-change for GPU compositing on mobile */
+  will-change: transform;
+  /* Simplified shadow — heavy drop-shadow kills mobile perf */
+  filter: drop-shadow(0 12px 32px rgba(108,63,212,.28));
 }
 
 /* Moon */
@@ -829,8 +830,18 @@ footer {
    RESPONSIVE
 ───────────────────────────────────────── */
 @media (max-width: 860px) {
-  .hero-card { grid-template-columns: 1fr; }
-  .hero-right { display: none; }
+  /* Show planet below hero text on tablet/mobile */
+  .hero-card {
+    grid-template-columns: 1fr;
+  }
+  .hero-right {
+    display: flex;
+    justify-content: center;
+    padding-bottom: 8px;
+  }
+  .planet-scene {
+    width: 240px; height: 240px;
+  }
   .orbit-card { grid-template-columns: 1fr; }
   .trust-strip { grid-template-columns: 1fr 1fr; }
   .footer-inner { grid-template-columns: 1fr; gap: 24px; }
@@ -847,6 +858,16 @@ footer {
   /* Nav: hide links, keep logo + CTA */
   .nav-links { display: none; }
   .nav-cta { font-size: 12px; padding: 7px 14px; }
+
+  /* Planet on tablet */
+  .planet-scene { width: 220px; height: 220px; }
+  .planet-scene .planet-svg-wrap svg { width: 180px; height: 165px; }
+  .planet-moon { width: 16px; height: 16px; }
+  .planet-badge { padding: 6px 10px; }
+  .planet-badge-val { font-size: 15px; }
+  .planet-badge-label { font-size: 9px; }
+  .pb-1 { bottom: 10px; left: -10px; }
+  .pb-2 { top: 20px; right: -8px; }
 
   /* Hero */
   .hero { padding: clamp(24px,4vw,48px) 20px 0; }
@@ -959,6 +980,13 @@ footer {
   /* Section headings */
   .alloc-h2 { font-size: clamp(22px, 6vw, 32px); letter-spacing: -.5px; }
   .section-label { font-size: 10px; }
+
+  /* Planet on small mobile */
+  .planet-scene { width: 180px; height: 180px; }
+  .planet-scene .planet-svg-wrap svg { width: 150px; height: 138px; }
+  .planet-moon { width: 13px; height: 13px; }
+  .planet-badge { display: none; }
+  .pstar { display: none; }
 }
 </style>
 </head>
@@ -1000,7 +1028,7 @@ footer {
         <div class="hero-tag tag">Research-Driven Investing</div>
         <h1 class="hero-h1">Where <em>Discipline</em><br>Builds Wealth</h1>
         <p class="hero-sub">Nebula helps you understand markets through clear thinking, patient strategies, and research grounded in first principles — not headlines.</p>
-        <a class="hero-cta" href="https://instagram.com/nebulafinance" target="_blank" rel="noopener noreferrer">
+        <a class="hero-cta" href="https://t.me/nebulawealthmanagement" target="_blank" rel="noopener noreferrer">
           Follow the Journey
           <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </a>
@@ -1357,11 +1385,11 @@ footer {
           <label class="orbit-label">Email address</label>
           <input class="orbit-input" type="email" placeholder="you@email.com" autocomplete="email"/>
         </div>
-        <button class="orbit-btn" onclick="window.open('https://instagram.com/nebulafinance','_blank')">
+        <button class="orbit-btn" id="orbit-submit" type="button">
           Follow Weekly Reports
           <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </button>
-        <p class="orbit-note">We share updates via Instagram. No spam, ever.</p>
+        <p class="orbit-note">Submissions go to nebulaamc@gmail.com · No spam, ever.</p>
       </div>
     </div>
   </div>
@@ -1382,6 +1410,42 @@ footer {
 </footer>
 
 <script>
+// ── Email form submission ──────────────────────
+const orbitSubmit = document.getElementById('orbit-submit');
+const nameInput   = document.querySelector('.orbit-input[type="text"]');
+const emailInput  = document.querySelector('.orbit-input[type="email"]');
+
+if (orbitSubmit) {
+  orbitSubmit.addEventListener('click', () => {
+    const name  = nameInput  ? nameInput.value.trim()  : '';
+    const email = emailInput ? emailInput.value.trim() : '';
+
+    // Basic validation
+    if (!email || !email.includes('@')) {
+      emailInput.style.borderColor = '#e05252';
+      emailInput.focus();
+      setTimeout(() => emailInput.style.borderColor = '', 2000);
+      return;
+    }
+
+    // Build mailto link → opens default email client pre-filled
+    const subject = encodeURIComponent('Nebula Weekly Reports — New Subscriber');
+    const body = encodeURIComponent(
+      `Hi Nebula team,\n\nI'd like to subscribe to the weekly reports.\n\nName: ${name || 'Not provided'}\nEmail: ${email}\n\nLooking forward to the insights!\n\n— ${name || email}`
+    );
+    const mailtoLink = `mailto:nebulaamc@gmail.com?subject=${subject}&body=${body}`;
+    window.open(mailtoLink, '_blank');
+
+    // Success state on button
+    orbitSubmit.textContent = '✓ Opening your email app…';
+    orbitSubmit.style.background = 'linear-gradient(135deg, #3d9a5c, #52c278)';
+    setTimeout(() => {
+      orbitSubmit.innerHTML = 'Follow Weekly Reports <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:16px;height:16px"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+      orbitSubmit.style.background = '';
+    }, 3500);
+  });
+}
+
 // ── Hamburger menu ─────────────────────────────
 const hamburger = document.getElementById('hamburger');
 const mobileNav = document.getElementById('mobile-nav');

@@ -189,8 +189,8 @@ main { padding-top: 60px; }
   pointer-events: none;
 }
 
-.hero-left { animation: rise .8s cubic-bezier(.22,1,.36,1) both; }
-.hero-tag { margin-bottom: 24px; }
+.hero-left { animation: rise .8s cubic-bezier(.22,1,.36,1) both; display: flex; flex-direction: column; }
+.hero-tag { margin-bottom: 20px; }
 
 .hero-h1 {
   font-family: var(--serif);
@@ -375,8 +375,9 @@ main { padding-top: 60px; }
    OUR STRATEGIES ACCORDION
 ───────────────────────────────────────── */
 .strategies-section {
-  padding: clamp(80px,8vw,120px) var(--pad);
+  padding: clamp(72px,7vw,108px) var(--pad);
   max-width: var(--max); margin: 0 auto;
+  border-top: 1px solid var(--border);
 }
 
 .strategies-header {
@@ -681,17 +682,7 @@ main { padding-top: 60px; }
 .legend-row-name { font-size: 12px; font-weight: 600; color: var(--ink-2); flex: 1; }
 .legend-row-pct  { font-family: var(--serif); font-size: 15px; color: var(--ink); }
 
-@media (max-width: 720px) {
-  .fund-content { grid-template-columns: 1fr; }
-  .fund-alloc-grid { grid-template-columns: 1fr 1fr; }
-  .fund-trigger { padding: 18px 20px; }
-  .fund-body-inner { padding: 0 20px 24px; }
-  .fund-trigger-name { font-size: 17px; }
-}
-@media (max-width: 480px) {
-  .fund-alloc-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
-  .strategies-header { flex-direction: column; align-items: flex-start; }
-}
+/* (stale blocks removed) */
 
 /* ─────────────────────────────────────────
    EMAIL CAPTURE
@@ -780,36 +771,104 @@ main { padding-top: 60px; }
 }
 
 /* ─────────────────────────────────────────
-   FOOTER
+   FOOTER — ENHANCED
 ───────────────────────────────────────── */
 footer {
   border-top: 1px solid var(--border);
-  padding: 36px var(--pad);
+  padding: clamp(40px,5vw,60px) var(--pad) 32px;
   background: var(--white);
 }
 .footer-inner {
   max-width: var(--max); margin: 0 auto;
-  display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px;
+  display: grid; grid-template-columns: 1fr auto;
+  gap: 40px; align-items: start;
 }
-.footer-logo { font-family: var(--serif); font-size: 18px; color: var(--ink); }
+.footer-brand {}
+.footer-logo { font-family: var(--serif); font-size: 20px; color: var(--ink); margin-bottom: 10px; }
 .footer-logo span { color: var(--accent); }
-.footer-disc { font-size: 12px; color: var(--ink-4); max-width: 440px; line-height: 1.6; }
-.footer-ig {
-  display: flex; align-items: center; gap: 8px;
-  font-size: 13px; font-weight: 600; color: var(--accent);
-  text-decoration: none; padding: 8px 16px; border-radius: 10px;
-  border: 1.5px solid var(--accent-mid); background: var(--accent-lt);
-  transition: background .2s, border-color .2s, transform .2s;
+.footer-disc { font-size: 12px; color: var(--ink-4); max-width: 380px; line-height: 1.7; }
+.footer-links-group {}
+.footer-links-title {
+  font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+  color: var(--ink-4); margin-bottom: 14px;
 }
-.footer-ig:hover {
-  background: var(--accent); color: var(--white); border-color: var(--accent);
-  transform: translateY(-1px);
+.footer-links-list { display: flex; flex-direction: column; gap: 10px; }
+.footer-link {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-size: 13px; font-weight: 500; color: var(--ink-2);
+  text-decoration: none; padding: 8px 14px; border-radius: 10px;
+  border: 1px solid var(--border); background: var(--surface);
+  transition: background .18s, border-color .18s, color .18s, transform .18s;
+  white-space: nowrap;
 }
-.ig-icon {
-  width: 18px; height: 18px; border-radius: 5px;
-  background: linear-gradient(135deg, #f09433,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888);
-  display: flex; align-items: center; justify-content: center; font-size: 10px;
+.footer-link:hover {
+  border-color: var(--accent-mid); background: var(--accent-lt);
+  color: var(--accent); transform: translateX(2px);
+}
+.footer-link-icon {
+  width: 28px; height: 28px; border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; font-size: 14px;
+}
+.footer-link-icon svg { width: 14px; height: 14px; }
+.footer-link-icon--tg { background: rgba(40,140,240,.1); color: #28a8f0; }
+.footer-link-icon--li { background: rgba(10,102,194,.1); color: #0a66c2; }
+.footer-link-icon--em { background: rgba(108,63,212,.1); color: var(--accent); }
+
+/* ─────────────────────────────────────────
+   REPORTS TOGGLE (inside fund)
+───────────────────────────────────────── */
+.reports-section { margin-top: 20px; }
+.reports-toggle {
+  display: flex; align-items: center; justify-content: space-between;
+  width: 100%; background: var(--surface);
+  border: 1px solid var(--border); border-radius: 12px;
+  padding: 10px 16px; cursor: pointer;
+  transition: background .18s, border-color .18s;
+}
+.reports-toggle:hover { background: var(--accent-lt); border-color: var(--accent-mid); }
+.reports-toggle-label {
+  display: flex; align-items: center; gap: 7px;
+  font-size: 13px; font-weight: 600; color: var(--ink-2);
+}
+.reports-toggle-label svg { color: var(--accent); }
+.reports-arrow {
+  color: var(--ink-4);
+  transition: transform .3s cubic-bezier(.22,1,.36,1);
+}
+.reports-section.is-open .reports-arrow { transform: rotate(180deg); }
+.reports-section.is-open .reports-toggle { background: var(--accent-lt); border-color: var(--accent-mid); }
+
+.reports-body {
+  max-height: 0; overflow: hidden;
+  transition: max-height .4s cubic-bezier(.22,1,.36,1);
+}
+.reports-section.is-open .reports-body { max-height: 400px; }
+.reports-inner {
+  padding: 12px 4px 4px;
+  display: flex; flex-direction: column; gap: 8px;
+}
+.report-row {
+  display: flex; align-items: center; justify-content: space-between;
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: 10px; padding: 12px 16px;
+  gap: 12px;
+}
+.report-row-left { display: flex; flex-direction: column; gap: 3px; }
+.report-week { font-size: 13px; font-weight: 600; color: var(--ink-2); }
+.report-date { font-size: 11px; color: var(--ink-4); }
+.report-return {
+  font-family: var(--serif); font-size: 20px; font-weight: 700;
   flex-shrink: 0;
+}
+.report-return.positive { color: #2d9a5c; }
+.report-return.negative { color: #c0392b; }
+
+/* ─────────────────────────────────────────
+   HERO PLANET ON MOBILE (between text + CTA)
+───────────────────────────────────────── */
+.hero-planet-mobile {
+  display: none; /* hidden on desktop — planet shows in hero-right */
 }
 
 /* ─────────────────────────────────────────
@@ -829,164 +888,154 @@ footer {
 /* ─────────────────────────────────────────
    RESPONSIVE
 ───────────────────────────────────────── */
+
+/* ── Large desktop+tablet breakpoint ── */
 @media (max-width: 860px) {
-  /* Show planet below hero text on tablet/mobile */
+  /* Hero: stack as single flex column so we can order children */
   .hero-card {
-    grid-template-columns: 1fr;
-  }
-  .hero-right {
     display: flex;
-    justify-content: center;
-    padding-bottom: 8px;
+    flex-direction: column;
   }
-  .planet-scene {
-    width: 240px; height: 240px;
+  /* Make hero-left transparent to layout — its children join the flex flow */
+  .hero-left {
+    display: contents;
   }
+  /* Assign explicit order to every direct + indirect child of hero-card */
+  .hero-tag   { order: 1; margin-bottom: 16px; }
+  .hero-h1    { order: 2; }
+  .hero-sub   { order: 3; margin-bottom: 0; }
+  /* Planet slot — sits between sub and CTA */
+  .hero-right { order: 4; display: flex; justify-content: center; padding: 20px 0 8px; }
+  .hero-cta   { order: 5; align-self: flex-start; }
+  /* Remove the empty mobile slot div */
+  .hero-planet-mobile { display: none; }
+
+  .planet-scene { width: 220px; height: 220px; }
   .orbit-card { grid-template-columns: 1fr; }
   .trust-strip { grid-template-columns: 1fr 1fr; }
-  .footer-inner { grid-template-columns: 1fr; gap: 24px; }
-  .footer-inner > *:last-child { align-self: flex-start; }
+  .footer-inner { grid-template-columns: 1fr; gap: 28px; }
 }
 
 @media (min-width: 861px) and (max-width: 1020px) {
-  .planet-scene { width: 280px; height: 260px; }
-  .planet-scene .planet-svg-wrap svg { width: 190px; height: 175px; }
+  .planet-scene { width: 260px; height: 260px; }
+  .planet-scene .planet-svg-wrap svg { width: 200px; height: 184px; }
 }
 
 /* ── Tablet ── */
 @media (max-width: 768px) {
-  /* Nav: hide links, keep logo + CTA */
   .nav-links { display: none; }
   .nav-cta { font-size: 12px; padding: 7px 14px; }
 
-  /* Planet on tablet */
-  .planet-scene { width: 220px; height: 220px; }
-  .planet-scene .planet-svg-wrap svg { width: 180px; height: 165px; }
-  .planet-moon { width: 16px; height: 16px; }
-  .planet-badge { padding: 6px 10px; }
-  .planet-badge-val { font-size: 15px; }
+  .hero { padding: clamp(20px,4vw,40px) 20px 0; }
+  .hero-card { padding: 32px 22px; gap: 12px; }
+  .hero-h1 { font-size: clamp(30px,7vw,48px); letter-spacing: -1px; }
+  .hero-sub { font-size: 15px; }
+  .hero-cta { font-size: 14px; padding: 12px 22px; width: 100%; justify-content: center; }
+
+  /* Planet tablet */
+  .planet-scene { width: 190px; height: 190px; }
+  .planet-scene .planet-svg-wrap svg { width: 158px; height: 144px; }
+  .planet-moon { width: 14px; height: 14px; }
+  .pb-1 { bottom: 6px; left: -6px; }
+  .pb-2 { top: 12px; right: -4px; }
+  .planet-badge { padding: 5px 9px; }
+  .planet-badge-val { font-size: 13px; }
   .planet-badge-label { font-size: 9px; }
-  .pb-1 { bottom: 10px; left: -10px; }
-  .pb-2 { top: 20px; right: -8px; }
 
-  /* Hero */
-  .hero { padding: clamp(24px,4vw,48px) 20px 0; }
-  .hero-card {
-    grid-template-columns: 1fr;
-    padding: 36px 24px;
-  }
-  .hero-h1 { font-size: clamp(30px, 7vw, 48px); letter-spacing: -1px; }
-  .hero-sub { font-size: 15px; margin-bottom: 28px; }
-  .hero-cta { font-size: 14px; padding: 12px 22px; }
-
-  /* Trust */
-  .trust-strip {
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
-    padding: 32px 20px;
-  }
-  .trust-pill { padding: 16px 14px; gap: 10px; }
-  .trust-pill-icon { width: 34px; height: 34px; font-size: 16px; }
+  .trust-strip { gap: 10px; padding: 28px 20px; }
+  .trust-pill { padding: 14px 12px; gap: 9px; }
+  .trust-pill-icon { width: 32px; height: 32px; font-size: 15px; }
   .trust-pill-text { font-size: 12px; }
 
-  /* Strategies */
-  .strategies-section { padding: 60px 20px; }
-  .strategies-header { flex-direction: column; align-items: flex-start; gap: 10px; }
-  .fund-trigger { padding: 18px 16px; gap: 12px; }
-  .fund-trigger-icon { width: 38px; height: 38px; font-size: 18px; border-radius: 10px; }
+  .strategies-section { padding: 56px 20px; }
+  .strategies-header { flex-direction: column; align-items: flex-start; gap: 8px; }
+  .fund-trigger { padding: 17px 16px; gap: 12px; }
   .fund-trigger-name { font-size: 16px; }
-  .fund-trigger-sub { font-size: 11px; }
   .fund-body-inner { padding: 0 16px 24px; }
-  .fund-content { grid-template-columns: 1fr; gap: 28px; }
-  .fund-alloc-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+  .fund-content { grid-template-columns: 1fr; gap: 24px; }
   .fund-desc-title { font-size: 22px; }
 
-  /* Orbit/Email */
-  .orbit { padding: 40px 20px 60px; }
-  .orbit-card {
-    grid-template-columns: 1fr;
-    padding: 32px 24px;
-    gap: 28px;
-  }
-  .orbit-h2 { font-size: clamp(24px, 5vw, 36px); }
+  /* Donut tablet: side by side */
+  .donut-wrap { flex-direction: row; align-items: center; gap: 20px; }
+  .donut-svg { width: 150px; height: 150px; flex-shrink: 0; }
 
-  /* Footer */
-  footer { padding: 32px 20px; }
-  .footer-inner {
-    grid-template-columns: 1fr;
-    gap: 20px;
-  }
+  .orbit { padding: 40px 20px 60px; }
+  .orbit-card { padding: 30px 22px; gap: 24px; }
+  .orbit-h2 { font-size: clamp(24px,5vw,36px); }
+
+  footer { padding: 40px 20px 28px; }
+  .footer-inner { gap: 24px; }
   .footer-disc { max-width: 100%; }
+  .footer-links-list { flex-direction: row; flex-wrap: wrap; gap: 8px; }
 }
 
 /* ── Mobile ── */
 @media (max-width: 480px) {
   :root { --pad: 16px; }
 
-  /* Nav */
   nav { height: 56px; }
   .nav-inner { padding: 0 16px; }
   .nav-logo { font-size: 17px; }
   .nav-logo-img { width: 26px; height: 26px; }
   .nav-cta { font-size: 11px; padding: 6px 12px; border-radius: 8px; }
 
-  /* Hero */
-  .hero { padding: 16px 16px 0; }
-  .hero-card { padding: 28px 18px; border-radius: 20px; }
-  .hero-h1 { font-size: clamp(26px, 8vw, 36px); letter-spacing: -.5px; }
+  .hero { padding: 14px 16px 0; }
+  .hero-card { padding: 24px 16px; border-radius: 20px; gap: 10px; }
+  .hero-h1 { font-size: clamp(26px,8vw,36px); letter-spacing: -.5px; margin-bottom: 10px; }
   .hero-sub { font-size: 14px; }
-  .hero-cta { font-size: 13px; padding: 11px 20px; border-radius: 11px; width: 100%; justify-content: center; }
+  .hero-cta { font-size: 13px; padding: 12px 18px; border-radius: 11px; width: 100%; margin-top: 2px; }
   .tag { font-size: 10px; padding: 4px 10px; }
 
-  /* Trust */
-  .trust-strip { grid-template-columns: 1fr 1fr; gap: 8px; padding: 24px 16px; }
-  .trust-pill { padding: 14px 10px; gap: 8px; border-radius: 14px; }
-  .trust-pill-icon { width: 30px; height: 30px; font-size: 14px; border-radius: 9px; }
-  .trust-pill-text { font-size: 11px; }
-
-  /* Strategies */
-  .strategies-section { padding: 48px 16px; }
-  .fund-trigger { padding: 16px 14px; gap: 10px; }
-  .fund-trigger-icon { width: 34px; height: 34px; font-size: 16px; }
-  .fund-trigger-name { font-size: 15px; }
-  .fund-trigger-sub { font-size: 10px; display: none; }
-  .fund-arrow { width: 26px; height: 26px; }
-  .fund-body-inner { padding: 0 14px 20px; }
-  .fund-alloc-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
-  .fund-alloc-card { padding: 14px 10px; border-radius: 14px; }
-  .fund-alloc-pct { font-size: 22px; }
-  .fund-alloc-label { font-size: 9px; }
-  .fund-desc-title { font-size: 20px; }
-  .fund-desc-text { font-size: 13px; }
-  .fund-bullets li { font-size: 12px; }
-  .donut-svg { width: 170px; height: 170px; }
-  .strategies-count { font-size: 11px; }
-  .fund-soon-badge { font-size: 9px; padding: 3px 8px; }
-
-  /* Orbit */
-  .orbit { padding: 32px 16px 48px; }
-  .orbit-card { padding: 24px 18px; border-radius: 22px; }
-  .orbit-h2 { font-size: clamp(22px, 7vw, 32px); }
-  .orbit-input { padding: 12px 14px; font-size: 14px; }
-  .orbit-btn { padding: 13px 20px; font-size: 14px; }
-
-  /* Footer */
-  footer { padding: 28px 16px; }
-  .footer-inner { gap: 18px; }
-  .footer-logo { font-size: 16px; }
-  .footer-disc { font-size: 11px; }
-  .footer-ig { font-size: 12px; padding: 7px 14px; }
-
-  /* Section headings */
-  .alloc-h2 { font-size: clamp(22px, 6vw, 32px); letter-spacing: -.5px; }
-  .section-label { font-size: 10px; }
-
-  /* Planet on small mobile */
-  .planet-scene { width: 180px; height: 180px; }
-  .planet-scene .planet-svg-wrap svg { width: 150px; height: 138px; }
-  .planet-moon { width: 13px; height: 13px; }
+  /* Planet mobile */
+  .hero-right { padding: 14px 0 2px; }
+  .planet-scene { width: 154px; height: 154px; }
+  .planet-scene .planet-svg-wrap svg { width: 126px; height: 116px; }
+  .planet-moon { width: 11px; height: 11px; }
   .planet-badge { display: none; }
   .pstar { display: none; }
+
+  .trust-strip { gap: 8px; padding: 20px 16px; }
+  .trust-pill { padding: 12px 10px; gap: 8px; border-radius: 14px; }
+  .trust-pill-icon { width: 28px; height: 28px; font-size: 14px; border-radius: 8px; }
+  .trust-pill-text { font-size: 11px; }
+
+  .strategies-section { padding: 44px 16px; }
+  .fund-trigger { padding: 15px 14px; gap: 10px; }
+  .fund-trigger-icon { width: 34px; height: 34px; font-size: 15px; }
+  .fund-trigger-name { font-size: 14px; }
+  .fund-trigger-sub { font-size: 10px; }
+  .fund-arrow { width: 26px; height: 26px; }
+  .fund-body-inner { padding: 0 12px 18px; }
+  .fund-desc-title { font-size: 19px; }
+  .fund-desc-text { font-size: 13px; }
+  .fund-bullets li { font-size: 12px; }
+  .fund-soon-badge { font-size: 9px; padding: 3px 8px; }
+  .strategies-count { font-size: 11px; }
+
+  /* Donut mobile: stacked */
+  .donut-wrap { flex-direction: column; align-items: center; gap: 14px; }
+  .donut-svg { width: 154px; height: 154px; }
+  .donut-legend { width: 100%; }
+
+  .report-week { font-size: 12px; }
+  .report-date { font-size: 10px; }
+  .report-return { font-size: 17px; }
+
+  .orbit { padding: 28px 16px 44px; }
+  .orbit-card { padding: 22px 16px; border-radius: 20px; }
+  .orbit-h2 { font-size: clamp(22px,7vw,30px); }
+  .orbit-input { padding: 12px 14px; font-size: 14px; }
+  .orbit-btn { padding: 13px 18px; font-size: 14px; }
+
+  footer { padding: 28px 16px 20px; }
+  .footer-inner { gap: 20px; }
+  .footer-logo { font-size: 17px; }
+  .footer-disc { font-size: 11px; }
+  .footer-links-list { flex-direction: column; gap: 8px; }
+  .footer-link { font-size: 12px; padding: 7px 12px; }
+
+  .alloc-h2 { font-size: clamp(22px,6vw,30px); letter-spacing: -.5px; }
+  .section-label { font-size: 10px; }
 }
 </style>
 </head>
@@ -1001,7 +1050,7 @@ footer {
       <li><a href="#strategy" id="nl-strategy">Nebula Funds</a></li>
       <li><a href="#orbit" id="nl-orbit">Stay in Orbit</a></li>
     </ul>
-    <a class="nav-cta" href="https://instagram.com/nebulafinance" target="_blank">Follow Weekly Reports</a>
+    <a class="nav-cta" href="https://t.me/nebulawealthmanagement" target="_blank" rel="noopener noreferrer">Follow Daily Updates</a>
     <button class="nav-hamburger" id="hamburger" aria-label="Menu">
       <span></span><span></span><span></span>
     </button>
@@ -1014,7 +1063,7 @@ footer {
     <a href="#home"     onclick="closeMobileNav()">Home</a>
     <a href="#strategy" onclick="closeMobileNav()">Nebula Funds</a>
     <a href="#orbit"    onclick="closeMobileNav()">Stay in Orbit</a>
-    <a href="https://instagram.com/nebulafinance" target="_blank" class="ig-link" onclick="closeMobileNav()">Follow Weekly Reports →</a>
+    <a href="https://t.me/nebulawealthmanagement" target="_blank" rel="noopener noreferrer" class="ig-link" onclick="closeMobileNav()">Follow Daily Updates →</a>
   </div>
 </div>
 
@@ -1028,6 +1077,7 @@ footer {
         <div class="hero-tag tag">Research-Driven Investing</div>
         <h1 class="hero-h1">Where <em>Discipline</em><br>Builds Wealth</h1>
         <p class="hero-sub">Nebula helps you understand markets through clear thinking, patient strategies, and research grounded in first principles — not headlines.</p>
+        <!-- Planet shown between content and CTA on mobile via CSS order -->
         <a class="hero-cta" href="https://t.me/nebulawealthmanagement" target="_blank" rel="noopener noreferrer">
           Follow the Journey
           <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -1227,8 +1277,8 @@ footer {
   <div class="fund-list">
 
     <!-- ── FUND 1: Nebula Equilibrium (open by default) ── -->
-    <div class="fund-item is-open" id="fund-equilibrium">
-      <button class="fund-trigger" data-fund="fund-equilibrium" aria-expanded="true">
+    <div class="fund-item" id="fund-equilibrium">
+      <button class="fund-trigger" data-fund="fund-equilibrium" aria-expanded="false">
         <div class="fund-trigger-icon">⚖️</div>
         <div class="fund-trigger-meta">
           <div class="fund-trigger-name">Nebula Equilibrium</div>
@@ -1256,12 +1306,34 @@ footer {
                 <li><span class="fund-bullet-dot"></span>Thematic bets on sectors with structural tailwinds</li>
                 <li><span class="fund-bullet-dot"></span>Gold as a timeless hedge against macro uncertainty</li>
               </ul>
+
+              <!-- Reports toggle -->
+              <div class="reports-section">
+                <button class="reports-toggle" id="reports-toggle" aria-expanded="false">
+                  <span class="reports-toggle-label">
+                    <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M2 4h12M4 8h8M6 12h4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+                    Show Reports
+                  </span>
+                  <svg class="reports-arrow" width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </button>
+                <div class="reports-body" id="reports-body">
+                  <div class="reports-inner">
+                    <div class="report-row">
+                      <div class="report-row-left">
+                        <span class="report-week">Week 1 Update</span>
+                        <span class="report-date">Last updated: Sunday 23:40 PM</span>
+                      </div>
+                      <span class="report-return positive">+0.64%</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
 
             <!-- Right: donut chart -->
             <div class="fund-visual-block">
               <div class="donut-wrap">
-                <svg class="donut-svg" viewBox="0 0 240 240" xmlns="http://www.w3.org/2000/svg">
+                <svg class="donut-svg" viewBox="0 0 240 240" xmlns="http://www.w3.org/2000/svg" style="overflow:visible">
                   <circle class="donut-seg" id="dseg-mf" cx="120" cy="120" r="72"
                     stroke="#7c5cbf" data-pct="55" data-label="Mutual Funds" data-color="#6c3fd4"/>
                   <circle class="donut-seg" id="dseg-ds" cx="120" cy="120" r="72"
@@ -1300,34 +1372,6 @@ footer {
                   </div>
                 </div>
               </div>
-            </div>
-          </div>
-
-          <!-- Allocation cards -->
-          <div class="fund-alloc-grid">
-            <div class="fund-alloc-card mf">
-              <div class="fund-alloc-icon">📊</div>
-              <div class="fund-alloc-pct">55%</div>
-              <div class="fund-alloc-label">Mutual Funds</div>
-              <div class="fund-alloc-bar-track"><div class="fund-alloc-bar-fill" data-width="55"></div></div>
-            </div>
-            <div class="fund-alloc-card ds">
-              <div class="fund-alloc-icon">📈</div>
-              <div class="fund-alloc-pct">20%</div>
-              <div class="fund-alloc-label">Direct Stocks</div>
-              <div class="fund-alloc-bar-track"><div class="fund-alloc-bar-fill" data-width="20"></div></div>
-            </div>
-            <div class="fund-alloc-card th">
-              <div class="fund-alloc-icon">🎯</div>
-              <div class="fund-alloc-pct">10%</div>
-              <div class="fund-alloc-label">Thematic Bets</div>
-              <div class="fund-alloc-bar-track"><div class="fund-alloc-bar-fill" data-width="10"></div></div>
-            </div>
-            <div class="fund-alloc-card gd">
-              <div class="fund-alloc-icon">🪙</div>
-              <div class="fund-alloc-pct">15%</div>
-              <div class="fund-alloc-label">Gold</div>
-              <div class="fund-alloc-bar-track"><div class="fund-alloc-bar-fill" data-width="15"></div></div>
             </div>
           </div>
 
@@ -1374,7 +1418,7 @@ footer {
       <div class="orbit-left">
         <span class="section-label">Weekly Reports</span>
         <h2 class="orbit-h2">Stay in<br><em>Orbit</em></h2>
-        <p class="orbit-sub">Get weekly market insights, portfolio updates, and educational breakdowns — delivered every Monday. No noise, only signal.</p>
+        <p class="orbit-sub">Get weekly market insights, portfolio updates, and educational breakdowns — delivered every Sunday. No noise, only signal.</p>
       </div>
       <div class="orbit-right">
         <div class="orbit-form-group">
@@ -1389,7 +1433,7 @@ footer {
           Follow Weekly Reports
           <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </button>
-        <p class="orbit-note">Submissions go to nebulaamc@gmail.com · No spam, ever.</p>
+        <p class="orbit-note">Submissions sent to <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="3e505b5c4b525f5f535d7e59535f5752105d5153">[email&#160;protected]</a> · No spam, ever.</p>
       </div>
     </div>
   </div>
@@ -1400,16 +1444,47 @@ footer {
 <!-- ── FOOTER ── -->
 <footer>
   <div class="footer-inner">
-    <div class="footer-logo">Nebula<span>.</span></div>
-    <p class="footer-disc">For educational purposes only. Not investment advice. All content is student-led and designed for learning. © 2025 Nebula.</p>
-    <a class="footer-ig" href="https://instagram.com/nebulafinance" target="_blank">
-      <span class="ig-icon">📷</span>
-      @nebulafinance
-    </a>
+    <div class="footer-brand">
+      <div class="footer-logo">Nebula<span>.</span></div>
+      <p class="footer-disc">For educational purposes only. Not investment advice. All content is student-led and designed for learning. © 2025 Nebula.</p>
+    </div>
+    <div class="footer-links-group">
+      <div class="footer-links-title">Connect</div>
+      <div class="footer-links-list">
+        <a class="footer-link" href="https://t.me/nebulawealthmanagement" target="_blank" rel="noopener noreferrer">
+          <span class="footer-link-icon footer-link-icon--tg">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M21.8 2.4L2.4 10c-1.3.5-1.3 1.3-.2 1.6l4.9 1.5 1.9 5.8c.2.7.4.9 1 .9.4 0 .7-.2 1-.5l2.4-2.3 5 3.7c.9.5 1.6.2 1.8-.8L22.9 3.5c.3-1.3-.5-1.8-1.1-1.1z" fill="currentColor"/></svg>
+          </span>
+          Telegram
+        </a>
+        <a class="footer-link" href="https://www.linkedin.com/in/tarunnakshtranaik/" target="_blank" rel="noopener noreferrer">
+          <span class="footer-link-icon footer-link-icon--li">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="4" cy="4" r="2" stroke="currentColor" stroke-width="1.5"/></svg>
+          </span>
+          LinkedIn
+        </a>
+        <a class="footer-link" href="/cdn-cgi/l/email-protection#c5aba0a7b0a9a4a4a8a685a2a8a4aca9eba6aaa8">
+          <span class="footer-link-icon footer-link-icon--em">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><polyline points="22,6 12,13 2,6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+          <span class="__cf_email__" data-cfemail="c2aca7a0b7aea3a3afa182a5afa3abaeeca1adaf">[email&#160;protected]</span>
+        </a>
+      </div>
+    </div>
   </div>
 </footer>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+// ── Reports toggle ────────────────────────────
+const reportsToggle = document.getElementById('reports-toggle');
+if (reportsToggle) {
+  reportsToggle.addEventListener('click', () => {
+    const sec  = reportsToggle.closest('.reports-section');
+    const open = sec.classList.toggle('is-open');
+    reportsToggle.setAttribute('aria-expanded', open);
+  });
+}
+
 // ── Email form submission ──────────────────────
 const orbitSubmit = document.getElementById('orbit-submit');
 const nameInput   = document.querySelector('.orbit-input[type="text"]');
@@ -1581,7 +1656,7 @@ revealEls.forEach(el => revObs.observe(el));
 
 // ── Navbar active state ────────────────────────
 const navSections = [
-  { id: 'home',     link: document.getElementById('nl-home') },
+  {    id: 'home',     link: document.getElementById('nl-home') },
   { id: 'strategy', link: document.getElementById('nl-strategy') },
   { id: 'orbit',    link: document.getElementById('nl-orbit') },
 ];

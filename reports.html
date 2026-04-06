@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Nebula — Where Discipline Builds Wealth</title>
+<title>Reports — Nebula</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300;1,9..40,400&display=swap" rel="stylesheet">
@@ -1039,46 +1039,144 @@ footer {
   .section-label { font-size: 10px; }
 }
 
-
-body { animation: pgfade .35s ease both; }
-@keyframes pgfade { from { opacity:0; transform:translateY(6px); } to { opacity:1; transform:translateY(0); } }
-
-
-/* ── Home quick-links section ── */
-.home-links-section {
-  padding: clamp(48px,6vw,80px) var(--pad) clamp(60px,7vw,100px);
-  border-top: 1px solid var(--border);
+body{animation:pgfade .35s ease both}@keyframes pgfade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+.page-hero{padding:clamp(60px,8vw,100px) var(--pad) clamp(40px,5vw,64px);border-bottom:1px solid var(--border);background:linear-gradient(160deg,#f9f7ff 0%,#fdfcff 60%,#f5f2fd 100%)}.page-hero-inner{max-width:var(--max);margin:0 auto}.page-hero-h1{font-family:var(--serif);font-size:clamp(36px,5vw,64px);line-height:1.08;letter-spacing:-1.5px;margin:12px 0 16px}.page-hero-h1 em{font-style:italic;color:var(--accent)}.page-hero-sub{font-size:clamp(15px,1.6vw,18px);font-weight:300;color:var(--ink-3);line-height:1.7;max-width:500px}@media(max-width:480px){.page-hero{padding:48px 16px 32px}.page-hero-h1{font-size:clamp(28px,8vw,40px);letter-spacing:-.8px}}
+.reports-page-wrap {
+  padding: clamp(48px,6vw,80px) var(--pad) clamp(60px,8vw,100px);
 }
-.home-links-inner {
-  max-width: var(--max); margin: 0 auto;
-  display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px;
+.reports-page-inner {
+  max-width: 860px; margin: 0 auto;
+  display: flex; flex-direction: column; gap: 20px;
 }
-.home-link-card {
+
+/* Fund header */
+.rp-fund-header {
   display: flex; align-items: center; gap: 16px;
   background: var(--white); border: 1.5px solid var(--border);
-  border-radius: 18px; padding: 22px 20px;
-  text-decoration: none; color: var(--ink);
+  border-radius: 18px; padding: 20px 24px;
   box-shadow: var(--shadow-xs);
-  transition: transform .25s cubic-bezier(.22,1,.36,1), border-color .2s, box-shadow .2s, background .2s;
 }
-.home-link-card:hover {
-  transform: translateY(-4px); border-color: var(--accent-mid);
-  box-shadow: var(--shadow-sm); background: var(--accent-lt);
+.rp-fund-icon { font-size: 28px; flex-shrink: 0; }
+.rp-fund-meta { flex: 1; }
+.rp-fund-name { font-family: var(--serif); font-size: 20px; letter-spacing: -.3px; margin-bottom: 3px; }
+.rp-fund-sub { font-size: 12px; color: var(--ink-4); font-weight: 500; }
+.rp-fund-status {
+  display: flex; align-items: center; gap: 7px;
+  font-size: 12px; font-weight: 600; color: #2d9a5c;
+  background: rgba(45,154,92,.08); border: 1px solid rgba(45,154,92,.2);
+  padding: 6px 12px; border-radius: 99px;
 }
-.home-link-icon {
-  width: 46px; height: 46px; border-radius: 14px; flex-shrink: 0;
-  display: flex; align-items: center; justify-content: center; font-size: 22px;
+.rp-status-dot {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: #2d9a5c;
+  box-shadow: 0 0 0 3px rgba(45,154,92,.2);
+  animation: pulse-dot 2s ease-in-out infinite;
+}
+@keyframes pulse-dot { 0%,100%{box-shadow:0 0 0 3px rgba(45,154,92,.2)} 50%{box-shadow:0 0 0 5px rgba(45,154,92,.08)} }
+
+/* Stats bar */
+.rp-stats-bar {
+  display: grid; grid-template-columns: repeat(4,1fr); gap: 12px;
+}
+.rp-stat {
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: 14px; padding: 16px 18px;
+  box-shadow: var(--shadow-xs);
+}
+.rp-stat-label { font-size: 10px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-4); margin-bottom: 7px; }
+.rp-stat-val { font-family: var(--serif); font-size: 20px; color: var(--ink); }
+.rp-stat-val.positive { color: #2d9a5c; }
+
+/* Table */
+.rp-table-wrap {
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: 18px; overflow: hidden; box-shadow: var(--shadow-xs);
+}
+.rp-table-header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 18px 24px 0; margin-bottom: 0;
+}
+.rp-table-title { font-family: var(--serif); font-size: 17px; letter-spacing: -.2px; }
+.rp-table-count { font-size: 11px; color: var(--ink-4); font-weight: 600; }
+.rp-table { margin-top: 12px; }
+.rp-table-row {
+  display: grid; grid-template-columns: 1fr 1.4fr 1fr 1fr;
+  align-items: center;
+  padding: 13px 24px;
+  border-top: 1px solid var(--border);
+  gap: 12px;
+}
+.rp-table-row:first-child { border-top: none; }
+.rp-table-head {
+  background: var(--surface);
+  font-size: 10px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-4);
+}
+.rp-table-row--upcoming { opacity: .5; }
+.rp-row-week { font-weight: 600; color: var(--ink-2); font-size: 14px; }
+.rp-row-date { font-size: 13px; color: var(--ink-3); }
+.rp-row-return { font-family: var(--serif); font-size: 18px; }
+.rp-row-return.positive { color: #2d9a5c; }
+.rp-row-return.muted { color: var(--ink-5); font-size: 14px; }
+.rp-badge { font-size: 10px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; padding: 4px 10px; border-radius: 99px; }
+.rp-badge--live { background: rgba(45,154,92,.1); color: #2d9a5c; border: 1px solid rgba(45,154,92,.2); }
+.rp-badge--soon { background: var(--surface); color: var(--ink-4); border: 1px solid var(--border); }
+
+/* Allocation chips */
+.rp-alloc-remind {
   background: var(--surface); border: 1px solid var(--border);
-  transition: background .2s, border-color .2s;
+  border-radius: 14px; padding: 16px 20px;
+  display: flex; align-items: center; gap: 16px; flex-wrap: wrap;
 }
-.home-link-card:hover .home-link-icon { background: rgba(108,63,212,.1); border-color: var(--accent-mid); }
-.home-link-body { flex: 1; min-width: 0; }
-.home-link-title { font-family: var(--serif); font-size: 17px; font-weight: 400; margin-bottom: 4px; letter-spacing: -.2px; }
-.home-link-sub { font-size: 12px; color: var(--ink-4); line-height: 1.5; }
-.home-link-arrow { width: 16px; height: 16px; color: var(--ink-5); flex-shrink: 0; transition: transform .2s, color .2s; }
-.home-link-card:hover .home-link-arrow { transform: translateX(3px); color: var(--accent); }
-@media(max-width:768px) { .home-links-inner { grid-template-columns: 1fr; gap: 12px; } }
-@media(max-width:480px) { .home-links-section { padding: 36px 16px 52px; } }
+.rp-alloc-remind-title {
+  display: flex; align-items: center; gap: 6px;
+  font-size: 12px; font-weight: 700; color: var(--ink-3);
+  white-space: nowrap;
+}
+.rp-alloc-remind-title svg { color: var(--accent); }
+.rp-alloc-chips { display: flex; gap: 8px; flex-wrap: wrap; }
+.rp-chip { font-size: 12px; font-weight: 600; padding: 5px 12px; border-radius: 99px; border: 1px solid; }
+.rp-chip--mf { background: rgba(108,63,212,.08); color: var(--accent); border-color: var(--accent-mid); }
+.rp-chip--ds { background: rgba(74,127,193,.08); color: var(--blue); border-color: rgba(74,127,193,.25); }
+.rp-chip--th { background: rgba(196,112,58,.08); color: var(--orange); border-color: rgba(196,112,58,.25); }
+.rp-chip--gd { background: rgba(185,155,90,.08); color: var(--gold); border-color: rgba(185,155,90,.25); }
+
+/* Subscribe CTA */
+.rp-subscribe-cta {
+  display: flex; align-items: center; justify-content: space-between; gap: 16px;
+  background: linear-gradient(135deg, var(--accent-lt), var(--white));
+  border: 1.5px solid var(--accent-mid); border-radius: 16px; padding: 20px 24px;
+}
+.rp-subscribe-title { font-family: var(--serif); font-size: 18px; letter-spacing: -.2px; margin-bottom: 4px; }
+.rp-subscribe-sub { font-size: 13px; color: var(--ink-3); }
+.rp-subscribe-btn {
+  flex-shrink: 0; text-decoration: none; font-size: 14px; font-weight: 700;
+  color: var(--white); background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  padding: 11px 22px; border-radius: 11px;
+  box-shadow: 0 4px 16px rgba(108,63,212,.28);
+  transition: transform .2s, box-shadow .2s;
+}
+.rp-subscribe-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 24px rgba(108,63,212,.4); }
+
+.rp-disclaimer {
+  font-size: 11px; color: var(--ink-4); line-height: 1.6;
+  display: flex; align-items: flex-start; gap: 6px;
+}
+.rp-disclaimer span { color: rgba(185,155,90,.6); flex-shrink: 0; margin-top: 1px; }
+
+@media(max-width:640px) {
+  .rp-stats-bar { grid-template-columns: 1fr 1fr; }
+  .rp-table-row { grid-template-columns: 1fr 1fr; gap: 8px; padding: 12px 16px; }
+  .rp-table-row.rp-table-head span:nth-child(n+3) { display: none; }
+  .rp-row-return, .rp-row-status { display: none; }
+  .rp-subscribe-cta { flex-direction: column; align-items: flex-start; }
+  .rp-subscribe-btn { width: 100%; text-align: center; }
+  .rp-alloc-remind { flex-direction: column; align-items: flex-start; gap: 10px; }
+}
+@media(max-width:480px) {
+  .reports-page-wrap { padding: 36px 16px 56px; }
+  .rp-fund-header { padding: 16px 18px; }
+  .rp-fund-name { font-size: 17px; }
+}
 
 </style>
 </head>
@@ -1110,248 +1208,107 @@ body { animation: pgfade .35s ease both; }
 </div>
 <main>
 
-<section id="home">
-  <div class="hero">
-    <div class="hero-card">
-      <div class="hero-left">
-        <div class="hero-tag tag">Research-Driven Investing</div>
-        <h1 class="hero-h1">Where <em>Discipline</em><br>Builds Wealth</h1>
-        <p class="hero-sub">Nebula helps you understand markets through clear thinking, patient strategies, and research grounded in first principles — not headlines.</p>
-        <!-- Planet shown between content and CTA on mobile via CSS order -->
-        <a class="hero-cta" href="https://t.me/nebulawealthmanagement" target="_blank" rel="noopener noreferrer">
-          Follow the Journey
-          <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </a>
+<section class="page-hero">
+  <div class="page-hero-inner">
+    <span class="section-label">Performance</span>
+    <h1 class="page-hero-h1">Weekly <em>Reports</em></h1>
+    <p class="page-hero-sub">Transparent, weekly performance updates for the Nebula Equilibrium strategy — published every Sunday.</p>
+  </div>
+</section>
+
+<div class="reports-page-wrap reveal">
+  <div class="reports-page-inner">
+
+    <!-- Fund header -->
+    <div class="rp-fund-header">
+      <div class="rp-fund-icon">⚖️</div>
+      <div class="rp-fund-meta">
+        <div class="rp-fund-name">Nebula Equilibrium</div>
+        <div class="rp-fund-sub">Balanced · Long-term · Moderate risk</div>
       </div>
+      <div class="rp-fund-status">
+        <span class="rp-status-dot"></span>
+        Active
+      </div>
+    </div>
 
-      <div class="hero-right">
-        <div class="planet-scene">
-          <!-- Micro stars -->
-          <div class="pstar" style="width:3px;height:3px;top:18%;left:12%;--dur:2.1s;--del:0s;opacity:.6"></div>
-          <div class="pstar" style="width:2px;height:2px;top:10%;left:72%;--dur:3.2s;--del:.4s;opacity:.5"></div>
-          <div class="pstar" style="width:4px;height:4px;top:78%;left:80%;--dur:2.7s;--del:.9s;opacity:.55"></div>
-          <div class="pstar" style="width:2px;height:2px;top:82%;left:18%;--dur:3.8s;--del:1.2s;opacity:.4"></div>
-          <div class="pstar" style="width:3px;height:3px;top:40%;left:5%;--dur:2.4s;--del:.6s;opacity:.5"></div>
-          <div class="pstar" style="width:2px;height:2px;top:22%;left:88%;--dur:4s;--del:1.8s;opacity:.45"></div>
-          <div class="pstar" style="width:3px;height:3px;top:65%;left:92%;--dur:2.9s;--del:.2s;opacity:.5"></div>
+    <!-- Summary stats bar -->
+    <div class="rp-stats-bar">
+      <div class="rp-stat">
+        <div class="rp-stat-label">Week 1 Return</div>
+        <div class="rp-stat-val positive">+0.64%</div>
+      </div>
+      <div class="rp-stat">
+        <div class="rp-stat-label">Last Updated</div>
+        <div class="rp-stat-val">Sunday 23:40 PM</div>
+      </div>
+      <div class="rp-stat">
+        <div class="rp-stat-label">Strategy</div>
+        <div class="rp-stat-val">Equilibrium</div>
+      </div>
+      <div class="rp-stat">
+        <div class="rp-stat-label">Frequency</div>
+        <div class="rp-stat-val">Weekly</div>
+      </div>
+    </div>
 
-          <!-- Orbiting moon -->
-          <div class="planet-moon"></div>
-
-          <!-- Planet SVG -->
-          <div class="planet-svg-wrap">
-            <svg width="240" height="220" viewBox="-30 -10 260 240" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <defs>
-                <!-- Planet body gradient -->
-                <radialGradient id="planetBody" cx="38%" cy="32%" r="65%" gradientUnits="objectBoundingBox">
-                  <stop offset="0%"   stop-color="#e8e0ff"/>
-                  <stop offset="22%"  stop-color="#c4b0f0"/>
-                  <stop offset="50%"  stop-color="#8b5cf6"/>
-                  <stop offset="74%"  stop-color="#5b21b6"/>
-                  <stop offset="100%" stop-color="#2e1065"/>
-                </radialGradient>
-                <!-- Surface banding -->
-                <linearGradient id="band1" x1="0%" y1="0%" x2="100%" y2="0%">
-                  <stop offset="0%"   stop-color="rgba(255,255,255,0)"/>
-                  <stop offset="30%"  stop-color="rgba(255,255,255,0.07)"/>
-                  <stop offset="60%"  stop-color="rgba(255,255,255,0.04)"/>
-                  <stop offset="100%" stop-color="rgba(255,255,255,0)"/>
-                </linearGradient>
-                <linearGradient id="band2" x1="0%" y1="0%" x2="100%" y2="0%">
-                  <stop offset="0%"   stop-color="rgba(185,155,90,0)"/>
-                  <stop offset="40%"  stop-color="rgba(185,155,90,0.1)"/>
-                  <stop offset="100%" stop-color="rgba(185,155,90,0)"/>
-                </linearGradient>
-                <!-- Atmospheric rim -->
-                <radialGradient id="rimLight" cx="50%" cy="50%" r="50%">
-                  <stop offset="72%"  stop-color="rgba(144,112,232,0)"/>
-                  <stop offset="88%"  stop-color="rgba(144,112,232,0.18)"/>
-                  <stop offset="100%" stop-color="rgba(108,63,212,0.35)"/>
-                </radialGradient>
-                <!-- Terminator shadow -->
-                <radialGradient id="terminator" cx="70%" cy="50%" r="55%">
-                  <stop offset="0%"   stop-color="rgba(0,0,0,0)"/>
-                  <stop offset="60%"  stop-color="rgba(10,4,30,0.2)"/>
-                  <stop offset="100%" stop-color="rgba(10,4,30,0.55)"/>
-                </radialGradient>
-                <!-- Specular highlight -->
-                <radialGradient id="specular" cx="35%" cy="28%" r="28%">
-                  <stop offset="0%"   stop-color="rgba(255,255,255,0.55)"/>
-                  <stop offset="60%"  stop-color="rgba(255,255,255,0.08)"/>
-                  <stop offset="100%" stop-color="rgba(255,255,255,0)"/>
-                </radialGradient>
-                <!-- Ring gradient — full width -->
-                <linearGradient id="ringGrad" x1="0%" y1="50%" x2="100%" y2="50%">
-                  <stop offset="0%"   stop-color="rgba(185,155,90,0)"/>
-                  <stop offset="8%"   stop-color="rgba(185,155,90,0.5)"/>
-                  <stop offset="25%"  stop-color="rgba(224,196,120,0.8)"/>
-                  <stop offset="40%"  stop-color="rgba(108,63,212,0.65)"/>
-                  <stop offset="60%"  stop-color="rgba(108,63,212,0.65)"/>
-                  <stop offset="75%"  stop-color="rgba(224,196,120,0.8)"/>
-                  <stop offset="92%"  stop-color="rgba(185,155,90,0.5)"/>
-                  <stop offset="100%" stop-color="rgba(185,155,90,0)"/>
-                </linearGradient>
-                <!-- Ring shadow on planet -->
-                <linearGradient id="ringShadow" x1="0%" y1="50%" x2="100%" y2="50%">
-                  <stop offset="0%"   stop-color="rgba(30,10,60,0)"/>
-                  <stop offset="20%"  stop-color="rgba(30,10,60,0.2)"/>
-                  <stop offset="50%"  stop-color="rgba(30,10,60,0.35)"/>
-                  <stop offset="80%"  stop-color="rgba(30,10,60,0.2)"/>
-                  <stop offset="100%" stop-color="rgba(30,10,60,0)"/>
-                </linearGradient>
-
-                <!-- Clip planet circle -->
-                <clipPath id="planetClip">
-                  <circle cx="100" cy="100" r="72"/>
-                </clipPath>
-                <!-- Clip: only the BOTTOM half (for ring-back: the part behind planet) -->
-                <clipPath id="ringBackClip">
-                  <rect x="-30" y="105" width="260" height="120"/>
-                </clipPath>
-                <!-- Clip: only the TOP half (for ring-front: the part in front of planet) -->
-                <clipPath id="ringFrontClip">
-                  <rect x="-30" y="-10" width="260" height="115"/>
-                </clipPath>
-              </defs>
-
-              <!-- ── Ring BACK half (below planet equator → sits behind) ── -->
-              <ellipse cx="100" cy="108" rx="118" ry="24"
-                fill="none" stroke="url(#ringGrad)" stroke-width="13" opacity="0.65"
-                clip-path="url(#ringBackClip)"/>
-              <ellipse cx="100" cy="108" rx="100" ry="19"
-                fill="none" stroke="rgba(144,112,232,0.38)" stroke-width="6" opacity="0.55"
-                clip-path="url(#ringBackClip)"/>
-
-              <!-- ── Planet body ── -->
-              <circle cx="100" cy="100" r="72" fill="url(#planetBody)"/>
-
-              <!-- Surface bands -->
-              <ellipse cx="100" cy="86"  rx="72" ry="10" fill="url(#band1)" clip-path="url(#planetClip)"/>
-              <ellipse cx="100" cy="108" rx="72" ry="8"  fill="url(#band2)" clip-path="url(#planetClip)"/>
-              <ellipse cx="100" cy="72"  rx="72" ry="6"  fill="url(#band1)" clip-path="url(#planetClip)" opacity=".6"/>
-              <ellipse cx="100" cy="128" rx="72" ry="7"  fill="url(#band2)" clip-path="url(#planetClip)" opacity=".5"/>
-
-              <!-- Surface texture -->
-              <circle cx="70"  cy="82"  r="5"  fill="rgba(255,255,255,0.06)" clip-path="url(#planetClip)"/>
-              <circle cx="128" cy="95"  r="7"  fill="rgba(255,255,255,0.05)" clip-path="url(#planetClip)"/>
-              <circle cx="84"  cy="118" r="4"  fill="rgba(255,255,255,0.06)" clip-path="url(#planetClip)"/>
-              <circle cx="115" cy="118" r="9"  fill="rgba(0,0,0,0.07)"       clip-path="url(#planetClip)"/>
-              <circle cx="60"  cy="110" r="6"  fill="rgba(0,0,0,0.06)"       clip-path="url(#planetClip)"/>
-
-              <!-- Terminator, rim, specular -->
-              <circle cx="100" cy="100" r="72" fill="url(#terminator)"/>
-              <circle cx="100" cy="100" r="72" fill="url(#rimLight)"/>
-              <circle cx="100" cy="100" r="72" fill="url(#specular)"/>
-
-              <!-- Ring shadow on planet surface -->
-              <ellipse cx="100" cy="104" rx="72" ry="10" fill="url(#ringShadow)"
-                clip-path="url(#planetClip)" opacity=".45"/>
-
-              <!-- ── Ring FRONT half (above planet equator → sits in front) ── -->
-              <ellipse cx="100" cy="108" rx="118" ry="24"
-                fill="none" stroke="url(#ringGrad)" stroke-width="13" opacity="0.9"
-                clip-path="url(#ringFrontClip)"/>
-              <ellipse cx="100" cy="108" rx="100" ry="19"
-                fill="none" stroke="rgba(144,112,232,0.48)" stroke-width="6" opacity="0.72"
-                clip-path="url(#ringFrontClip)"/>
-
-              <!-- Small distant moon -->
-              <circle cx="166" cy="46" r="7" fill="rgba(108,63,212,0.65)"/>
-              <circle cx="164" cy="44" r="2.5" fill="rgba(255,255,255,0.5)"/>
-            </svg>
-          </div>
-
-          <!-- Floating info badges -->
-          <div class="planet-badge pb-1">
-            <div class="pb-dot" style="background:var(--accent)"></div>
-            <div>
-              <div class="planet-badge-val">1000+</div>
-              <div class="planet-badge-label">Learners</div>
-            </div>
-          </div>
-          <div class="planet-badge pb-2">
-            <div class="pb-dot" style="background:var(--gold)"></div>
-            <div>
-              <div class="planet-badge-val">Weekly</div>
-              <div class="planet-badge-label">Insights</div>
-            </div>
-          </div>
+    <!-- Report table -->
+    <div class="rp-table-wrap">
+      <div class="rp-table-header">
+        <span class="rp-table-title">Report History</span>
+        <span class="rp-table-count">1 entry</span>
+      </div>
+      <div class="rp-table">
+        <div class="rp-table-row rp-table-head">
+          <span>Week</span>
+          <span>Published</span>
+          <span>Return</span>
+          <span>Status</span>
+        </div>
+        <div class="rp-table-row">
+          <span class="rp-row-week">Week 1</span>
+          <span class="rp-row-date">Sunday 23:40 PM</span>
+          <span class="rp-row-return positive">+0.64%</span>
+          <span class="rp-row-status"><span class="rp-badge rp-badge--live">Published</span></span>
+        </div>
+        <div class="rp-table-row rp-table-row--upcoming">
+          <span class="rp-row-week">Week 2</span>
+          <span class="rp-row-date">Upcoming Sunday</span>
+          <span class="rp-row-return muted">—</span>
+          <span class="rp-row-status"><span class="rp-badge rp-badge--soon">Pending</span></span>
         </div>
       </div>
     </div>
-  </div>
 
-  <!-- Trust strip -->
-  <div class="trust-strip wrap">
-    <div class="trust-pill reveal">
-      <div class="trust-pill-icon">🎓</div>
-      <div class="trust-pill-text">Beginner Friendly</div>
+    <!-- Allocation reminder -->
+    <div class="rp-alloc-remind">
+      <div class="rp-alloc-remind-title">
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.5"/><path d="M8 7v5M8 5v.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        Current Allocation
+      </div>
+      <div class="rp-alloc-chips">
+        <span class="rp-chip rp-chip--mf">Mutual Funds 55%</span>
+        <span class="rp-chip rp-chip--ds">Direct Stocks 20%</span>
+        <span class="rp-chip rp-chip--th">Thematic Bets 10%</span>
+        <span class="rp-chip rp-chip--gd">Gold 15%</span>
+      </div>
     </div>
-    <div class="trust-pill reveal" style="transition-delay:.07s">
-      <div class="trust-pill-icon">🔬</div>
-      <div class="trust-pill-text">Research Focused</div>
-    </div>
-    <div class="trust-pill reveal" style="transition-delay:.14s">
-      <div class="trust-pill-icon">⏳</div>
-      <div class="trust-pill-text">Long-Term Thinking</div>
-    </div>
-    <div class="trust-pill reveal" style="transition-delay:.21s">
-      <div class="trust-pill-icon">🔁</div>
-      <div class="trust-pill-text">Consistency First</div>
-    </div>
-  </div>
-</section>
 
-  <!-- Trust strip -->
-  <div class="trust-strip wrap">
-    <div class="trust-pill reveal">
-      <div class="trust-pill-icon">🎓</div>
-      <div class="trust-pill-text">Beginner Friendly</div>
+    <!-- Subscribe CTA -->
+    <div class="rp-subscribe-cta">
+      <div class="rp-subscribe-text">
+        <div class="rp-subscribe-title">Get reports in your inbox</div>
+        <div class="rp-subscribe-sub">Published every Sunday. No spam — just signal.</div>
+      </div>
+      <a class="rp-subscribe-btn" href="contact.html">Subscribe →</a>
     </div>
-    <div class="trust-pill reveal" style="transition-delay:.07s">
-      <div class="trust-pill-icon">🔬</div>
-      <div class="trust-pill-text">Research Focused</div>
-    </div>
-    <div class="trust-pill reveal" style="transition-delay:.14s">
-      <div class="trust-pill-icon">⏳</div>
-      <div class="trust-pill-text">Long-Term Thinking</div>
-    </div>
-    <div class="trust-pill reveal" style="transition-delay:.21s">
-      <div class="trust-pill-icon">🔁</div>
-      <div class="trust-pill-text">Consistency First</div>
-    </div>
-  </div>
-</section>
 
-<!-- ── QUICK LINKS ── -->
-<section class="home-links-section">
-  <div class="home-links-inner">
-    <a class="home-link-card reveal" href="strategies.html">
-      <div class="home-link-icon">⚖️</div>
-      <div class="home-link-body">
-        <div class="home-link-title">Our Strategies</div>
-        <div class="home-link-sub">Explore Nebula Equilibrium & upcoming funds</div>
-      </div>
-      <svg class="home-link-arrow" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-    </a>
-    <a class="home-link-card reveal" href="reports.html" style="transition-delay:.08s">
-      <div class="home-link-icon">📊</div>
-      <div class="home-link-body">
-        <div class="home-link-title">Weekly Reports</div>
-        <div class="home-link-sub">Performance updates published every Sunday</div>
-      </div>
-      <svg class="home-link-arrow" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-    </a>
-    <a class="home-link-card reveal" href="contact.html" style="transition-delay:.16s">
-      <div class="home-link-icon">✉️</div>
-      <div class="home-link-body">
-        <div class="home-link-title">Stay in Orbit</div>
-        <div class="home-link-sub">Subscribe for weekly insights & updates</div>
-      </div>
-      <svg class="home-link-arrow" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-    </a>
+    <p class="rp-disclaimer">
+      <span>⚠</span> Model portfolio for educational purposes only. Not investment advice. Past performance does not guarantee future results.
+    </p>
+
   </div>
-</section>
+</div>
 
 </main>
 <footer>
@@ -1388,40 +1345,10 @@ body { animation: pgfade .35s ease both; }
 
 </footer>
 <script>
+const h2=document.getElementById("hamburger"),mn2=document.getElementById("mobile-nav");if(h2){h2.addEventListener("click",()=>{const o=mn2.classList.toggle("is-open");h2.classList.toggle("is-open",o)});document.addEventListener("click",e=>{if(!h2.contains(e.target)&&!mn2.contains(e.target)){mn2.classList.remove("is-open");h2.classList.remove("is-open")}})};function closeMobileNav(){if(mn2)mn2.classList.remove("is-open");if(h2)h2.classList.remove("is-open")}
+const revEls2=document.querySelectorAll(".reveal");const ro2=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("visible");ro2.unobserve(e.target)}})},{threshold:0.08});revEls2.forEach(el=>ro2.observe(el));
 
-const hamburger2 = document.getElementById('hamburger');
-const mobileNav2 = document.getElementById('mobile-nav');
-if(hamburger2){
-  hamburger2.addEventListener('click', () => {
-    const open = mobileNav2.classList.toggle('is-open');
-    hamburger2.classList.toggle('is-open', open);
-  });
-  document.addEventListener('click', e => {
-    if (!hamburger2.contains(e.target) && !mobileNav2.contains(e.target)) {
-      mobileNav2.classList.remove('is-open');
-      hamburger2.classList.remove('is-open');
-    }
-  });
-}
-function closeMobileNav() {
-  if(mobileNav2){ mobileNav2.classList.remove('is-open'); }
-  if(hamburger2){ hamburger2.classList.remove('is-open'); }
-}
-
-const revealEls = document.querySelectorAll('.reveal');
-const revObs = new IntersectionObserver(entries => {
-  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); revObs.unobserve(e.target); }});
-}, { threshold: 0.08 });
-revealEls.forEach(el => revObs.observe(el));
-
-
-(function(){
-  var page = 'index.html';
-  document.querySelectorAll('.nav-links a, .mobile-nav-inner a:not(.ig-link)').forEach(function(a){
-    var href = a.getAttribute('href') || '';
-    a.classList.toggle('active', href === page);
-  });
-})();
+(function(){var page="reports.html";document.querySelectorAll(".nav-links a,.mobile-nav-inner a:not(.ig-link)").forEach(function(a){var href=a.getAttribute("href")||"";a.classList.toggle("active",href===page)});})();
 </script>
 </body>
 </html>

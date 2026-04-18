@@ -1,0 +1,1971 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nebula Equilibrium Fund | Balanced Multi-Asset Performance</title>
+  <meta name="description" content="Discover the Nebula Equilibrium Fund, a balanced model portfolio focusing on equity, mutual funds, and gold. Track our +9.35% real-time performance and core investment philosophy.">
+  <meta name="keywords" content="Nebula Equilibrium Fund, Balanced portfolio, Multi-asset growth, Investment performance, Real-time returns">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Nebula Equilibrium Fund | Balanced Performance">
+  <meta property="og:description" content="A research-driven, +9.35% real-time performing multi-asset fund for long-term growth.">
+  
+  <!-- Twitter -->
+  <meta property="twitter:title" content="Nebula Equilibrium Fund">
+  <meta property="twitter:description" content="Disciplined asset allocation for moderate risk and consistent returns.">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "InvestmentFund",
+    "name": "Nebula Equilibrium Fund",
+    "description": "A structured, multi-asset portfolio focusing on equity, mutual funds, and gold.",
+    "url": "https://nebula.investing/nebula-equilibrium-fund.html",
+    "inceptionDate": "2026-03-31",
+    "provider": {
+      "@type": "Organization",
+      "name": "Nebula"
+    }
+  }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300;1,9..40,400&display=swap"
+    rel="stylesheet">
+  <style>
+    /* ─────────────────────────────────────────
+   RESET & ROOT
+───────────────────────────────────────── */
+    :root {
+      /* Palette */
+      --ink: #1a1624;
+      --ink-2: #3d3650;
+      --ink-3: #6b6580;
+      --ink-4: #9d98ae;
+      --ink-5: #c8c4d4;
+      --border: #e8e4f0;
+      --surface: #f4f2f8;
+      --surface-2: #ffffff;
+      --bg: #faf9fc;
+      --white: #ffffff;
+      --accent: #6c3fd4;
+      --accent-2: #9070e8;
+      --accent-lt: #ede8fb;
+      --accent-mid: #d4c8f8;
+      --gold: #b99b5a;
+      --blue: #4a7fc1;
+      --orange: #c4703a;
+
+      --serif: 'DM Serif Display', Georgia, serif;
+      --sans: 'DM Sans', system-ui, sans-serif;
+      --max: 1120px;
+      --pad: clamp(24px, 5vw, 80px);
+
+      --shadow-sm: 0 4px 12px rgba(108, 63, 212, .03), 0 1px 4px rgba(108, 63, 212, .02);
+      --shadow-md: 0 8px 32px rgba(108, 63, 212, .05), 0 2px 8px rgba(108, 63, 212, .03);
+      --shadow-glow: 0 16px 40px rgba(108, 63, 212, .1);
+    }
+
+    *,
+    *::before,
+    *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: var(--sans);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .wrap {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 0 var(--pad);
+    }
+
+    main.wrap {
+      padding-top: 100px;
+      padding-bottom: 100px;
+    }
+
+    /* NAVBAR */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 900;
+      height: 60px;
+      background: rgba(250, 249, 252, 0.88);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+    }
+
+    .nav-inner {
+      max-width: var(--max);
+      width: 100%;
+      margin: 0 auto;
+      padding: 0 var(--pad);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-logo {
+      font-family: var(--serif);
+      font-size: 20px;
+      color: var(--ink);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 9px;
+    }
+
+    .nav-logo span {
+      color: var(--accent);
+    }
+
+    .nav-logo-img {
+      height: 32px; width: 32px;
+      display: block; flex-shrink: 0;
+      border-radius: 50%;
+      object-fit: cover; object-position: center;
+      filter: drop-shadow(0 0 5px rgba(108,63,212,.5));
+      transition: filter .22s;
+    }
+    .nav-logo:hover .nav-logo-img {
+      filter: drop-shadow(0 0 10px rgba(108,63,212,.75));
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 4px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--ink-3);
+      text-decoration: none;
+      padding: 7px 14px;
+      border-radius: 8px;
+      transition: all .2s;
+    }
+
+    .nav-links a:hover {
+      background: var(--surface);
+      color: var(--ink);
+    }
+
+    .nav-links a.active {
+      color: var(--accent);
+      background: var(--accent-lt);
+    }
+
+    /* LAYOUT */
+    main {
+      padding-top: 100px;
+      padding-bottom: 100px;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+
+    .title {
+      font-family: var(--serif);
+      font-size: clamp(32px, 5vw, 48px);
+      margin-bottom: 16px;
+      color: var(--ink);
+    }
+
+    .subtext {
+      font-size: 16px;
+      color: var(--ink-3);
+      max-width: 600px;
+      margin: 0 auto;
+      font-weight: 300;
+    }
+
+    .grid {
+      display: grid;
+      gap: 32px;
+      grid-template-columns: 2fr 1fr;
+      margin-bottom: 60px;
+    }
+
+    @media (max-width: 768px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 40px;
+      box-shadow: var(--shadow-sm);
+      transition: box-shadow 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card:hover {
+      box-shadow: var(--shadow-glow);
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--accent-mid), transparent);
+    }
+
+    .latest-report h3 {
+      font-family: var(--serif);
+      font-size: 28px;
+      margin-bottom: 24px;
+      color: var(--ink);
+    }
+
+    .report-badge {
+      display: inline-block;
+      padding: 6px 12px;
+      background: var(--accent-lt);
+      color: var(--accent);
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+      margin-bottom: 16px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .report-summary {
+      font-size: 16px;
+      color: var(--ink-2);
+      line-height: 1.8;
+      margin-bottom: 30px;
+    }
+
+    .highlights {
+      list-style: none;
+    }
+
+    .highlights li {
+      position: relative;
+      padding-left: 24px;
+      margin-bottom: 12px;
+      color: var(--ink-3);
+      font-size: 15px;
+      font-weight: 300;
+    }
+
+    .highlights li::before {
+      content: '•';
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      font-size: 20px;
+      text-shadow: 0 0 8px var(--accent);
+    }
+
+    .metrics-row {
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+    }
+
+    .metric-card {
+      background: var(--surface-2);
+      border-radius: 16px;
+      padding: 24px;
+      border: 1px solid var(--border);
+      text-align: center;
+    }
+
+    .metric-title {
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--ink-4);
+      margin-bottom: 8px;
+      font-weight: 600;
+    }
+
+    .metric-value {
+      font-family: var(--serif);
+      font-size: 36px;
+      color: var(--accent);
+    }
+
+    /* Strategy Details */
+    .strat-details {
+      margin-bottom: 80px;
+    }
+
+    .strat-details h3 {
+      font-family: var(--serif);
+      font-size: 24px;
+      margin-bottom: 32px;
+      text-align: center;
+    }
+
+    .strat-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+    }
+
+    .strat-card {
+      background: var(--surface);
+      padding: 24px;
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-sm);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .strat-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-md);
+      border-color: var(--accent-mid);
+    }
+
+    .strat-icon {
+      font-size: 24px;
+      margin-bottom: 12px;
+    }
+
+    .strat-card-title {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 8px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .strat-card-text {
+      font-size: 14px;
+      color: var(--ink-3);
+      line-height: 1.6;
+      font-weight: 300;
+    }
+
+    .strat-note {
+      margin-top: 32px;
+      padding: 16px 24px;
+      background: var(--surface-2);
+      border-radius: 12px;
+      border: 1px dashed var(--border);
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+    }
+
+    .strat-note-icon {
+      font-size: 20px;
+    }
+
+    .strat-note-icon {
+      font-size: 20px;
+    }
+
+    .strat-note-text {
+      font-size: 13px;
+      color: var(--ink-4);
+      line-height: 1.6;
+    }
+
+    /* Dropdowns */
+    details.strat-dropdown {
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      margin-bottom: 24px;
+      overflow: hidden;
+      transition: border-color 0.3s, box-shadow 0.3s;
+    }
+
+    details.strat-dropdown[open] {
+      border-color: var(--accent-mid);
+      box-shadow: var(--shadow-md);
+      margin-bottom: 40px;
+    }
+
+    details.strat-dropdown>summary {
+      padding: 24px 32px;
+      font-family: var(--serif);
+      font-size: 24px;
+      color: var(--ink);
+      cursor: pointer;
+      list-style: none;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      outline: none;
+    }
+
+    details.strat-dropdown>summary::-webkit-details-marker {
+      display: none;
+    }
+
+    details.strat-dropdown>summary::after {
+      content: '▼';
+      font-family: var(--sans);
+      font-size: 16px;
+      color: var(--accent);
+      transition: transform 0.3s ease;
+    }
+
+    details.strat-dropdown[open]>summary::after {
+      transform: rotate(-180deg);
+    }
+
+    .strat-dropdown-content {
+      padding: 0 32px 32px 32px;
+      border-top: 1px solid rgba(108, 63, 212, 0.1);
+      /* Subtle separator */
+      margin-top: 8px;
+      padding-top: 32px;
+    }
+
+    @media (max-width: 600px) {
+      details.strat-dropdown>summary {
+        padding: 20px;
+        font-size: 20px;
+      }
+
+      .strat-dropdown-content {
+        padding: 0 20px 24px 20px;
+      }
+    }
+
+    /* Strategy Construct Image Format */
+    .construct-list {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px 24px;
+      margin-bottom: 80px;
+    }
+
+    .construct-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+    }
+
+    .construct-item-icon {
+      font-size: 32px;
+      flex-shrink: 0;
+      line-height: 1;
+      margin-top: 2px;
+      filter: drop-shadow(0 4px 6px rgba(108, 63, 212, .3));
+    }
+
+    .construct-item-title {
+      font-size: 17px;
+      font-weight: 500;
+      color: var(--accent-2);
+      margin-bottom: 6px;
+    }
+
+    .construct-item-text {
+      font-size: 14px;
+      color: var(--ink-3);
+      line-height: 1.5;
+      font-weight: 300;
+    }
+
+    @media (max-width: 600px) {
+      .construct-list {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* ── Hero Section ─────────────────────────────── */
+    .fund-hero {
+      position: relative;
+      text-align: center;
+      padding: 80px 40px 60px;
+      margin-bottom: 60px;
+      border-radius: 28px;
+      background: linear-gradient(135deg, rgba(108, 63, 212, 0.08) 0%, rgba(13, 11, 19, 0) 60%);
+      border: 1px solid var(--border);
+      overflow: hidden;
+    }
+
+    .hero-orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      pointer-events: none;
+      opacity: 0.35;
+      animation: orb-pulse 6s ease-in-out infinite alternate;
+    }
+
+    .hero-orb-1 {
+      width: 420px;
+      height: 420px;
+      background: radial-gradient(circle, #6c3fd4 0%, transparent 70%);
+      top: -160px;
+      left: -80px;
+    }
+
+    .hero-orb-2 {
+      width: 300px;
+      height: 300px;
+      background: radial-gradient(circle, #4a7fc1 0%, transparent 70%);
+      bottom: -120px;
+      right: -60px;
+      animation-delay: 3s;
+    }
+
+    @keyframes orb-pulse {
+      from {
+        transform: scale(1);
+        opacity: 0.3;
+      }
+
+      to {
+        transform: scale(1.15);
+        opacity: 0.45;
+      }
+    }
+
+    .hero-tags {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 28px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-tag {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      padding: 6px 14px;
+      border-radius: 20px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--ink-3);
+    }
+
+    .hero-tag-live {
+      background: rgba(16, 185, 129, 0.1);
+      border-color: rgba(16, 185, 129, 0.3);
+      color: #059669;
+    }
+
+    .hero-title {
+      font-family: var(--serif);
+      font-size: clamp(36px, 6vw, 60px);
+      color: var(--ink);
+      margin-bottom: 20px;
+      line-height: 1.1;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-title em {
+      font-style: italic;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-sub {
+      font-size: 16px;
+      color: var(--ink-3);
+      font-weight: 300;
+      max-width: 680px;
+      margin: 0 auto 48px;
+      line-height: 1.75;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-stats {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: nowrap;
+      gap: 0;
+      background: rgba(108, 63, 212, 0.03);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      backdrop-filter: blur(12px);
+      padding: 24px 20px;
+      margin-bottom: 28px;
+      position: relative;
+      z-index: 1;
+      overflow-x: auto;
+      white-space: nowrap;
+    }
+
+    .hero-stat {
+      padding: 0 24px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .hero-stat-value {
+      font-family: var(--serif);
+      font-size: 26px;
+      color: var(--accent-2);
+      margin-bottom: 6px;
+      line-height: 1;
+      min-height: 38px;
+      display: flex;
+      align-items: center;
+    }
+
+    .hero-stat:first-child .hero-stat-value {
+      color: #059669;
+      font-size: 32px;
+    }
+
+    .hero-stat-label {
+      font-size: 12px;
+      color: var(--ink-4);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-weight: 600;
+    }
+
+    .hero-stat-sep {
+      width: 1px;
+      height: 50px;
+      background: var(--border);
+      flex-shrink: 0;
+    }
+
+    .hero-footnote {
+      font-size: 13px;
+      color: var(--ink-5);
+      letter-spacing: 0.3px;
+      position: relative;
+      z-index: 1;
+    }
+
+    @media (max-width: 640px) {
+      .hero-stat-sep {
+        display: none;
+      }
+
+      .hero-stats {
+        gap: 24px;
+        flex-direction: column;
+      }
+
+      .hero-stat {
+        padding: 0;
+      }
+
+      .fund-hero {
+        padding: 60px 20px 40px;
+      }
+    }
+
+    /* ── Portfolio Manager Card ───────────────────── */
+    .manager-card {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 32px;
+      margin-bottom: 60px;
+      box-shadow: var(--shadow-sm);
+      transition: box-shadow 0.3s, border-color 0.3s;
+    }
+
+    .manager-card:hover {
+      box-shadow: var(--shadow-md);
+      border-color: var(--accent-mid);
+    }
+
+    .manager-img-wrap {
+      flex-shrink: 0;
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 4px solid var(--surface);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+    }
+
+    .manager-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top;
+    }
+
+    .manager-content {
+      flex-grow: 1;
+    }
+
+    .manager-role {
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--accent-2);
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    .manager-name {
+      font-family: var(--serif);
+      font-size: 28px;
+      color: var(--ink);
+      margin-bottom: 16px;
+    }
+
+    .manager-desc {
+      font-size: 15px;
+      color: var(--ink-2);
+      line-height: 1.6;
+      margin-bottom: 24px;
+      max-width: 800px;
+    }
+
+    .manager-desc p {
+      margin-bottom: 12px;
+    }
+
+    .manager-desc p:last-child {
+      margin-bottom: 0;
+    }
+
+    .btn-linkedin {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #0077b5;
+      color: #fff;
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.2s;
+    }
+
+    .btn-linkedin:hover {
+      background: #005582;
+      transform: translateY(-2px);
+    }
+
+    @media (max-width: 768px) {
+      .manager-card {
+        flex-direction: column;
+        text-align: center;
+        padding: 24px;
+        gap: 20px;
+      }
+    }
+
+    /* Portfolio Snapshot */
+    .allocations {
+      margin-bottom: 80px;
+    }
+
+    .allocations h3 {
+      font-family: var(--serif);
+      font-size: 24px;
+      margin-bottom: 32px;
+      text-align: center;
+    }
+
+    .alloc-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+    }
+
+    .alloc-item {
+      background: var(--surface);
+      padding: 24px;
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .alloc-item:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-md);
+      border-color: var(--accent-mid);
+    }
+
+    .alloc-item.mf .alloc-pct {
+      color: var(--accent);
+    }
+
+    .alloc-item.ds .alloc-pct {
+      color: var(--blue);
+    }
+
+    .alloc-item.tb .alloc-pct {
+      color: var(--orange);
+    }
+
+    .alloc-item.gd .alloc-pct {
+      color: var(--gold);
+    }
+
+    .alloc-pct {
+      font-family: var(--serif);
+      font-size: 36px;
+      margin-bottom: 8px;
+    }
+
+    .alloc-label {
+      font-size: 13px;
+      color: var(--ink-3);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-weight: 600;
+    }
+
+    /* Past Reports */
+    .past-reports {
+      margin-bottom: 80px;
+    }
+
+    .past-reports h3 {
+      font-family: var(--serif);
+      font-size: 24px;
+      margin-bottom: 24px;
+      text-align: center;
+    }
+
+    .report-weeks {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .week-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 24px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      transition: border-color 0.2s;
+    }
+
+    .week-row:hover {
+      border-color: var(--accent-mid);
+      background: var(--surface-2);
+    }
+
+    .week-name {
+      color: var(--ink-2);
+      font-weight: 500;
+      font-size: 15px;
+    }
+
+    .week-val {
+      font-family: var(--serif);
+      color: var(--ink);
+      font-size: 18px;
+    }
+
+    /* CTA */
+    .cta-section {
+      text-align: center;
+      background: var(--surface-2);
+      padding: 60px 40px;
+      border-radius: 24px;
+      border: 1px solid var(--border);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-section::before {
+      content: '';
+      position: absolute;
+      width: 300px;
+      height: 300px;
+      background: radial-gradient(circle, var(--accent-mid) 0%, transparent 70%);
+      top: -150px;
+      left: 50%;
+      transform: translateX(-50%);
+      opacity: 0.5;
+      filter: blur(40px);
+      pointer-events: none;
+    }
+
+    .cta-title {
+      font-family: var(--serif);
+      font-size: 32px;
+      margin-bottom: 12px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .cta-sub {
+      color: var(--ink-3);
+      margin-bottom: 32px;
+      font-size: 16px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .cta-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+      position: relative;
+      z-index: 1;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 14px 28px;
+      border-radius: 12px;
+      font-weight: 600;
+      font-size: 14px;
+      text-decoration: none;
+      transition: all 0.2s;
+      cursor: pointer;
+      border: 1px solid transparent;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #fff;
+      box-shadow: 0 4px 16px rgba(144, 112, 232, .3);
+    }
+
+    .btn-primary:hover {
+      background: var(--accent-2);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 24px rgba(144, 112, 232, .4);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--ink);
+      border-color: var(--border);
+    }
+
+    .btn-secondary:hover {
+      background: var(--surface);
+      border-color: var(--ink-3);
+    }
+
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+      }
+
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      .title {
+        font-size: 32px;
+      }
+
+      .metric-card {
+        text-align: left;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px;
+      }
+
+      .metric-title {
+        margin-bottom: 0;
+      }
+
+      .metrics-row {
+        gap: 16px;
+      }
+    }
+    @keyframes pie-spin-in { from { transform: rotate(-90deg); opacity: 0; } to { transform: rotate(0); opacity: 1; } }
+
+    @media (max-width: 768px) {
+      .allocations [style*="grid-template-columns:280px"] {
+        grid-template-columns: 1fr !important;
+        justify-items: center;
+      }
+    }
+
+    /* ─────────────────────────────────────────
+   BENCHMARK COMPARISON
+───────────────────────────────────────── */
+    .benchmark-section {
+      margin: 0 auto 80px;
+      padding: 40px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      box-shadow: var(--shadow-sm);
+      max-width: 900px; /* Balanced width for the content */
+    }
+
+    .benchmark-header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .benchmark-header h3 {
+      font-family: var(--serif);
+      font-size: 28px;
+      margin-bottom: 12px;
+      color: var(--ink);
+    }
+
+    .benchmark-header p {
+      font-size: 15px;
+      color: var(--ink-3);
+      max-width: 600px;
+      margin: 0 auto;
+      font-weight: 300;
+    }
+
+    .benchmark-container {
+      display: flex;
+      flex-direction: column;
+      gap: 48px;
+    }
+
+    .benchmark-visual {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      gap: clamp(20px, 5vw, 60px);
+      height: 300px;
+      padding-top: 50px;
+      position: relative;
+    }
+
+    .benchmark-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+      flex: 1;
+      max-width: 180px;
+    }
+
+    .benchmark-bar-wrap {
+      width: 100%;
+      height: 200px;
+      background: var(--surface-2);
+      border-radius: 16px;
+      display: flex;
+      align-items: flex-end;
+      position: relative;
+      border: 1px solid var(--border);
+    }
+
+    .benchmark-bar {
+      width: 100%;
+      border-radius: 12px 12px 0 0;
+      position: relative;
+      height: 0;
+      transition: height 1.8s cubic-bezier(0.22, 1, 0.36, 1);
+      display: flex;
+      justify-content: center;
+    }
+
+    .benchmark-bar.nifty {
+      background: linear-gradient(180deg, var(--blue), #2c5282);
+      box-shadow: 0 4px 16px rgba(74, 127, 193, 0.15);
+    }
+
+    .benchmark-bar.nebula {
+      background: linear-gradient(180deg, var(--accent), var(--accent-2));
+      box-shadow: 0 4px 20px rgba(108, 63, 212, 0.15);
+    }
+
+    .benchmark-val {
+      position: absolute;
+      top: -38px;
+      left: 50%;
+      transform: translate(-50%, 10px);
+      font-family: var(--serif);
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--ink);
+      white-space: nowrap;
+      opacity: 0;
+      transition: opacity 0.5s 0.8s, transform 0.5s 0.8s;
+    }
+
+    .benchmark-bar.is-visible .benchmark-val {
+      opacity: 1;
+      transform: translate(-50%, 0);
+    }
+
+    .benchmark-info {
+      text-align: center;
+      margin-top: 20px;
+      width: 100%;
+      min-height: 40px;
+    }
+
+    .benchmark-name {
+      font-family: var(--serif);
+      font-size: 18px;
+      color: var(--ink);
+      margin-bottom: 4px;
+    }
+
+    .benchmark-period {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--ink-4);
+      font-weight: 600;
+    }
+
+    .benchmark-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .benchmark-card {
+      padding: 24px;
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.3s;
+    }
+
+    .benchmark-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--accent-mid);
+    }
+
+    .benchmark-card-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--accent-2);
+      margin-bottom: 8px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .benchmark-card-text {
+      font-size: 14px;
+      color: var(--ink-3);
+      line-height: 1.6;
+      font-weight: 300;
+    }
+
+    @media (max-width: 640px) {
+      .benchmark-grid {
+        grid-template-columns: 1fr;
+      }
+      .benchmark-section {
+        padding: 24px 20px;
+      }
+      .benchmark-bar-wrap {
+        height: 160px;
+      }
+      .benchmark-visual {
+        height: 240px;
+      }
+    }
+    /* ─────────────────────────────────────────
+   FAQ SECTION
+───────────────────────────────────────── */
+    .faq-section {
+      margin-top: 80px;
+      margin-bottom: 100px;
+    }
+
+    .faq-header {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+
+    .faq-list {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .faq-item {
+      margin-bottom: 16px;
+    }
+
+    @media (max-width: 768px) {
+      .faq-section {
+        margin-top: 60px;
+        margin-bottom: 60px;
+      }
+    }
+    /* ─────────────────────────────────────────
+   FOOTER
+───────────────────────────────────────── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: clamp(60px, 8vw, 80px) 0 40px;
+      background: var(--white);
+    }
+
+    .footer-inner {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr;
+      gap: 60px;
+    }
+
+    .footer-logo {
+      font-family: var(--serif);
+      font-size: 24px;
+      color: var(--ink);
+      margin-bottom: 16px;
+    }
+
+    .footer-logo span {
+      color: var(--accent);
+    }
+
+    .footer-disc {
+      font-size: 14px;
+      color: var(--ink-4);
+      line-height: 1.7;
+      max-width: 440px;
+      margin-bottom: 8px;
+    }
+
+    .footer-nav-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 40px;
+    }
+
+    .footer-links-title {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--ink-4);
+      margin-bottom: 20px;
+    }
+
+    .footer-links-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .footer-link-text {
+      font-size: 14px;
+      color: var(--ink-2);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-link-text:hover {
+      color: var(--accent);
+    }
+
+    .footer-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--ink-2);
+      text-decoration: none;
+      padding: 8px 14px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      transition: all 0.2s;
+      white-space: nowrap;
+      width: fit-content;
+    }
+
+    .footer-link:hover {
+      border-color: var(--accent-mid);
+      background: var(--accent-lt);
+      color: var(--accent);
+      transform: translateX(3px);
+    }
+
+    .footer-link-icon {
+      width: 24px;
+      height: 24px;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 12px;
+    }
+
+    .footer-link-icon svg { width: 12px; height: 12px; }
+
+    .footer-link-icon--tg { background: rgba(40, 140, 240, .1); color: #28a8f0; }
+    .footer-link-icon--li { background: rgba(10, 102, 194, .1); color: #0a66c2; }
+    .footer-link-icon--em { background: rgba(108, 63, 212, .1); color: var(--accent); }
+
+    @media (max-width: 860px) {
+      .footer-inner { grid-template-columns: 1fr; gap: 48px; }
+    }
+    @media (max-width: 480px) {
+      .footer-nav-grid { grid-template-columns: 1fr; gap: 40px; }
+      .footer-disc { font-size: 13px; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav>
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo"><img class="nav-logo-img" src="navbar.png" alt="Nebula planet logo">Nebula<span>.</span></a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="index.html#strategy">Strategies</a></li>
+        <li><a href="index.html#orbit">Insights</a></li>
+        <li><a href="nebula-equilibrium-fund.html" class="active">Equilibrium Fund</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main class="wrap">
+
+    <!-- Hero Section -->
+    <div class="fund-hero">
+      <div class="hero-orb hero-orb-1"></div>
+      <div class="hero-orb hero-orb-2"></div>
+
+      <div class="hero-tags">
+        <span class="hero-tag">⚖️ Multi-Asset</span>
+        <span class="hero-tag hero-tag-live">🟢 Live</span>
+        <span class="hero-tag">📅 Since 31st March 2026</span>
+      </div>
+
+      <h1 class="hero-title">Nebula <em>Equilibrium</em> Fund</h1>
+      <p class="hero-sub">A structured, multi-asset portfolio built for long-term compounding — combining mutual funds,
+        direct equities, thematic exposures, and gold to balance growth with disciplined risk management.</p>
+
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <div class="hero-stat-value" id="counter-return">+0.00%</div>
+          <div class="hero-stat-label">Since Inception Return</div>
+        </div>
+        <div class="hero-stat-sep"></div>
+        <div class="hero-stat">
+          <div class="hero-stat-value" style="font-size: 24px;">31st March 2026</div>
+          <div class="hero-stat-label">Inception Date</div>
+        </div>
+        <div class="hero-stat-sep"></div>
+        <div class="hero-stat">
+          <div class="hero-stat-value">Daily</div>
+          <div class="hero-stat-label">Valuation</div>
+        </div>
+        <div class="hero-stat-sep"></div>
+        <div class="hero-stat">
+          <div class="hero-stat-value">Open</div>
+          <div class="hero-stat-label">Subscription</div>
+        </div>
+      </div>
+
+      <p class="hero-footnote">Process-driven investing · Avoiding frequent changes · Observing asset classes across
+        market cycles</p>
+    </div>
+
+
+    <!-- Portfolio Manager -->
+    <div class="manager-card">
+      <div class="manager-img-wrap">
+        <!-- Ensure the image file name matches exactly what you place in your folder -->
+        <img src="tarunnakshtra.jpg" alt="Tarunnakshtra Naik" class="manager-img"
+          onerror="this.src='https://ui-avatars.com/api/?name=Tarunnakshtra+Naik&background=6c3fd4&color=fff&size=200'">
+      </div>
+      <div class="manager-content">
+        <div class="manager-role">Portfolio Manager – Nebula Equilibrium Fund</div>
+        <h2 class="manager-name">Tarunnakshtra Naik</h2>
+        <div class="manager-desc">
+          <p>Managing a model multi-asset portfolio focused on structured allocation, risk management, and long-term
+            compounding.</p>
+          <p>Currently building a public track record by tracking portfolio performance and documenting investment
+            decisions.</p>
+          <p>Focus areas include asset allocation, equity analysis, and disciplined portfolio construction.</p>
+        </div>
+        <a href="https://linkedin.com/in/tarunnakshtranaik" target="_blank" class="btn-linkedin">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+            <path
+              d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
+          </svg>
+          Know More
+        </a>
+      </div>
+    </div>
+
+    <!-- Strategy Details -->
+    <details class="strat-dropdown">
+      <summary>Strategy Details</summary>
+      <div class="strat-dropdown-content">
+        <div class="strat-grid">
+          <!-- Card 1 -->
+          <div class="strat-card">
+            <div class="strat-icon">🧠</div>
+            <div class="strat-card-title">Strategy Type</div>
+            <div class="strat-card-text">
+              <strong style="color: var(--accent); display: block; margin-bottom: 4px; font-weight: 500;">Open Ended
+                (Model Portfolio)</strong>
+              The fund operates without a fixed tenure and is continuously tracked and managed over time.
+            </div>
+          </div>
+          <!-- Card 2 -->
+          <div class="strat-card">
+            <div class="strat-icon">📊</div>
+            <div class="strat-card-title">Benchmark</div>
+            <div class="strat-card-text">
+              <strong style="color: var(--accent); display: block; margin-bottom: 4px; font-weight: 500;">Custom
+                Multi-Asset Benchmark</strong>
+              The fund is benchmarked against a blended mix of equity indices and gold to reflect its diversified
+              structure: Nifty 50, Nifty Midcap 150, Gold.
+            </div>
+          </div>
+          <!-- Card 3 -->
+          <div class="strat-card">
+            <div class="strat-icon">💰</div>
+            <div class="strat-card-title">Subscription</div>
+            <div class="strat-card-text">
+              <strong style="color: var(--accent); display: block; margin-bottom: 4px; font-weight: 500;">Open</strong>
+              Simulated investors can participate in the fund at any point in time.
+            </div>
+          </div>
+          <!-- Card 4 -->
+          <div class="strat-card">
+            <div class="strat-icon">🔄</div>
+            <div class="strat-card-title">Redemption</div>
+            <div class="strat-card-text">
+              <strong style="color: var(--accent); display: block; margin-bottom: 4px; font-weight: 500;">Not Applicable
+                (Model Portfolio)</strong>
+              As a simulated portfolio, redemption is not applicable. Performance is tracked continuously.
+            </div>
+          </div>
+          <!-- Card 5 -->
+          <div class="strat-card">
+            <div class="strat-icon">📅</div>
+            <div class="strat-card-title">Valuation Point</div>
+            <div class="strat-card-text">
+              <strong style="color: var(--accent); display: block; margin-bottom: 4px; font-weight: 500;">Daily (End of
+                Day)</strong>
+              The portfolio is valued daily based on market closing prices, ensuring transparent tracking of
+              performance.
+            </div>
+          </div>
+        </div>
+
+        <div class="strat-note">
+          <div class="strat-note-icon">🧾</div>
+          <div class="strat-note-text">
+            <strong style="color: var(--ink-2); font-weight: 600;">Additional Note:</strong> Returns shown are based on
+            the model portfolio since inception. Individual investor returns may vary depending on the time of entry.
+          </div>
+        </div>
+      </div>
+    </details>
+
+    <!-- Strategy Construct -->
+    <details class="strat-dropdown">
+      <summary>Strategy Construct</summary>
+      <div class="strat-dropdown-content">
+        <div class="construct-list">
+          <!-- Item 1 -->
+          <div class="construct-item">
+            <div class="construct-item-icon">⏳</div>
+            <div class="construct-item-content">
+              <div class="construct-item-title">Investment Horizon</div>
+              <div class="construct-item-text">
+                <strong>Medium to Long Term (3 Years +)</strong><br>
+                The portfolio is designed to capture long-term compounding while observing short-term market behavior
+                through continuous tracking.
+              </div>
+            </div>
+          </div>
+          <!-- Item 2 -->
+          <div class="construct-item">
+            <div class="construct-item-icon">📊</div>
+            <div class="construct-item-content">
+              <div class="construct-item-title">Market Capitalisation Allocation</div>
+              <div class="construct-item-text">
+                <strong>Blended via Direct Stocks & Mutual Funds</strong>
+                <ul style="list-style: none; padding: 0; margin: 8px 0;">
+                  <li>Large Cap: Core exposure via Flexi-cap Mutual Funds</li>
+                  <li>Mid Cap: Growth exposure through funds + stocks</li>
+                  <li>Small Cap: Limited indirect exposure</li>
+                </ul>
+                <span style="font-size: 13px; color: var(--ink-4); display: block; font-style: italic;">👉 Since 55% is
+                  in mutual funds, market cap exposure is indirect and dynamically managed</span>
+              </div>
+            </div>
+          </div>
+          <!-- Item 3 -->
+          <div class="construct-item">
+            <div class="construct-item-icon">📈</div>
+            <div class="construct-item-content">
+              <div class="construct-item-title">Number of Stocks</div>
+              <div class="construct-item-text">
+                <strong>Current: 6–8 Stocks (Core Portfolio)</strong><br>
+                Target: 10–15 Stocks
+                <span
+                  style="font-size: 13px; color: var(--ink-4); display: block; margin-top: 8px; font-style: italic;">👉
+                  Focus is on quality over quantity, not over-diversification</span>
+              </div>
+            </div>
+          </div>
+          <!-- Item 4 -->
+          <div class="construct-item">
+            <div class="construct-item-icon">👤</div>
+            <div class="construct-item-content">
+              <div class="construct-item-title">Suitable For</div>
+              <div class="construct-item-text">
+                <strong>Moderate to Growth-Oriented Investors</strong><br>
+                Suitable for investors looking for a balanced approach combining stability, growth, and risk management
+              </div>
+            </div>
+          </div>
+          <!-- Item 5 -->
+          <div class="construct-item">
+            <div class="construct-item-icon">📌</div>
+            <div class="construct-item-content">
+              <div class="construct-item-title">Scrip Allocation</div>
+              <div class="construct-item-text">
+                <strong>Max ~10% per Stock (Guideline)</strong><br>
+                <span
+                  style="font-size: 13px; color: var(--ink-4); display: block; margin-top: 8px; font-style: italic;">👉
+                  Position sizing is controlled to:<br>• Avoid overexposure<br>• Maintain diversification</span>
+              </div>
+            </div>
+          </div>
+          <!-- Item 6 -->
+          <div class="construct-item">
+            <div class="construct-item-icon">🏭</div>
+            <div class="construct-item-content">
+              <div class="construct-item-title">Sector Allocation Limit</div>
+              <div class="construct-item-text">
+                <strong>No Fixed Limit (Monitored Actively)</strong>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </details>
+
+    <!-- Core Philosophy -->
+    <details class="strat-dropdown" style="margin-bottom: 80px;">
+      <summary>
+        <span>Core Philosophy</span>
+      </summary>
+      <div class="strat-dropdown-content">
+        <p style="color: var(--ink-2); line-height: 1.8; margin-bottom: 32px;">The fund follows a structured,
+          multi-asset approach focused on balancing growth, stability, and risk through disciplined allocation and
+          long-term thinking.</p>
+        <div class="strat-grid">
+          <!-- Philosophy 1 -->
+          <div class="strat-card">
+            <div class="strat-icon">📊</div>
+            <div class="strat-card-title">1. Asset Allocation First</div>
+            <div class="strat-card-text">
+              <p style="margin-bottom: 12px;">The foundation of the portfolio is built on strategic asset allocation,
+                not short-term predictions.</p>
+              <ul style="list-style: none;">
+                <li style="position: relative; padding-left: 16px; margin-bottom: 6px;"><span
+                    style="position: absolute; left: 0; color: var(--accent);">•</span> Core stability through mutual
+                  funds</li>
+                <li style="position: relative; padding-left: 16px; margin-bottom: 6px;"><span
+                    style="position: absolute; left: 0; color: var(--accent);">•</span> Growth through direct equities
+                </li>
+                <li style="position: relative; padding-left: 16px;"><span
+                    style="position: absolute; left: 0; color: var(--accent);">•</span> Risk management through gold
+                </li>
+              </ul>
+            </div>
+          </div>
+          <!-- Philosophy 2 -->
+          <div class="strat-card">
+            <div class="strat-icon">📈</div>
+            <div class="strat-card-title">2. Quality Over Speculation</div>
+            <div class="strat-card-text">
+              <p style="margin-bottom: 12px;">Investments are selected based on:</p>
+              <ul style="list-style: none; margin-bottom: 16px;">
+                <li style="position: relative; padding-left: 16px; margin-bottom: 6px;"><span
+                    style="position: absolute; left: 0; color: var(--accent);">•</span> Strong business models</li>
+                <li style="position: relative; padding-left: 16px; margin-bottom: 6px;"><span
+                    style="position: absolute; left: 0; color: var(--accent);">•</span> Consistent earnings growth</li>
+                <li style="position: relative; padding-left: 16px;"><span
+                    style="position: absolute; left: 0; color: var(--accent);">•</span> Long-term industry potential
+                </li>
+              </ul>
+              <span style="font-size: 13px; color: var(--ink-4); display: block; font-style: italic;">👉 The focus is on
+                sustainable businesses, not short-term hype.</span>
+            </div>
+          </div>
+          <!-- Philosophy 3 -->
+          <div class="strat-card">
+            <div class="strat-icon">⚖️</div>
+            <div class="strat-card-title">3. Diversification & Risk Control</div>
+            <div class="strat-card-text">
+              <p style="margin-bottom: 12px;">The portfolio maintains:</p>
+              <ul style="list-style: none; margin-bottom: 16px;">
+                <li style="position: relative; padding-left: 16px; margin-bottom: 6px;"><span
+                    style="position: absolute; left: 0; color: var(--accent);">•</span> Multi-asset exposure</li>
+                <li style="position: relative; padding-left: 16px; margin-bottom: 6px;"><span
+                    style="position: absolute; left: 0; color: var(--accent);">•</span> Sector diversification</li>
+                <li style="position: relative; padding-left: 16px;"><span
+                    style="position: absolute; left: 0; color: var(--accent);">•</span> Controlled position sizing</li>
+              </ul>
+              <span style="font-size: 13px; color: var(--ink-4); display: block; font-style: italic;">👉 Risk is managed
+                before returns are chased.</span>
+            </div>
+          </div>
+          <!-- Philosophy 4 -->
+          <div class="strat-card">
+            <div class="strat-icon">🔄</div>
+            <div class="strat-card-title">4. Consistency Over Timing</div>
+            <div class="strat-card-text">
+              <p style="margin-bottom: 8px;">The strategy avoids frequent changes and market timing.</p>
+              <p>The goal is to stay invested and observe performance over time, rather than react to short-term
+                volatility.</p>
+            </div>
+          </div>
+          <!-- Philosophy 5 -->
+          <div class="strat-card">
+            <div class="strat-icon">📊</div>
+            <div class="strat-card-title">5. Structured Decision Making</div>
+            <div class="strat-card-text">
+              <p style="margin-bottom: 12px;">Every investment is guided by:</p>
+              <ul style="list-style: none; margin-bottom: 16px;">
+                <li style="position: relative; padding-left: 16px; margin-bottom: 6px;"><span
+                    style="position: absolute; left: 0; color: var(--accent);">•</span> Defined allocation rules</li>
+                <li style="position: relative; padding-left: 16px; margin-bottom: 6px;"><span
+                    style="position: absolute; left: 0; color: var(--accent);">•</span> Clear rationale</li>
+                <li style="position: relative; padding-left: 16px;"><span
+                    style="position: absolute; left: 0; color: var(--accent);">•</span> Continuous tracking</li>
+              </ul>
+              <span style="font-size: 13px; color: var(--ink-4); display: block; font-style: italic;">👉 The focus is on
+                process-driven investing.</span>
+            </div>
+          </div>
+          <!-- Philosophy 6 -->
+          <div class="strat-card">
+            <div class="strat-icon">🧭</div>
+            <div class="strat-card-title">6. Long-Term Orientation</div>
+            <div class="strat-card-text">
+              <p>The portfolio is designed with a 3+ year horizon, aiming to benefit from compounding rather than
+                short-term gains.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </details>
+
+    <!-- Benchmark Comparison -->
+    <div class="benchmark-section">
+      <div class="benchmark-header">
+        <h3>Benchmark Comparison</h3>
+        <p>How Nebula Equilibrium performs against India's primary wealth creator.</p>
+      </div>
+
+      <div class="benchmark-container">
+        <!-- Visual Comparison -->
+        <div class="benchmark-visual">
+          <div class="benchmark-item">
+            <div class="benchmark-bar-wrap">
+              <div class="benchmark-bar nifty" data-height="100%">
+                <span class="benchmark-val">12.85%</span>
+              </div>
+            </div>
+            <div class="benchmark-info">
+              <div class="benchmark-name">Nifty 50</div>
+              <div class="benchmark-period">Since Inception (1996)</div>
+            </div>
+          </div>
+
+          <div class="benchmark-item">
+            <div class="benchmark-bar-wrap">
+              <div class="benchmark-bar nebula" data-height="73%">
+                <span class="benchmark-val">9.35%</span>
+              </div>
+            </div>
+            <div class="benchmark-info">
+              <div class="benchmark-name">Nebula</div>
+              <div class="benchmark-period">Since Inception (31 Mar 2026)</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="benchmark-grid">
+          <div class="benchmark-card">
+            <div class="benchmark-card-title">Market Benchmark</div>
+            <p class="benchmark-card-text">Nifty 50 has delivered consistent compounding over 30 years, serving as the ultimate test for any investment strategy.</p>
+          </div>
+          <div class="benchmark-card">
+            <div class="benchmark-card-title">Nebula Performance</div>
+            <p class="benchmark-card-text">Nebula leverages active multi-asset discipline to capture growth while managing downside risk in real-time.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Portfolio Snapshot -->
+    <div class="allocations">
+      <h3>Portfolio Snapshot</h3>
+      <div style="display:grid; grid-template-columns:280px 1fr; gap:40px; align-items:center;">
+        <!-- Pie Chart -->
+        <div>
+          <div style="position:relative; width:240px; height:240px; margin:0 auto;">
+            <div style="width:100%; height:100%; border-radius:50%; background:conic-gradient(var(--accent) 0deg 198deg, var(--blue) 198deg 270deg, var(--orange) 270deg 306deg, var(--gold) 306deg 360deg); box-shadow:0 8px 32px rgba(108,63,212,.12); animation:pie-spin-in 1s cubic-bezier(.22,1,.36,1) both;">
+              <div style="position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); width:60%; height:60%; border-radius:50%; background:var(--bg); display:flex; flex-direction:column; align-items:center; justify-content:center;">
+                <div style="font-family:var(--serif); font-size:28px; color:var(--ink); line-height:1;">100%</div>
+                <div style="font-size:11px; color:var(--ink-4); text-transform:uppercase; letter-spacing:1px; font-weight:600; margin-top:4px;">Allocated</div>
+              </div>
+            </div>
+          </div>
+          <div style="display:flex; flex-direction:column; gap:10px; margin-top:20px;">
+            <div style="display:flex; align-items:center; gap:8px; font-size:13px; color:var(--ink-3);"><span style="width:10px;height:10px;border-radius:50%;background:var(--accent);flex-shrink:0;"></span> Mutual Funds — 55%</div>
+            <div style="display:flex; align-items:center; gap:8px; font-size:13px; color:var(--ink-3);"><span style="width:10px;height:10px;border-radius:50%;background:var(--blue);flex-shrink:0;"></span> Direct Stocks — 20%</div>
+            <div style="display:flex; align-items:center; gap:8px; font-size:13px; color:var(--ink-3);"><span style="width:10px;height:10px;border-radius:50%;background:var(--orange);flex-shrink:0;"></span> Thematic Bets — 10%</div>
+            <div style="display:flex; align-items:center; gap:8px; font-size:13px; color:var(--ink-3);"><span style="width:10px;height:10px;border-radius:50%;background:var(--gold);flex-shrink:0;"></span> Gold — 15%</div>
+          </div>
+        </div>
+        <!-- Cards -->
+        <div class="alloc-list" style="grid-template-columns:1fr 1fr;">
+          <div class="alloc-item mf">
+            <div class="alloc-pct">55%</div>
+            <div class="alloc-label">Mutual Funds</div>
+          </div>
+          <div class="alloc-item ds">
+            <div class="alloc-pct">20%</div>
+            <div class="alloc-label">Direct Stocks</div>
+          </div>
+          <div class="alloc-item tb">
+            <div class="alloc-pct">10%</div>
+            <div class="alloc-label">Thematic Bets</div>
+          </div>
+          <div class="alloc-item gd">
+            <div class="alloc-pct">15%</div>
+            <div class="alloc-label">Gold</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+    <!-- CTA -->
+    <div class="cta-section" id="advice">
+      <h2 class="cta-title">GET A ADVICE</h2>
+      <p class="cta-sub">Stay updated with ongoing insights and portfolio thinking.</p>
+      <div class="cta-buttons">
+        <a href="https://instagram.com" target="_blank" class="btn btn-primary">Follow Weekly Insights</a>
+        <a href="index.html#strategy" class="btn btn-secondary">Explore Strategies</a>
+      </div>
+    </div>
+    <!-- FAQ Section -->
+    <section class="faq-section reveal">
+      <div class="faq-header">
+        <span class="section-label">Support & Knowledge</span>
+        <h2 class="title" style="margin-top:10px; font-size: clamp(26px, 4vw, 36px);">FAQ – <em>Nebula Equilibrium Fund</em></h2>
+      </div>
+
+      <div class="faq-list">
+        <div class="faq-item">
+          <details class="strat-dropdown">
+            <summary style="font-size: 18px;">1. What is the Nebula Equilibrium Fund?</summary>
+            <div class="strat-dropdown-content">
+              <p class="strat-card-text">The Nebula Equilibrium Fund is a model portfolio designed to simulate real-world portfolio management. It focuses on structured asset allocation, risk management, and long-term investing across equity, mutual funds, and gold.</p>
+            </div>
+          </details>
+        </div>
+
+        <div class="faq-item">
+          <details class="strat-dropdown">
+            <summary style="font-size: 18px;">2. Is this a real mutual fund or PMS?</summary>
+            <div class="strat-dropdown-content">
+              <p class="strat-card-text">No, this is not a registered mutual fund or PMS. It is an independently managed model portfolio created for educational purposes to understand how professional fund management works.</p>
+            </div>
+          </details>
+        </div>
+
+        <div class="faq-item">
+          <details class="strat-dropdown">
+            <summary style="font-size: 18px;">3. How are returns calculated?</summary>
+            <div class="strat-dropdown-content">
+              <p class="strat-card-text">Returns are calculated based on the portfolio’s performance since inception using a Net Asset Value (NAV) system. The NAV reflects the current value of the portfolio divided by total units.</p>
+            </div>
+          </details>
+        </div>
+
+        <div class="faq-item">
+          <details class="strat-dropdown">
+            <summary style="font-size: 18px;">4. Can individuals invest in this fund?</summary>
+            <div class="strat-dropdown-content">
+              <p class="strat-card-text">Currently, the fund is a model portfolio and does not accept public investments. It is used to track performance, build a track record, and demonstrate investment strategy.</p>
+            </div>
+          </details>
+        </div>
+
+        <div class="faq-item">
+          <details class="strat-dropdown">
+            <summary style="font-size: 18px;">5. Why do investor returns differ from fund returns?</summary>
+            <div class="strat-dropdown-content">
+              <p class="strat-card-text">Returns shown are based on the model portfolio since inception. Individual investor returns may vary depending on the time of entry, as investments are made at different NAV levels.</p>
+            </div>
+          </details>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ── FOOTER ── -->
+  <footer>
+    <div class="wrap">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <div class="footer-logo">Nebula<span>.</span></div>
+          <p class="footer-disc">Where Discipline Builds Wealth. A research-driven approach to multi-asset investing and compounding for the modern era.</p>
+          <p class="footer-disc" style="margin-top:24px; font-size: 11px; opacity: 0.8;">© 2026 Nebula. Built for educational purposes. All returns mentioned are based on model performance and do not guarantee future results.</p>
+        </div>
+
+        <div class="footer-nav-grid">
+          <div class="footer-links-group">
+            <div class="footer-links-title">Platform</div>
+            <div class="footer-links-list">
+              <a class="footer-link-text" href="index.html">Home</a>
+              <a class="footer-link-text" href="index.html#strategy">Our Strategies</a>
+              <a class="footer-link-text" href="index.html#orbit">Market Insights</a>
+              <a class="footer-link-text" href="report.html">Performance Reports</a>
+            </div>
+          </div>
+
+          <div class="footer-links-group">
+            <div class="footer-links-title">Connect</div>
+            <div class="footer-links-list">
+              <a class="footer-link" href="https://t.me/nebulawealthmanagement" target="_blank" rel="noopener noreferrer">
+                <span class="footer-link-icon footer-link-icon--tg">
+                  <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21.8 2.4L2.4 10c-1.3.5-1.3 1.3-.2 1.6l4.9 1.5 1.9 5.8c.2.7.4.9 1 .9.4 0 .7-.2 1-.5l2.4-2.3 5 3.7c.9.5 1.6.2 1.8-.8L22.9 3.5c.3-1.3-.5-1.8-1.1-1.1z" fill="currentColor" />
+                  </svg>
+                </span>
+                Telegram
+              </a>
+              <a class="footer-link" href="https://www.linkedin.com/in/tarunnakshtranaik/" target="_blank" rel="noopener noreferrer">
+                <span class="footer-link-icon footer-link-icon--li">
+                  <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                    <circle cx="4" cy="4" r="2" stroke="currentColor" stroke-width="1.5" />
+                  </svg>
+                </span>
+                LinkedIn
+              </a>
+              <a class="footer-link" href="mailto:nebulaamc@gmail.com">
+                <span class="footer-link-icon footer-link-icon--em">
+                  <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                    <polyline points="22,6 12,13 2,6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                  </svg>
+                </span>
+                Email Support
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // ── Animated return counter ─────────────────────
+    (function () {
+      const el = document.getElementById('counter-return');
+      if (!el) return;
+      const target = 9.35;
+      const duration = 1800;
+      let start = null;
+
+      function easeOut(t) { return 1 - Math.pow(1 - t, 3); }
+
+      function step(ts) {
+        if (!start) start = ts;
+        const progress = Math.min((ts - start) / duration, 1);
+        const value = (easeOut(progress) * target).toFixed(2);
+        el.textContent = '+' + value + '%';
+        if (progress < 1) requestAnimationFrame(step);
+      }
+
+      // Start when hero is visible
+      const obs = new IntersectionObserver(entries => {
+        if (entries[0].isIntersecting) {
+          requestAnimationFrame(step);
+          obs.disconnect();
+        }
+      }, { threshold: 0.3 });
+      obs.observe(document.querySelector('.fund-hero'));
+    })();
+    // ── Benchmark Bar Animation ─────────────────────
+    (function() {
+      const bars = document.querySelectorAll('.benchmark-bar');
+      const obs = new IntersectionObserver(entries => {
+        entries.forEach(e => {
+          if (e.isIntersecting) {
+            e.target.style.height = e.target.getAttribute('data-height');
+            e.target.classList.add('is-visible');
+            obs.unobserve(e.target);
+          }
+        });
+      }, { threshold: 0.2 });
+      bars.forEach(b => obs.observe(b));
+    })();
+  </script>
+</body>
+
+</html>
